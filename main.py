@@ -40,9 +40,9 @@ from utils.irm_utils import (
     CMNISTFULL_LYDP,
 )
 from models.irm_models import EBD
-import shutil
+# import shutil
 import wandb
-from sklearn.linear_model import LogisticRegression
+# from sklearn.linear_model import LogisticRegression
 from utils.irm_utils import eval_acc_class, eval_acc_multi_class
 
 
