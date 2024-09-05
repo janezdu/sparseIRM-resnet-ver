@@ -207,16 +207,16 @@ def main_worker(args):
             print("record: (train_acc, test_acc)", record_test_best)
             print("last accs (train_acc, test_acc)", (train_acc, test_acc))
 
-            agg_data = {
-                "record_train_acc": record_test_best[0],
-                "record_test_acc": record_test_best[1],
-                "last_train_acc": train_acc,
-                "last_test_acc": test_acc,
-            }
-            save_aggregate_data("aggregate_data.csv", agg_data)
 
             iter += 1
         unfix_model_subnet(model)
+        agg_data = {
+            "record_train_acc": record_test_best[0],
+            "record_test_acc": record_test_best[1],
+            "last_train_acc": train_acc,
+            "last_test_acc": test_acc,
+        }
+        save_aggregate_data("aggregate_data.csv", agg_data)
 
 
 def save_aggregate_data(filename, data, verbose=False):
