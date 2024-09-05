@@ -168,6 +168,9 @@ class ResNet(nn.Module):
 def ResNet18(pretrained=False):
     return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
 
+def ResNet18_coco(pretrained=False):
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 8)
+
 
 def ResNet50(pretrained=False):
     return ResNet(get_builder(), Bottleneck, [3, 4, 6, 3], 1000)

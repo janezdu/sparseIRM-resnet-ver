@@ -12,19 +12,25 @@ from PIL import Image
 
 def get_transform_coco(num_classes):
     if num_classes == 2:
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize(
-                [0.37493148, 0.21778074, 0.23026027],
-                [0.10265636, 0.20582178, 0.21669184])
-        ])
+        transform = transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize(
+                    [0.37493148, 0.21778074, 0.23026027],
+                    [0.10265636, 0.20582178, 0.21669184],
+                ),
+            ]
+        )
     elif num_classes == 10:
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize(
-                [0.34489644, 0.30505344, 0.3762387 ],
-                [0.26109827, 0.2823534, 0.32291284])
-        ])
+        transform = transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize(
+                    [0.34489644, 0.30505344, 0.3762387],
+                    [0.26109827, 0.2823534, 0.32291284],
+                ),
+            ]
+        )
     else:
         raise Exception
     return transform
@@ -51,89 +57,105 @@ class COCODataset(object):
         else:
             sp = None
         img = self.x_array[idx]
-        img = (img *255).astype(np.uint8)
+        img = (img * 255).astype(np.uint8)
         img = img.transpose(1, 2, 0)
         img = Image.fromarray(img)
         x = self.transform(img)
 
-        return x,y,g, sp
+        return x, y, g, sp
 
-def get_coco_handles(num_classes=2, sp_ratio_list=None, noise_ratio=0, dataset='colour', train_test=None, flags=None):
+
+def get_coco_handles(
+    num_classes=2,
+    sp_ratio_list=None,
+    noise_ratio=0,
+    dataset="colour",
+    train_test=None,
+    flags=None,
+):
     data_dir = "coco"
-    if dataset == 'places':
-        dataset_name = 'cocoplaces_vf_{}_{}'.format(num_classes, confounder_strength)
-        original_dirname = os.path.join(data_dir, dataset_name) # /home/ylindf/data/predictive_group_invariance/coco
-    elif dataset == 'colour':
-#         dataset_name = 'cococolours_vf_{}_{}'.format(num_classes, confounder_strength)
+    if dataset == "places":
+        dataset_name = "cocoplaces_vf_{}_{}".format(num_classes, confounder_strength)
+        original_dirname = os.path.join(
+            data_dir, dataset_name
+        )  # /home/ylindf/data/predictive_group_invariance/coco
+    elif dataset == "colour":
+        #         dataset_name = 'cococolours_vf_{}_{}'.format(num_classes, confounder_strength)
         # dataset_name = 'cococolours_vf_num_class_{}_sp_{}_noise_{}'.format(
         #     num_classes,
         #     "_".join([str(x) for x in sp_ratio_list]),
         #     noise_ratio)
 
         if flags.grayscale_model:
-            dataset_name = 'cocogrey__class_{}_noise_{}_sz_{}'.format(
-                num_classes,
-                noise_ratio,
-                flags.image_scale)
+            dataset_name = "cocogrey__class_{}_noise_{}_sz_{}".format(
+                num_classes, noise_ratio, flags.image_scale
+            )
         else:
-            dataset_name = 'cococolours_vf_num_class_{}_sp_{}_noise_{}_sz_{}'.format(
+            dataset_name = "cococolours_vf_num_class_{}_sp_{}_noise_{}_sz_{}".format(
                 num_classes,
                 "_".join([str(x) for x in sp_ratio_list]),
                 noise_ratio,
-                flags.image_scale)
+                flags.image_scale,
+            )
         original_dirname = os.path.join(data_dir, dataset_name)
 
-
     print("esr", original_dirname, dataset_name, data_dir)
-    dirname = os.path.join(data_dir,  dataset_name)
+    dirname = os.path.join(data_dir, dataset_name)
     print("ugh", dirname)
-    print('Copying data over, this will be worth it, be patient ...', end=' ')
-    subprocess.call(['rsync', '-r', original_dirname, data_dir])
-    print('Done!')
+    print("Copying data over, this will be worth it, be patient ...", end=" ")
+    subprocess.call(["rsync", "-r", original_dirname, data_dir])
+    print("Done!")
 
     if train_test == "train":
-        train_file = h5py.File(dirname+'/train.h5py', mode='r')
-        print("what", dirname+'/train.h5py')
+        train_file = h5py.File(dirname + "/train.h5py", mode="r")
+        print("what", dirname + "/train.h5py")
         return (train_file, None, None, None, None)
     elif train_test == "test":
-        id_test_file = h5py.File(dirname+'/idtest.h5py', mode='r')
+        id_test_file = h5py.File(dirname + "/idtest.h5py", mode="r")
         return (id_test_file, None, None, None, None)
     else:
         raise Exception
 
-def get_spcoco_dataset(sp_ratio_list=None, noise_ratio=None, num_classes=None, flags=None):
+
+def get_spcoco_dataset(
+    sp_ratio_list=None, noise_ratio=None, num_classes=None, flags=None
+):
     coco_transform = get_transform_coco(flags.num_classes)
     train_data_handle, _, _, _, _ = get_coco_handles(
         num_classes=num_classes,
         sp_ratio_list=sp_ratio_list,
         noise_ratio=noise_ratio,
-        dataset='colour', train_test="train", flags=flags)
+        dataset="colour",
+        train_test="train",
+        flags=flags,
+    )
     # shuffle train
     print(train_data_handle["images"])
     train_x_array = train_data_handle["images"].value
     train_y_array = train_data_handle["y"].value
     train_env_array = train_data_handle["e"].value
     train_sp_array = train_data_handle["g"].value
-    perm = np.random.permutation(
-        range(train_x_array.shape[0]))
+    perm = np.random.permutation(range(train_x_array.shape[0]))
     coco_dataset_train = COCODataset(
         x_array=train_x_array[perm],
         y_array=train_y_array[perm],
         env_array=train_env_array[perm],
         transform=coco_transform,
-        sp_array=train_sp_array[perm])
+        sp_array=train_sp_array[perm],
+    )
     test_data_handle, _, _, _, _ = get_coco_handles(
         num_classes=num_classes,
         sp_ratio_list=sp_ratio_list,
         noise_ratio=noise_ratio,
-        dataset='colour',
+        dataset="colour",
         train_test="test",
-        flags=flags)
+        flags=flags,
+    )
     coco_dataset_test = COCODataset(
         x_array=test_data_handle["images"].value,
         y_array=test_data_handle["y"].value,
         env_array=test_data_handle["e"].value,
         transform=coco_transform,
-        sp_array=test_data_handle["g"].value)
+        sp_array=test_data_handle["g"].value,
+    )
     return coco_dataset_train, coco_dataset_test
-
