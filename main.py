@@ -78,7 +78,7 @@ def main_worker(args):
         dp = CMNISTFULL_LYDP(args)
     elif args.set == "mnistcifar":
         dp = CIFAR_LYPD(args)
-    elif args.set == "colobj":
+    elif args.set == "cococolour":
         dp = COCOcolor_LYPD(args)
     args.arch = "EBD"
     ebd = get_model(args)
@@ -86,7 +86,7 @@ def main_worker(args):
 
     args.acc_list = []
     lr_policy = get_policy(args.lr_policy)(optimizer, args)
-    if args.set != "mnistfull":
+    if args.set not in ["cococolour", "mnistfull"]:
         criterion = mean_nll_class
         args.eval_fn = eval_acc_class
     else:
