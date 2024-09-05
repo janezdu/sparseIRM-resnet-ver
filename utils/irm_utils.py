@@ -24,9 +24,9 @@ def torch_xor(a, b):
 def concat_envs(con_envs):
     con_x = torch.cat([env["images"] for env in con_envs])
     con_y = torch.cat([env["labels"] for env in con_envs])
-    con_g = torch.cat([
-        ig * torch.ones_like(env["labels"])
-        for ig, env in enumerate(con_envs)])
+    con_g = torch.cat(
+        [ig * torch.ones_like(env["labels"]) for ig, env in enumerate(con_envs)]
+    )
     # con_2g = torch.cat([
     #     (ig < (len(con_envs) // 2)) * torch.ones_like(env["labels"])
     #     for ig,env in enumerate(con_envs)]).long()
@@ -39,18 +39,18 @@ def concat_envs(con_envs):
 def eval_acc_multi_class(logits, labels, colors):
     acc = mean_accuracy_multi_class(logits, labels)
     minacc = mean_accuracy_multi_class(
-        logits[colors.view(-1) != 1],
-        labels[colors.view(-1) != 1])
+        logits[colors.view(-1) != 1], labels[colors.view(-1) != 1]
+    )
     majacc = mean_accuracy_multi_class(
-        logits[colors.view(-1) == 1],
-        labels[colors.view(-1) == 1])
+        logits[colors.view(-1) == 1], labels[colors.view(-1) == 1]
+    )
     return acc, minacc, majacc
 
 
 def mean_accuracy_multi_class(output, target):
     probs = torch.softmax(output, dim=1)
     winners = probs.argmax(dim=1)
-    corrects = (winners == target.view(-1))
+    corrects = winners == target.view(-1)
     accuracy = corrects.sum().float() / float(corrects.size(0))
     return accuracy
 
@@ -70,17 +70,13 @@ def merge_env(original_env, merged_num):
 
 def eval_acc_class(logits, labels, colors):
     acc = mean_accuracy_class(logits, labels)
-    minacc = mean_accuracy_class(
-        logits[colors != 1],
-        labels[colors != 1])
-    majacc = mean_accuracy_class(
-        logits[colors == 1],
-        labels[colors == 1])
+    minacc = mean_accuracy_class(logits[colors != 1], labels[colors != 1])
+    majacc = mean_accuracy_class(logits[colors == 1], labels[colors == 1])
     return acc, minacc, majacc
 
 
 def mean_accuracy_class(logits, y):
-    preds = (logits > 0.).float()
+    preds = (logits > 0.0).float()
     return ((preds - y).abs() < 1e-2).float().mean()
 
 
@@ -100,7 +96,7 @@ def get_strctured_penalty(strctnet, ebd, envs_num, xis):
     x01_ebd = (x0_ebd - x1_ebd)[:, None]
     x12_ebd = (x1_ebd - x2_ebd)[:, None]
     x12_ebd_logit = strctnet(x01_ebd)
-    return 10 ** 13 * (x12_ebd_logit - x12_ebd).pow(2).mean()
+    return 10**13 * (x12_ebd_logit - x12_ebd).pow(2).mean()
 
 
 def make_environment(images, labels, e):
@@ -117,38 +113,45 @@ def make_environment(images, labels, e):
     images = torch.stack([images, images], dim=1)
     images[torch.tensor(range(len(images))), (1 - colors).long(), :, :] *= 0
     return {
-        'images': (images.float() / 255.),
-        'labels': labels[:, None],
-        'color': (1 - color_mask[:, None])
+        "images": (images.float() / 255.0),
+        "labels": labels[:, None],
+        "color": (1 - color_mask[:, None]),
     }
 
 
-
 def make_environment_fullcolor(images, labels, sp_ratio, noise_ratio):
-    colors = [(1, 1, 0), (1, 0, 1), (0, 1, 1),
-                (1, 0, 0), (0, 1, 0), (1, 0.5, 0),
-                (0, 0, 1), (1, 1, 1),
-                (0, 0.4, 0.8), (0.8,0,0.4)]
+    colors = [
+        (1, 1, 0),
+        (1, 0, 1),
+        (0, 1, 1),
+        (1, 0, 0),
+        (0, 1, 0),
+        (1, 0.5, 0),
+        (0, 0, 1),
+        (1, 1, 1),
+        (0, 0.4, 0.8),
+        (0.8, 0, 0.4),
+    ]
     images = images.reshape((-1, 28, 28))[:, ::2, ::2]
     images = torch.stack([images, images, images], dim=1).long()
     NUM_CLASSES = 10
     assert len(colors) == NUM_CLASSES
     sp_list = []
     ln_list = []
-    for i in range( images.shape[0]): #
-        if np.random.random() < noise_ratio: # 0.25
-            label_ = np.random.choice([
-            x for x in list(range(NUM_CLASSES))
-            if x != labels[i]])
+    for i in range(images.shape[0]):  #
+        if np.random.random() < noise_ratio:  # 0.25
+            label_ = np.random.choice(
+                [x for x in list(range(NUM_CLASSES)) if x != labels[i]]
+            )
             ln = 0
         else:
             label_ = labels[i]
             ln = 1
-        ln_list.append(ln) # label noise
-        if np.random.random() < sp_ratio: # 0.1
-            color_ = np.random.choice([
-            x for x in list(range(NUM_CLASSES))
-            if x != label_])
+        ln_list.append(ln)  # label noise
+        if np.random.random() < sp_ratio:  # 0.1
+            color_ = np.random.choice(
+                [x for x in list(range(NUM_CLASSES)) if x != label_]
+            )
             sp = 0
         else:
             color_ = label_
@@ -158,43 +161,48 @@ def make_environment_fullcolor(images, labels, sp_ratio, noise_ratio):
         images[i] = (images[i] * bc).long().clone()
         labels[i] = torch.tensor(label_).long().clone()
     return {
-      'images': (images.float() / 255.),
-      'labels': labels[:, None],
-      'color': torch.Tensor(sp_list)[:, None]
+        "images": (images.float() / 255.0),
+        "labels": labels[:, None],
+        "color": torch.Tensor(sp_list)[:, None],
     }
 
 
 def make_fullmnist_envs(flags):
-    mnist = datasets.MNIST('~/datasets/mnist', train=True, download=True)
-    mnist_train = (mnist.data[:flags.data_num], mnist.targets[:flags.data_num])
-    mnist_val = (mnist.data[flags.data_num:], mnist.targets[flags.data_num:])
+    mnist = datasets.MNIST("~/datasets/mnist", train=True, download=True)
+    mnist_train = (mnist.data[: flags.data_num], mnist.targets[: flags.data_num])
+    mnist_val = (mnist.data[flags.data_num :], mnist.targets[flags.data_num :])
     rng_state = np.random.get_state()
     np.random.shuffle(mnist_train[0].numpy())
     np.random.set_state(rng_state)
     np.random.shuffle(mnist_train[1].numpy())
     # Build environments
-    sp_ratio_list = [ 1- float(x) for x in flags.cons_ratio.split("_")]
+    sp_ratio_list = [1 - float(x) for x in flags.cons_ratio.split("_")]
     envs_num = len(sp_ratio_list) - 1
     envs = []
     for i in range(envs_num):
         envs.append(
-          make_environment_fullcolor(
-              mnist_train[0][i::envs_num],
-              mnist_train[1][i::envs_num],
-              sp_ratio=sp_ratio_list[i],
-              noise_ratio=flags.noise_ratio))
+            make_environment_fullcolor(
+                mnist_train[0][i::envs_num],
+                mnist_train[1][i::envs_num],
+                sp_ratio=sp_ratio_list[i],
+                noise_ratio=flags.noise_ratio,
+            )
+        )
     envs.append(
         make_environment_fullcolor(
             mnist_val[0],
             mnist_val[1],
             sp_ratio=sp_ratio_list[-1],
-            noise_ratio=flags.noise_ratio))
+            noise_ratio=flags.noise_ratio,
+        )
+    )
     return envs
 
+
 def make_mnist_envs(flags):
-    mnist = datasets.MNIST('~/datasets/mnist', train=True, download=True)
-    mnist_train = (mnist.data[:flags.data_num], mnist.targets[:flags.data_num])
-    mnist_val = (mnist.data[flags.data_num:], mnist.targets[flags.data_num:])
+    mnist = datasets.MNIST("~/datasets/mnist", train=True, download=True)
+    mnist_train = (mnist.data[: flags.data_num], mnist.targets[: flags.data_num])
+    mnist_val = (mnist.data[flags.data_num :], mnist.targets[flags.data_num :])
     rng_state = np.random.get_state()
     np.random.shuffle(mnist_train[0].numpy())
     np.random.set_state(rng_state)
@@ -208,12 +216,19 @@ def make_mnist_envs(flags):
                 make_environment(
                     mnist_train[0][i::envs_num],
                     mnist_train[1][i::envs_num],
-                    (0.2 - 0.1) / (envs_num - 1) * i + 0.1))
+                    (0.2 - 0.1) / (envs_num - 1) * i + 0.1,
+                )
+            )
     elif flags.env_type == "sin":
         for i in range(envs_num):
             envs.append(
-                make_environment(mnist_train[0][i::envs_num], mnist_train[1][i::envs_num],
-                                 (0.2 - 0.1) * math.sin(i * 2.0 * math.pi / (envs_num - 1)) * i + 0.1))
+                make_environment(
+                    mnist_train[0][i::envs_num],
+                    mnist_train[1][i::envs_num],
+                    (0.2 - 0.1) * math.sin(i * 2.0 * math.pi / (envs_num - 1)) * i
+                    + 0.1,
+                )
+            )
     elif flags.env_type == "step":
         lower_coef = 0.1
         upper_coef = 0.2
@@ -222,9 +237,9 @@ def make_mnist_envs(flags):
             env_coef = lower_coef if i < env_per_group else upper_coef
             envs.append(
                 make_environment(
-                    mnist_train[0][i::envs_num],
-                    mnist_train[1][i::envs_num],
-                    env_coef))
+                    mnist_train[0][i::envs_num], mnist_train[1][i::envs_num], env_coef
+                )
+            )
     else:
         raise Exception
     envs.append(make_environment(mnist_val[0], mnist_val[1], 0.9))
@@ -232,29 +247,21 @@ def make_mnist_envs(flags):
 
 
 def make_one_logit(num, sp_ratio, dim_inv, dim_spu):
-    cc = CowCamels(
-        dim_inv=dim_inv, dim_spu=dim_spu, n_envs=1,
-        p=[sp_ratio], s=[0.5])
-    inputs, outputs, colors, inv_noise = cc.sample(
-        n=num, env="E0")
-    return {
-        'images': inputs,
-        'labels': outputs,
-        'color': colors[:, None]
-    }
+    cc = CowCamels(dim_inv=dim_inv, dim_spu=dim_spu, n_envs=1, p=[sp_ratio], s=[0.5])
+    inputs, outputs, colors, inv_noise = cc.sample(n=num, env="E0")
+    return {"images": inputs, "labels": outputs, "color": colors[:, None]}
 
 
 def make_one_reg(num, sp_cond, inv_cond, dim_inv, dim_spu):
     ar = AntiReg(
-        dim_inv=dim_inv, dim_spu=dim_spu, n_envs=1,
-        s=[sp_cond], inv=[inv_cond])
-    inputs, outputs, colors, inv_noise = ar.sample(
-        n=num, env="E0")
+        dim_inv=dim_inv, dim_spu=dim_spu, n_envs=1, s=[sp_cond], inv=[inv_cond]
+    )
+    inputs, outputs, colors, inv_noise = ar.sample(n=num, env="E0")
     return {
-        'images': inputs,
-        'labels': outputs,
-        'color': colors,
-        'noise': None,
+        "images": inputs,
+        "labels": outputs,
+        "color": colors,
+        "noise": None,
     }
 
 
@@ -270,7 +277,9 @@ def make_logit_envs(total_num, flags):
                     total_num // envs_num,
                     (upper_coef - lower_coef) / (envs_num - 1) * i + lower_coef,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     elif flags.env_type == "cos":
         lower_coef = 0.8
         upper_coef = 0.9
@@ -278,9 +287,12 @@ def make_logit_envs(total_num, flags):
             envs.append(
                 make_one_logit(
                     total_num // envs_num,
-                    (upper_coef - lower_coef) * math.cos(i * 2.0 * math.pi / envs_num) + lower_coef,
+                    (upper_coef - lower_coef) * math.cos(i * 2.0 * math.pi / envs_num)
+                    + lower_coef,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     elif flags.env_type == "sin":
         lower_coef = 0.8
         upper_coef = 0.9
@@ -288,9 +300,12 @@ def make_logit_envs(total_num, flags):
             envs.append(
                 make_one_logit(
                     total_num // envs_num,
-                    (upper_coef - lower_coef) * math.sin(i * 2.0 * math.pi / envs_num) + lower_coef,
+                    (upper_coef - lower_coef) * math.sin(i * 2.0 * math.pi / envs_num)
+                    + lower_coef,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     elif flags.env_type == "2cos":
         lower_coef = 0.8
         upper_coef = 0.9
@@ -298,9 +313,12 @@ def make_logit_envs(total_num, flags):
             envs.append(
                 make_one_logit(
                     total_num // envs_num,
-                    (upper_coef - lower_coef) * math.cos(i * 4.0 * math.pi / envs_num) + lower_coef,
+                    (upper_coef - lower_coef) * math.cos(i * 4.0 * math.pi / envs_num)
+                    + lower_coef,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     elif flags.env_type == "2sin":
         lower_coef = 0.8
         upper_coef = 0.9
@@ -308,9 +326,12 @@ def make_logit_envs(total_num, flags):
             envs.append(
                 make_one_logit(
                     total_num // envs_num,
-                    (upper_coef - lower_coef) * math.sin(i * 4.0 * math.pi / envs_num) + lower_coef,
+                    (upper_coef - lower_coef) * math.sin(i * 4.0 * math.pi / envs_num)
+                    + lower_coef,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     else:
         raise Exception
     envs.append(make_one_logit(total_num, 0.1, flags.dim_inv, flags.dim_spu))
@@ -331,7 +352,9 @@ def make_reg_envs(total_num, flags):
                     (upper_coef - lower_coef) / (envs_num - 1) * i + lower_coef,
                     inv_cond,
                     flags.dim_inv,
-                    flags.dim_spu))
+                    flags.dim_spu,
+                )
+            )
     else:
         raise Exception
     envs.append(make_one_reg(total_num, 9.9, inv_cond, flags.dim_inv, flags.dim_spu))
@@ -356,7 +379,7 @@ def pretty_print(*values):
 
     def format_val(v):
         if not isinstance(v, str):
-            v = np.array2string(v, precision=5, floatmode='fixed')
+            v = np.array2string(v, precision=5, floatmode="fixed")
         return v.ljust(col_width)
 
     str_values = [format_val(v) for v in values]
@@ -382,7 +405,9 @@ class LYDataProviderMK(LYDataProvider):
         super(LYDataProviderMK, self).__init__()
 
     def preprocess_data(self):
-        self.train_x, self.train_y, self.train_g, self.train_c = concat_envs(self.envs[:-1])
+        self.train_x, self.train_y, self.train_g, self.train_c = concat_envs(
+            self.envs[:-1]
+        )
         self.test_x, self.test_y, self.test_g, self.test_c = concat_envs(self.envs[-1:])
 
     def fetch_train(self):
@@ -433,8 +458,16 @@ class CIFAR_LYPD(LYDataProvider):
         test_num = 1000  # 1800
         cons_list = [0.999, 0.7, 0.1]
         train_envs = len(cons_list) - 1
-        ratio_list = [1. / train_envs] * (train_envs)
-        spd, self.train_loader, self.val_loader, self.test_loader, self.train_data, self.val_data, self.test_data = get_data_loader_cifarminst(
+        ratio_list = [1.0 / train_envs] * (train_envs)
+        (
+            spd,
+            self.train_loader,
+            self.val_loader,
+            self.test_loader,
+            self.train_data,
+            self.val_data,
+            self.test_data,
+        ) = get_data_loader_cifarminst(
             batch_size=self.flags.batch_size,
             train_num=train_num,
             test_num=test_num,
@@ -443,7 +476,8 @@ class CIFAR_LYPD(LYDataProvider):
             label_noise_ratio=0.1,
             color_spurious=False,
             transform_data_to_standard=0,
-            oracle=0)
+            oracle=0,
+        )
         self.train_loader_iter = iter(self.train_loader)
 
     def fetch_train(self):
@@ -459,9 +493,7 @@ class CIFAR_LYPD(LYDataProvider):
     def fetch_test(self):
         ds = self.test_data.val_dataset
         batch = ds.x_array, ds.y_array, ds.env_array, ds.sp_array
-        batch = tuple(
-            torch.Tensor(t).cuda()
-            for t in batch)
+        batch = tuple(torch.Tensor(t).cuda() for t in batch)
         x, y, g, sp = batch
         return x, y.float(), g, sp
 
@@ -484,17 +516,20 @@ class COCOcolor_LYPD(LYDataProvider):
             sp_ratio_list=sp_ratio_list,
             noise_ratio=self.flags.noise_ratio,
             num_classes=self.flags.num_classes,
-            flags=self.flags)
+            flags=self.flags,
+        )
         self.train_loader = torch.utils.data.DataLoader(
             dataset=self.train_dataset,
             batch_size=self.flags.batch_size,
             shuffle=False,
-            num_workers=4)
+            num_workers=4,
+        )
         self.test_loader = torch.utils.data.DataLoader(
             dataset=self.test_dataset,
             batch_size=self.flags.batch_size,
             shuffle=False,
-            num_workers=4)
+            num_workers=4,
+        )
         self.train_loader_iter = iter(self.train_loader)
         self.test_loader_iter = iter(self.test_loader)
 
@@ -511,9 +546,7 @@ class COCOcolor_LYPD(LYDataProvider):
     def fetch_test(self):
         ds = self.test_dataset
         batch = ds.x_array, ds.y_array, ds.env_array, ds.sp_array
-        batch = tuple(
-            torch.Tensor(t).cuda()
-            for t in batch)
+        batch = tuple(torch.Tensor(t).cuda() for t in batch)
         x, y, g, sp = batch
         return x, y.float(), g, sp
 
@@ -538,6 +571,7 @@ class COCOcolor_LYPD(LYDataProvider):
 
     def get_test_loader(self):
         return self.test_loader
+
 
 class CMNISTFULL_LYDP(LYDataProviderMK):
     def __init__(self, flags):
