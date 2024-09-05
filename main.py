@@ -76,6 +76,8 @@ def main_worker(args):
         dp = CMNISTFULL_LYDP(args)
     elif args.set == "mnistcifar":
         dp = CIFAR_LYPD(args)
+    elif args.set == "colobj":
+        dp = COCOcolor_LYPD(args)
     args.arch = "EBD"
     ebd = get_model(args)
     ebd = set_gpu(args, ebd)
@@ -201,6 +203,7 @@ def main_worker(args):
             )
             end_epoch = time.time()
             print("record: (train_acc, test_acc)", record_test_best)
+            print("last accs (train_acc, test_acc)", (train_acc, test_acc))
 
             iter += 1
         unfix_model_subnet(model)
