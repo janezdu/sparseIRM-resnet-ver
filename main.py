@@ -40,8 +40,10 @@ from utils.irm_utils import (
     CMNISTFULL_LYDP,
 )
 from models.irm_models import EBD
+
 # import shutil
 import wandb
+
 # from sklearn.linear_model import LogisticRegression
 from utils.irm_utils import eval_acc_class, eval_acc_multi_class
 
@@ -205,8 +207,29 @@ def main_worker(args):
             print("record: (train_acc, test_acc)", record_test_best)
             print("last accs (train_acc, test_acc)", (train_acc, test_acc))
 
+            agg_data = {
+                "record_train_acc": record_test_best[0],
+                "record_test_acc": record_test_best[1],
+                "last_train_acc": train_acc,
+                "last_test_acc": test_acc,
+            }
+            save_aggregate_data("aggregate_data.csv", agg_data)
+
             iter += 1
         unfix_model_subnet(model)
+
+
+def save_aggregate_data(filename, data, verbose=False):
+    path = os.path.join("./", filename)
+    exists = os.path.isfile(path)
+
+    with open(path, "a") as f:
+        if not exists:
+            f.write(",".join(data.keys()) + "\n")
+        f.write(",".join([str(x) for x in data.values()]) + "\n")
+
+    if verbose:
+        print(f"done saving {filename} to {path}")
 
 
 def get_trainer(args):
