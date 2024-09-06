@@ -211,6 +211,7 @@ def main_worker(args):
             iter += 1
         unfix_model_subnet(model)
         agg_data = {
+            "date": time.strftime("%Y-%m-%d %H:%M:%S"),
             "record_train_acc": record_test_best[0],
             "record_test_acc": record_test_best[1],
             "last_train_acc": train_acc,
