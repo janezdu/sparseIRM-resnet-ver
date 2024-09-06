@@ -190,9 +190,9 @@ def train(
             fn_list.append(loss.item() * args.K)
             loss.backward()
 
-            # if args.steps > args.pgd_anneal_iters:
-            print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-            proj_sort(model.module, args.z)
+            if args.steps > args.pgd_anneal_iters:
+                print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
+                proj_sort(model.module, args.z)
 
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
