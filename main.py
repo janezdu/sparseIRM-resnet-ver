@@ -221,46 +221,46 @@ def main_worker(args):
         dim_v = len(model.module.fc.weight.data.view(-1))
         final_l1_norm = model.module.fc.weight.data.norm(p=1)
 
-        alg = "unk"
-        if "dense" in args.conv_type:
-            alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
-        elif "prob" in args.conv_type:
-            alg = "probmask"
+    alg = "unk"
+    if "dense" in args.conv_type:
+        alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
+    elif "prob" in args.conv_type:
+        alg = "probmask"
 
-        agg_data = {
-            "runid": wandb.run.id,
-            "date": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "model": "resnet18",
-            "hidden_dim": args.hidden_dim,
-            "algorithm": alg,
-            "dataset": args.set,
-            "epochs": args.epochs,
-            "last CE train loss": "n/a",
-            "last CE test loss": "n/a",
-            "env0 01 train acc": "n/a",
-            "env1 01 train acc": "n/a",
-            "last 01 train accuracy": train_acc.detach().cpu().numpy(),
-            "01 test accuracy": test_acc.detach().cpu().numpy(),
-            "time elapsed": "n/a",
-            "final l1 norm": final_l1_norm.item(),
-            "learning rate": args.weight_opt_lr,
-            "optimizer": args.optimizer,
-            "momentum": args.momentum if args.weight_opt == "sgd" else None,
-            "zo_only": False,
-            "target density/prune": args.z if args.use_pgd else args.prune_rate,
-            "percent zeros": zero_count.item() / dim_v,
-            "irmv1_gradnorm penalty": args.penalty_weight,
-            "irmv1_penalty_anneal_iter": args.penalty_anneal_iters,
-            "orig 28x28": False,
-            "ts": args.ts,
-            "te": args.te,
-            "record_train_acc": record_test_best[0],
-            "record_test_acc": record_test_best[1],
-            "last_train_acc": train_acc,
-            "last_test_acc": test_acc,
-        }
+    agg_data = {
+        "runid": wandb.run.id,
+        "date": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "model": "resnet18",
+        "hidden_dim": args.hidden_dim,
+        "algorithm": alg,
+        "dataset": args.set,
+        "epochs": args.epochs,
+        "last CE train loss": "n/a",
+        "last CE test loss": "n/a",
+        "env0 01 train acc": "n/a",
+        "env1 01 train acc": "n/a",
+        "last 01 train accuracy": train_acc.detach().cpu().numpy(),
+        "01 test accuracy": test_acc.detach().cpu().numpy(),
+        "time elapsed": "n/a",
+        "final l1 norm": final_l1_norm.item(),
+        "learning rate": args.weight_opt_lr,
+        "optimizer": args.optimizer,
+        "momentum": args.momentum if args.weight_opt == "sgd" else None,
+        "zo_only": False,
+        "target density/prune": args.z if args.use_pgd else args.prune_rate,
+        "percent zeros": zero_count.item() / dim_v,
+        "irmv1_gradnorm penalty": args.penalty_weight,
+        "irmv1_penalty_anneal_iter": args.penalty_anneal_iters,
+        "orig 28x28": False,
+        "ts": args.ts,
+        "te": args.te,
+        "record_train_acc": record_test_best[0],
+        "record_test_acc": record_test_best[1],
+        "last_train_acc": train_acc,
+        "last_test_acc": test_acc,
+    }
 
-        save_aggregate_data("aggregate.csv", agg_data, verbose=True)
+    save_aggregate_data("aggregate.csv", agg_data, verbose=True)
 
 def save_aggregate_data(filename, data, verbose=False):
     path = os.path.join("./", filename)
