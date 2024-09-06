@@ -76,7 +76,9 @@
                 "--use_pgd",
                 "--last-layer-dense",
                 "--num_classes",
-                "1"
+                "1",
+                "--pgd_anneal_iters",
+                "0",
             ]
         },
         {
