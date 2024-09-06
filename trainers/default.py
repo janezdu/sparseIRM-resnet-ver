@@ -359,8 +359,11 @@ def modifier(args, epoch, model):
 
 
 def proj_sort(model, z):
+    
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
+    print("dim_v", dim_v)
+    
     mu, p = torch.sort(v, descending=True)
 
     rho = dim_v - 1
@@ -371,6 +374,8 @@ def proj_sort(model, z):
             break
 
     assert rho >= 0
+    
+    print("rho", rho)
     if rho == dim_v - 1:
         return
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
