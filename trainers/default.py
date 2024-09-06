@@ -138,6 +138,9 @@ def train(train_loader, model, ebd, criterion, optimizer, epoch, args, writer, w
             loss = loss / args.K
             fn_list.append(loss.item()*args.K)
             loss.backward()
+            
+            proj_sort(model.module, args.z)
+            
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
             #         print("pr grad mean", n, m.scores.grad.mean().item())
