@@ -241,5 +241,20 @@ def validate(val_loader, model, criterion, args, writer, epoch):
     return test_acc_meter_d.avg, test_minacc_meter_d.avg, test_majacc_meter_d.avg, loss_meter_d.avg, test_corr_meter_d.avg
 
 
-def modifier(args, epoch, model):
-    return
+def proj_sort(model, z):
+    v = model.fc.weight.data.flatten()
+    dim_v = v.shape[0]
+    mu, p = torch.sort(v, descending=True)
+
+    rho = dim_v - 1
+    for i in range(dim_v):
+        res = mu[i] - (torch.sum(mu[: i + 1]) - z) / (i + 1)
+        if res <= 0:
+            rho = i - 1
+            break
+
+    assert rho >= 0
+    if rho == dim_v - 1:
+        return
+    theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
+    model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)
