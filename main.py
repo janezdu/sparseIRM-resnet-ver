@@ -217,9 +217,9 @@ def main_worker(args):
         #     "last_train_acc": train_acc,
         #     "last_test_acc": test_acc,
         # }
-        zero_count = (model.module.fc.weight.data == 0).sum()
-        dim_v = len(model.module.fc.weight.data.view(-1))
-        final_l1_norm = model.module.fc.weight.data.norm(p=1)
+    zero_count = (model.module.fc.weight.data == 0).sum()
+    dim_v = len(model.module.fc.weight.data.view(-1))
+    final_l1_norm = model.module.fc.weight.data.norm(p=1)
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
