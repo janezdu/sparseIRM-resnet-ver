@@ -663,7 +663,7 @@ def parse_arguments():
     )
 
     parser.add_argument('--envs_num', type=int, default=2)
-    parser.add_argument('--classes_num', type=int, default=2)
+    parser.add_argument('--num_classes', type=int, default=2)
     parser.add_argument('--l2_regularizer_weight', type=float, default=0.001)
     parser.add_argument('--data_num', type=int, default=50000)
     parser.add_argument('--env_type', default="linear", type=str, choices=["2_group", "cos", "linear"])
