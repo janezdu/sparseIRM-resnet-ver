@@ -239,8 +239,8 @@ def main_worker(args):
         "last CE test loss": "n/a",
         "env0 01 train acc": "n/a",
         "env1 01 train acc": "n/a",
-        "last 01 train accuracy": train_acc.detach().cpu().numpy(),
-        "01 test accuracy": test_acc.detach().cpu().numpy(),
+        "last 01 train accuracy": train_acc,
+        "01 test accuracy": test_acc,
         "time elapsed": "n/a",
         "final l1 norm": final_l1_norm.item(),
         "learning rate": args.weight_opt_lr,
@@ -261,6 +261,7 @@ def main_worker(args):
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)
+
 
 def save_aggregate_data(filename, data, verbose=False):
     path = os.path.join("./", filename)
