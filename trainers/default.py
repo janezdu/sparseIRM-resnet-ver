@@ -369,12 +369,14 @@ def proj_sort(model, z):
     rho = dim_v - 1
     for i in range(dim_v):
         res = mu[i] - (torch.sum(mu[:i]) - z) / (i + 1)
-        if res <= 1e3:
+        if res <= 1e-3:
             rho = i - 1
             break
 
     # assert rho >= 0
-    rho = max(rho, 0)
+    if rho < 0:
+        print("Rho smaller than zero when model l1:" + str(torch.norm(v, 1)))
+        rho = max(rho, 0)
 
     print("rho", rho)
     if rho == dim_v - 1:
