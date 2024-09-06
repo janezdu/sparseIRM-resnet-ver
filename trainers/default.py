@@ -240,6 +240,9 @@ def validate(val_loader, model, criterion, args, writer, epoch):
             progress.write_to_tensorboard(writer, prefix="test" if not args.finetuning else "test_ft", global_step=epoch)
     return test_acc_meter_d.avg, test_minacc_meter_d.avg, test_majacc_meter_d.avg, loss_meter_d.avg, test_corr_meter_d.avg
 
+def modifier(args, epoch, model):
+    return
+
 
 def proj_sort(model, z):
     v = model.fc.weight.data.flatten()
