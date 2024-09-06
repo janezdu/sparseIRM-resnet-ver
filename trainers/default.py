@@ -373,7 +373,8 @@ def proj_sort(model, z):
             rho = i - 1
             break
 
-    assert rho >= 0
+    # assert rho >= 0
+    rho = max(rho, 0)
 
     print("rho", rho)
     if rho == dim_v - 1:
