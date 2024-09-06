@@ -688,6 +688,7 @@ def parse_arguments():
     parser.add_argument('--step_gamma', type=float, default=0.1)
     parser.add_argument('--step_round', type=int, default=3)
     parser.add_argument('--inner_steps', type=int, default=1)
+    parser.add_argument('--use_pgd', default=False, action="store_true")
 
     args = parser.parse_args()
 
