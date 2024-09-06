@@ -192,7 +192,8 @@ def train(
 
             if args.steps > args.pgd_anneal_iters:
                 print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-                proj_sort(model.module, args.z)
+                # proj_sort(model.module, args.z)
+                proj(model.module, args.z)
 
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
@@ -378,8 +379,43 @@ def proj_sort(model, z):
         print("Rho smaller than zero when model l1:" + str(torch.norm(v, 1)))
         rho = max(rho, 0)
 
-    print("rho", rho)
     if rho == dim_v - 1:
         return
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
+    print("rho, theta", rho, theta)
     model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)
+
+
+def proj(model, z, device="cuda"):
+    ## minimizing ||v||_1, so projecting last fc layer to l1 ball
+    v = model.fc.weight.data.flatten()
+    v = torch.cat((v, torch.zeros(1).to(device)))
+    n = v.shape[0]
+
+    U = torch.arange(n).to(device)
+    s = 0
+    rho = 0
+
+    while len(U) > 0:
+        k = torch.randint(len(U), (1,))[0]
+        G = U[torch.where(v[U] >= v[U[k]])]
+        L = U[torch.where(v[U] < v[U[k]])]
+
+        del_rho = len(G)
+        del_s = torch.sum(v[G])
+
+        if (s + del_s) - (rho + del_rho) * v[U[k]] < z:
+            s += del_s
+            rho += del_rho
+            U = L
+        else:
+            U = torch.cat((G[:k], G[k + 1 :]))
+
+    if rho == n - 1:
+        return
+
+    theta = (s - z) / rho
+    result = (v - theta).clamp(min=0)
+    result = result[:-1]
+    model.fc.weight.data = result.reshape(model.fc.weight.shape)
+    return
