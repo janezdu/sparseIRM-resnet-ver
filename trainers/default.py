@@ -192,8 +192,8 @@ def train(
 
             if args.steps > args.pgd_anneal_iters:
                 print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-                # proj_sort(model.module, args.z)
-                proj(model.module, args.z)
+                proj_sort(model.module, args.z)
+                # proj(model.module, args.z)
 
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
@@ -364,6 +364,8 @@ def proj_sort(model, z):
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
     print("dim_v", dim_v)
+    if torch.norm(v, 1) <= z:
+        return
 
     mu, p = torch.sort(v, descending=True)
 
@@ -380,6 +382,7 @@ def proj_sort(model, z):
         rho = max(rho, 0)
 
     if rho == dim_v - 1:
+        print("retunring when rho == dim_v - 1")
         return
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     print("rho, theta", rho, theta)
