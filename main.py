@@ -261,7 +261,7 @@ def main_worker(args):
         }
 
         save_aggregate_data("aggregate.csv", agg_data, verbose=True)
-        save_aggregate_data("aggregate_data.csv", agg_data)
+        # save_aggregate_data("aggregate_data.csv", agg_data)
 
 
 def save_aggregate_data(filename, data, verbose=False):
