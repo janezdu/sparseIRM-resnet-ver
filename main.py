@@ -222,7 +222,7 @@ def main_worker(args):
         final_l1_norm = model.module.fc.weight.data.norm(p=1)
 
     alg = "unk"
-    if "dense" in args.conv_type:
+    if "dense" in (args.conv_type.lower()):
         alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
     elif "prob" in args.conv_type:
         alg = "probmask"
@@ -235,29 +235,29 @@ def main_worker(args):
         "algorithm": alg,
         "dataset": args.set,
         "epochs": args.epochs,
-        "last CE train loss": "n/a",
-        "last CE test loss": "n/a",
-        "env0 01 train acc": "n/a",
-        "env1 01 train acc": "n/a",
         "last 01 train accuracy": train_acc,
         "01 test accuracy": test_acc,
-        "time elapsed": "n/a",
+        "time elapsed": start_train - end_train,
+        "record_train_acc": record_test_best[0],
+        "record_test_acc": record_test_best[1],
+        "last_train_acc": train_acc,
+        "last_test_acc": test_acc,
+        "target density/prune": args.z if args.use_pgd else args.prune_rate,
         "final l1 norm": final_l1_norm.item(),
         "learning rate": args.weight_opt_lr,
         "optimizer": args.optimizer,
         "momentum": args.momentum if args.weight_opt == "sgd" else None,
-        "zo_only": False,
-        "target density/prune": args.z if args.use_pgd else args.prune_rate,
         "percent zeros": zero_count.item() / dim_v,
         "irmv1_gradnorm penalty": args.penalty_weight,
         "irmv1_penalty_anneal_iter": args.penalty_anneal_iters,
         "orig 28x28": False,
         "ts": args.ts,
         "te": args.te,
-        "record_train_acc": record_test_best[0],
-        "record_test_acc": record_test_best[1],
-        "last_train_acc": train_acc,
-        "last_test_acc": test_acc,
+        "zo_only": False,
+        "last CE train loss": "n/a",
+        "last CE test loss": "n/a",
+        "env0 01 train acc": "n/a",
+        "env1 01 train acc": "n/a",
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)
