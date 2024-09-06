@@ -74,7 +74,9 @@
                 "--z", 
                 "10",
                 "--use_pgd",
-                "--last-layer-dense"
+                "--last-layer-dense",
+                "--num_classes",
+                "1"
             ]
         },
         {

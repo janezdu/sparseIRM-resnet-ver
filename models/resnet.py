@@ -1,5 +1,5 @@
 import torch.nn as nn
-
+import torch
 from utils.builder import get_builder
 from args import args
 import math
@@ -118,7 +118,8 @@ class ResNet(nn.Module):
 
         # self.fc = nn.Linear(512 * block.expansion, num_classes)
         if args.last_layer_dense:
-            self.fc = nn.Conv2d(512 * block.expansion, args.num_classes, 1, bias=False)
+            # self.fc = nn.Conv2d(512 * block.expansion, args.num_classes, 1, bias=False)
+            self.fc = nn.Linear(512 * block.expansion, num_classes)
         else:
             self.fc = builder.conv1x1(512 * block.expansion, num_classes)
 
@@ -158,6 +159,7 @@ class ResNet(nn.Module):
         x = self.layer4(x)
 
         x = self.avgpool(x)
+        x = torch.flatten(x, 1)
         x = self.fc(x)
         x = x.view(x.size(0), -1)
 
