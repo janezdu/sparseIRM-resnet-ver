@@ -73,6 +73,7 @@ def train(
     v_meter = AverageMeter("v", ":6.4f")
     max_score_meter = AverageMeter("max_score", ":6.4f")
     l1_meter = AverageMeter("l1", ":6.4f")
+    zero_count_meter = AverageMeter("zero_count", ":6.4f")
     l = [
         loss_meter,
         train_nll_meter,
@@ -83,6 +84,7 @@ def train(
         train_majacc_meter,
         train_corr_meter,
         l1_meter,
+        zero_count_meter,
     ]
     progress = ProgressMeter(
         len(train_loader),
@@ -190,7 +192,6 @@ def train(
             fn_list.append(loss.item() * args.K)
             loss.backward()
 
-
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
             #         print("pr grad mean", n, m.scores.grad.mean().item())
@@ -220,6 +221,9 @@ def train(
         train_corr_meter.update(t_corr, train_x.size(0))
         l1_norm = model.module.fc.weight.norm(p=1)
         l1_meter.update(l1_norm.item(), train_x.size(0))
+        zero_count_meter.update(
+            (model.module.fc.weight == 0).sum().item(), train_x.size(0)
+        )
         # torch.nn.utils.clip_grad_norm_(model.parameters(), 3)
 
         if optimizer is not None:
@@ -235,7 +239,7 @@ def train(
                 optimizer.step()
         if weight_opt is not None:
             weight_opt.step()
-            
+
         if args.use_pgd and args.steps > args.pgd_anneal_iters:
             print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
             with torch.no_grad():
