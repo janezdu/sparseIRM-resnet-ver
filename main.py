@@ -224,7 +224,7 @@ def main_worker(args):
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
         alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
-    elif "prob" in args.conv_type:
+    elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
 
     agg_data = {
