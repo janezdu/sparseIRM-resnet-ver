@@ -210,13 +210,7 @@ def main_worker(args):
             iter += 1
         unfix_model_subnet(model)
         end_train = time.time()
-        # agg_data = {
-        #     "date": time.strftime("%Y-%m-%d %H:%M:%S"),
-        #     "record_train_acc": record_test_best[0],
-        #     "record_test_acc": record_test_best[1],
-        #     "last_train_acc": train_acc,
-        #     "last_test_acc": test_acc,
-        # }
+
     zero_count = (model.module.fc.weight.data == 0).sum()
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
@@ -235,8 +229,6 @@ def main_worker(args):
         "algorithm": alg,
         "dataset": args.set,
         "epochs": args.epochs,
-        "last 01 train accuracy": train_acc,
-        "01 test accuracy": test_acc,
         "time elapsed": start_train - end_train,
         "record_train_acc": record_test_best[0],
         "record_test_acc": record_test_best[1],
