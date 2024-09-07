@@ -190,10 +190,6 @@ def train(
             fn_list.append(loss.item() * args.K)
             loss.backward()
 
-            if args.steps > args.pgd_anneal_iters:
-                print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-                proj_sort(model.module, args.z)
-                # proj(model.module, args.z)
 
             # for n, m in model.named_modules():
             #     if hasattr(m, "scores"):
@@ -239,6 +235,12 @@ def train(
                 optimizer.step()
         if weight_opt is not None:
             weight_opt.step()
+            
+        if args.steps > args.pgd_anneal_iters:
+            print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
+            proj_sort(model.module, args.z)
+            # proj(model.module, args.z)
+
         args.steps += 1
         if "Dense" not in args.conv_type:
             if not args.finetuning:
