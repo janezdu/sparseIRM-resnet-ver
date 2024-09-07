@@ -163,7 +163,8 @@ class ResNet(nn.Module):
         x = self.layer4(x)
 
         x = self.avgpool(x)
-        x = torch.flatten(x, 1)
+        if args.use_pgd:
+            x = torch.flatten(x, 1)
         x = self.fc(x)
         if args.use_pgd:
             x = x.view(x.size(0), -1)
