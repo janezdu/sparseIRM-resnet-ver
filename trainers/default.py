@@ -236,7 +236,7 @@ def train(
         if weight_opt is not None:
             weight_opt.step()
             
-        if args.steps > args.pgd_anneal_iters:
+        if args.use_pgd and args.steps > args.pgd_anneal_iters:
             print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
             with torch.no_grad():
                 proj_sort(model.module, args.z)
