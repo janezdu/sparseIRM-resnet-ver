@@ -183,7 +183,7 @@ def train(
 
             loss = (
                 train_nll
-                + args.l2_regularizer_weight * weight_norm
+                # + args.l2_regularizer_weight * weight_norm
                 + penalty_weight * train_penalty
             )
             if penalty_weight > 1.0:
@@ -243,7 +243,7 @@ def train(
         if args.steps == args.pgd_anneal_iters:
             print("l1 at pgd_anneal_iters", l1_norm.item())
             with torch.no_grad():
-                args.z = l1_norm.item() * 0.9
+                args.z = l1_norm.item() * args.fraction_z
             print("set z to", args.z)
 
         if args.use_pgd and args.steps > args.pgd_anneal_iters:
