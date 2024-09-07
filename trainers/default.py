@@ -238,7 +238,8 @@ def train(
             
         if args.steps > args.pgd_anneal_iters:
             print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-            proj_sort(model.module, args.z)
+            with torch.no_grad():
+                proj_sort(model.module, args.z)
             # proj(model.module, args.z)
 
         args.steps += 1
