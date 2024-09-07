@@ -242,8 +242,9 @@ def train(
 
         if args.use_pgd and args.steps > args.pgd_anneal_iters:
             print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-            with torch.no_grad():
-                proj_sort(model.module, args.z)
+            if args.steps % args.pgd_skip_steps == 0:
+                with torch.no_grad():
+                    proj_sort(model.module, args.z)
             # proj(model.module, args.z)
 
         args.steps += 1
@@ -258,6 +259,12 @@ def train(
                             f"train/scaling_para", args.scaling_para, global_step=t
                         )
                         # print("scalingpara at this batch", args.scaling_para)
+    
+    if args.use_pgd:
+        print("final projection at end of training")
+        with torch.no_grad():
+            proj_sort(model.module, args.z)
+    
     progress.display(len(train_loader))
     progress.write_to_tensorboard(
         writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
