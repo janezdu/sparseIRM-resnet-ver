@@ -244,7 +244,7 @@ def main_worker(args):
         "last_test_acc": test_acc,
         "target density/prune": args.z if args.use_pgd else args.prune_rate,
         "final l1 norm": final_l1_norm.item(),
-        "learning rate": args.optimizer_lr,
+        "learning rate": args.lr,
         "optimizer": args.optimizer,
         "momentum": args.momentum if args.optimizer == "sgd" else None,
         "percent zeros": zero_count.item() / dim_v,
