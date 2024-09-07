@@ -375,7 +375,7 @@ def proj_sort(model, z):
     rho = dim_v - 1
     for i in range(dim_v):
         res = mu[i] - (torch.sum(mu[:i]) - z) / (i + 1)
-        if res <= -1e-3:
+        if res <= 0:
             rho = i - 1
             break
 
