@@ -229,7 +229,7 @@ def main_worker(args):
         "algorithm": alg,
         "dataset": args.set,
         "epochs": args.epochs,
-        "time elapsed": start_train - end_train,
+        "time elapsed": end_train - start_train,
         "record_train_acc": record_test_best[0],
         "record_test_acc": record_test_best[1],
         "last_train_acc": train_acc,
@@ -245,11 +245,6 @@ def main_worker(args):
         "orig 28x28": False,
         "ts": args.ts,
         "te": args.te,
-        "zo_only": False,
-        "last CE train loss": "n/a",
-        "last CE test loss": "n/a",
-        "env0 01 train acc": "n/a",
-        "env1 01 train acc": "n/a",
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)
