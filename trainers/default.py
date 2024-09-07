@@ -239,6 +239,12 @@ def train(
                 optimizer.step()
         if weight_opt is not None:
             weight_opt.step()
+            
+        if args.steps == args.pgd_anneal_iters:
+            print("l1 at pgd_anneal_iters", l1_norm.item())
+            with torch.no_grad():
+                args.z = l1_norm.item() * 0.9
+            print("set z to", args.z)
 
         if args.use_pgd and args.steps > args.pgd_anneal_iters:
             print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
