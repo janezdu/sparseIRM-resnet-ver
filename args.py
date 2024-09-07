@@ -693,6 +693,7 @@ def parse_arguments():
     parser.add_argument('--z', type=float, default=10)
     parser.add_argument('--pgd_anneal_iters', type=int, default=600)
     parser.add_argument('--pgd_skip_steps', type=int, default=50)
+    parser.add_argument('--fraction_z', type=float, default=0.95)
     args = parser.parse_args()
 
     # Allow for use from notebook without config file
