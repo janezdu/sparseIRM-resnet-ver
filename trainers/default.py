@@ -105,7 +105,7 @@ def train(
             train_g.cuda(),
             train_c.cuda(),
         )
-        print(train_x.size(), train_y.size())
+        # print(train_x.size(), train_y.size())
         train_c_label = (2 * train_y - 1) * train_c - train_y + 1
 
         l, tn, tp, wn, t_acc, t_min_acc, t_maj_acc, t_corr = 0, 0, 0, 0, 0, 0, 0, 0
@@ -232,11 +232,11 @@ def train(
         if optimizer is not None:
             if "Dense" not in args.conv_type and not args.fix_subnet:
                 if args.steps >= len(train_loader) * args.epochs * args.ts:
-                    print(
-                        "args.steps >= len(train_loader)*args.epochs*args.ts",
-                        args.steps,
-                        len(train_loader) * args.epochs * args.ts,
-                    )
+                    # print(
+                    #     "args.steps >= len(train_loader)*args.epochs*args.ts",
+                    #     args.steps,
+                    #     len(train_loader) * args.epochs * args.ts,
+                    # )
                     optimizer.step()
             else:
                 optimizer.step()
@@ -244,13 +244,13 @@ def train(
             weight_opt.step()
             
         if args.steps == args.pgd_anneal_iters:
-            print("l1 at pgd_anneal_iters", l1_norm.item())
+            # print("l1 at pgd_anneal_iters", l1_norm.item())
             with torch.no_grad():
                 args.z = l1_norm.item() * args.fraction_z
-            print("set z to", args.z)
+            # print("set z to", args.z)
 
         if args.use_pgd and args.steps > args.pgd_anneal_iters:
-            print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
+            # print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
             if args.steps % args.pgd_skip_steps == 0:
                 with torch.no_grad():
                     proj_sort(model.module, args.z)
