@@ -12,5 +12,5 @@
 #SBATCH --output=out/%x-%j.out
 
 echo 'hello'
-chmod +x gumbelrun.sh
-./gumbelrun.sh
+chmod +x irmv1run.sh
+./irmv1run.sh
