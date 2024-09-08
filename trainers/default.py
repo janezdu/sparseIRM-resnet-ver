@@ -183,7 +183,7 @@ def train(
 
             if args.use_pgd:
                 args.l2_regularizer_weight = 0.0
-            
+
             loss = (
                 train_nll
                 + args.l2_regularizer_weight * weight_norm
@@ -242,7 +242,7 @@ def train(
                 optimizer.step()
         if weight_opt is not None:
             weight_opt.step()
-            
+
         if args.steps == args.pgd_anneal_iters:
             # print("l1 at pgd_anneal_iters", l1_norm.item())
             with torch.no_grad():
@@ -253,7 +253,7 @@ def train(
             # print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
             if args.steps % args.pgd_skip_steps == 0:
                 with torch.no_grad():
-                    proj_sort(model.module, args.z)
+                    proj_sort(model.module, args.z, args.rho_tolerance)
             # proj(model.module, args.z)
 
         args.steps += 1
@@ -268,12 +268,12 @@ def train(
                             f"train/scaling_para", args.scaling_para, global_step=t
                         )
                         # print("scalingpara at this batch", args.scaling_para)
-    
+
     if args.use_pgd:
         print("final projection at end of training")
         with torch.no_grad():
             proj_sort(model.module, args.z)
-    
+
     progress.display(len(train_loader))
     progress.write_to_tensorboard(
         writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
@@ -382,7 +382,7 @@ def modifier(args, epoch, model):
     return
 
 
-def proj_sort(model, z):
+def proj_sort(model, z, rho_tolerance):
 
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
@@ -407,9 +407,9 @@ def proj_sort(model, z):
     if rho == dim_v - 1:
         # print("retunring when rho == dim_v - 1")
         return
-    
-    rho = rho + 15
-    
+
+    rho = min(dim_v, rho + rho_tolerance)
+
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)

@@ -247,6 +247,7 @@ def main_worker(args):
         "te": args.te,
         "fraction z": args.fraction_z if args.use_pgd else None,
         "pgd skip": args.pgd_skip_steps if args.use_pgd else None,
+        "rho tolerance": args.rho_tolerance if args.use_pgd else None,
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)
