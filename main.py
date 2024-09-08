@@ -246,7 +246,7 @@ def main_worker(args):
         "ts": args.ts,
         "te": args.te,
         "fraction z": args.fraction_z if args.use_pgd else None,
-        "pgd skip": args.pgd_skip if args.use_pgd else None,
+        "pgd skip": args.pgd_skip_steps if args.use_pgd else None,
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)

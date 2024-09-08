@@ -171,15 +171,15 @@ def train(
                     weight_norm += m.bias.norm().pow(2)
             # for w in model.parameters():
             #     weight_norm += w.norm().pow(2)
-            print(
-                "args.step args.penalty_anneal_iters",
-                args.steps,
-                args.penalty_anneal_iters,
-            )
+            # print(
+            #     "args.step args.penalty_anneal_iters",
+            #     args.steps,
+            #     args.penalty_anneal_iters,
+            # )
             penalty_weight = (
                 args.penalty_weight if args.steps >= args.penalty_anneal_iters else 0.0
             )
-            print("penalty weights", penalty_weight)
+            # print("penalty weights", penalty_weight)
 
             if args.use_pgd:
                 args.l2_regularizer_weight = 0.0
@@ -386,7 +386,7 @@ def proj_sort(model, z):
 
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
-    print("dim_v", dim_v)
+    # print("dim_v", dim_v)
     if torch.norm(v, 1) <= z:
         return
 
