@@ -409,9 +409,9 @@ def proj_sort(model, z, rho_tolerance):
         return
 
     # rho = min(dim_v, rho + rho_tolerance)
-    rho = dim_v - 1
+    # rho = dim_v - 1
 
-    theta = mu[dim_v - rho :].mean()
+    theta = mu[dim_v - rho_tolerance :].mean()
     # theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)
