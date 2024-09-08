@@ -15,7 +15,9 @@ def parse_arguments():
         "--data", help="path to dataset base directory", default="/mnt/disk1/datasets"
     )
     parser.add_argument("--optimizer", help="Which optimizer to use", default="sgd")
-    parser.add_argument("--weight_opt", help="Which optimizer to use for weight", default="sgd")
+    parser.add_argument(
+        "--weight_opt", help="Which optimizer to use for weight", default="sgd"
+    )
     parser.add_argument("--set", help="name of dataset", type=str, default="ImageNet")
     parser.add_argument(
         "-a", "--arch", metavar="ARCH", default="ResNet18", help="model architecture"
@@ -55,8 +57,8 @@ def parse_arguments():
         type=int,
         metavar="N",
         help="mini-batch size (default: 256), this is the total "
-             "batch size of all GPUs on the current node when "
-             "using Data Parallel or Distributed Data Parallel",
+        "batch size of all GPUs on the current node when "
+        "using Data Parallel or Distributed Data Parallel",
     )
     parser.add_argument(
         "--lr",
@@ -120,7 +122,6 @@ def parse_arguments():
         help="use pre-trained model",
     )
 
-
     parser.add_argument(
         "--pretrained_distill",
         dest="pretrained_distill",
@@ -158,9 +159,7 @@ def parse_arguments():
     parser.add_argument(
         "--lr-policy", default="constant_lr", help="Policy for the learning rate."
     )
-    parser.add_argument(
-        "--lr-adjust", default=30, type=int, help="Interval to drop lr"
-    )
+    parser.add_argument("--lr-adjust", default=30, type=int, help="Interval to drop lr")
     parser.add_argument(
         "--lr-gamma", default=0.1, type=int, help="Multistep multiplier"
     )
@@ -259,15 +258,11 @@ def parse_arguments():
     parser.add_argument(
         "--approx", action="store_true", help="Use Approx Discrete Mode"
     )
-    parser.add_argument(
-        "--zero", action="store_true", help="Use Zero Discrete Mode"
-    )
+    parser.add_argument("--zero", action="store_true", help="Use Zero Discrete Mode")
     parser.add_argument(
         "--flip", action="store_true", help="Use Flip Mask Randomly Mode"
     )
-    parser.add_argument(
-        "--bs", action="store_true", help="Sample from Score"
-    )
+    parser.add_argument("--bs", action="store_true", help="Sample from Score")
     parser.add_argument(
         "--gumbel_sample", action="store_true", help="Sample from gumbel"
     )
@@ -284,7 +279,9 @@ def parse_arguments():
         "--multiply_prob_bs", action="store_true", help="multiply probability and bs"
     )
     parser.add_argument(
-        "--indiv", action="store_true", help="individual temperature for different channels"
+        "--indiv",
+        action="store_true",
+        help="individual temperature for different channels",
     )
     parser.add_argument(
         "--label-smoothing",
@@ -662,39 +659,41 @@ def parse_arguments():
         help="Whether use snip",
     )
 
-    parser.add_argument('--envs_num', type=int, default=2)
-    parser.add_argument('--num_classes', type=int, default=2)
-    parser.add_argument('--l2_regularizer_weight', type=float, default=0.001)
-    parser.add_argument('--data_num', type=int, default=50000)
-    parser.add_argument('--env_type', default="linear", type=str, choices=["2_group", "cos", "linear"])
-    parser.add_argument('--irm_type', default="irmv1", type=str)
-    parser.add_argument('--hidden_dim', type=int, default=390)
-    parser.add_argument('--penalty_anneal_iters', type=int, default=200)
-    parser.add_argument('--penalty_weight', type=float, default=10000.0)
-    parser.add_argument('--grayscale_model', type=int, default=0)
-    parser.add_argument('--weight_lr_schedule', default=False, action="store_true")
+    parser.add_argument("--envs_num", type=int, default=2)
+    parser.add_argument("--num_classes", type=int, default=2)
+    parser.add_argument("--l2_regularizer_weight", type=float, default=0.001)
+    parser.add_argument("--data_num", type=int, default=50000)
+    parser.add_argument(
+        "--env_type", default="linear", type=str, choices=["2_group", "cos", "linear"]
+    )
+    parser.add_argument("--irm_type", default="irmv1", type=str)
+    parser.add_argument("--hidden_dim", type=int, default=390)
+    parser.add_argument("--penalty_anneal_iters", type=int, default=200)
+    parser.add_argument("--penalty_weight", type=float, default=10000.0)
+    parser.add_argument("--grayscale_model", type=int, default=0)
+    parser.add_argument("--weight_lr_schedule", default=False, action="store_true")
 
-    parser.add_argument('--fix_subnet', default=False, action="store_true")
-    parser.add_argument('--freeze_weight', default=False, action="store_true")
-    parser.add_argument('--step', default="ours", type=str)
-    parser.add_argument('--runs_name', type=str)
-    parser.add_argument('--prior_sd_coef', type=float, default=0)
-    parser.add_argument('--dim_inv', type=int, default=2)
-    parser.add_argument('--variance_gamma', type=float, default=1.0)
-    parser.add_argument('--dim_spu', type=int, default=10)
-    parser.add_argument('--image_scale', type=int, default=32)
-    parser.add_argument('--cons_ratio', type=str, default="0.999_0.7_0.1")
-    parser.add_argument('--noise_ratio', type=float, default=0.05)
-    parser.add_argument('--step_gamma', type=float, default=0.1)
-    parser.add_argument('--step_round', type=int, default=3)
-    parser.add_argument('--inner_steps', type=int, default=1)
+    parser.add_argument("--fix_subnet", default=False, action="store_true")
+    parser.add_argument("--freeze_weight", default=False, action="store_true")
+    parser.add_argument("--step", default="ours", type=str)
+    parser.add_argument("--runs_name", type=str)
+    parser.add_argument("--prior_sd_coef", type=float, default=0)
+    parser.add_argument("--dim_inv", type=int, default=2)
+    parser.add_argument("--variance_gamma", type=float, default=1.0)
+    parser.add_argument("--dim_spu", type=int, default=10)
+    parser.add_argument("--image_scale", type=int, default=32)
+    parser.add_argument("--cons_ratio", type=str, default="0.999_0.7_0.1")
+    parser.add_argument("--noise_ratio", type=float, default=0.05)
+    parser.add_argument("--step_gamma", type=float, default=0.1)
+    parser.add_argument("--step_round", type=int, default=3)
+    parser.add_argument("--inner_steps", type=int, default=1)
 
-    parser.add_argument('--use_pgd', default=False, action="store_true")
-    parser.add_argument('--z', type=float, default=10)
-    parser.add_argument('--pgd_anneal_iters', type=int, default=600)
-    parser.add_argument('--pgd_skip_steps', type=int, default=50)
-    parser.add_argument('--fraction_z', type=float, default=0.95)
-    parser.add_argument('--rho_tolerance', type=int, default=0)
+    parser.add_argument("--use_pgd", default=False, action="store_true")
+    parser.add_argument("--z", type=float, default=10)
+    parser.add_argument("--pgd_anneal_iters", type=int, default=600)
+    parser.add_argument("--pgd_skip_steps", type=int, default=50)
+    parser.add_argument("--fraction_z", type=float, default=0.95)
+    parser.add_argument("--rho_tolerance", type=int, default=0)
     args = parser.parse_args()
 
     # Allow for use from notebook without config file
