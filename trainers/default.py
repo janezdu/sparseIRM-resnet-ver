@@ -401,14 +401,17 @@ def proj_sort(model, z):
 
     # assert rho >= 0
     if rho < 0:
-        print("Rho smaller than zero when model l1:" + str(torch.norm(v, 1)))
+        # print("Rho smaller than zero when model l1:" + str(torch.norm(v, 1)))
         rho = max(rho, 0)
 
     if rho == dim_v - 1:
-        print("retunring when rho == dim_v - 1")
+        # print("retunring when rho == dim_v - 1")
         return
+    
+    rho = rho + 15
+    
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
-    print("rho, theta", rho, theta)
+    # print("rho, theta", rho, theta)
     model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)
 
 
