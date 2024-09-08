@@ -181,6 +181,9 @@ def train(
             )
             print("penalty weights", penalty_weight)
 
+            if args.use_pgd:
+                args.l2_regularizer_weight = 0.0
+            
             loss = (
                 train_nll
                 + args.l2_regularizer_weight * weight_norm
