@@ -383,23 +383,18 @@ def modifier(args, epoch, model):
 
 
 def proj_sort(model, z, rho_tolerance):
-
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
     # print("dim_v", dim_v)
     if torch.norm(v, 1) <= z:
         return
-
     mu, p = torch.sort(v, descending=True)
-
     rho = dim_v - 1
     for i in range(dim_v):
         res = mu[i] - (torch.sum(mu[:i]) - z) / (i + 1)
         if res <= 0:
             rho = i - 1
             break
-
-    # assert rho >= 0
     if rho < 0:
         # print("Rho smaller than zero when model l1:" + str(torch.norm(v, 1)))
         rho = max(rho, 0)
@@ -407,9 +402,6 @@ def proj_sort(model, z, rho_tolerance):
     if rho == dim_v - 1:
         # print("retunring when rho == dim_v - 1")
         return
-
-    # rho = min(dim_v, rho + rho_tolerance)
-    # rho = dim_v - 1
 
     theta = mu[dim_v - rho_tolerance :].mean()
     # theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
