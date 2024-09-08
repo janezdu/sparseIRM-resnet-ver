@@ -183,7 +183,7 @@ def train(
 
             loss = (
                 train_nll
-                # + args.l2_regularizer_weight * weight_norm
+                + args.l2_regularizer_weight * weight_norm
                 + penalty_weight * train_penalty
             )
             if penalty_weight > 1.0:
