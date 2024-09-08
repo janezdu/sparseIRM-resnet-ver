@@ -414,6 +414,7 @@ def proj_sort(model, z, rho_tolerance):
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (model.fc.weight.data - theta).clamp(min=0)
+    print("num zeros", (model.fc.weight == 0).sum().item())
 
 
 def proj(model, z, device="cuda"):
