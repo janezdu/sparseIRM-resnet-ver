@@ -272,7 +272,7 @@ def train(
     if args.use_pgd:
         print("final projection at end of training")
         with torch.no_grad():
-            proj_sort(model.module, args.z)
+            proj_sort(model.module, args.z, args.rho_tolerance)
 
     progress.display(len(train_loader))
     progress.write_to_tensorboard(
