@@ -402,6 +402,7 @@ def proj_sort(model, z, rho_tolerance):
     # rho = min(rho, dim_v - rho_tolerance)
     # even if l1 norm is satisfied, kill some weights
     if rho > dim_v - rho_tolerance:
+        rho = dim_v - rho_tolerance
         print("artificially killing some weights")
         mu[rho:] = 0
         trimmed = mu
