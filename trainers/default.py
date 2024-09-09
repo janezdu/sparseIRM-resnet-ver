@@ -250,12 +250,12 @@ def train(
                 args.z = l1_norm.item() * args.fraction_z
             # print("set z to", args.z)
 
-        if args.use_pgd and args.steps > args.pgd_anneal_iters:
-            # print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
-            if args.steps % args.pgd_skip_steps == 0:
-                with torch.no_grad():
-                    proj_sort(model.module, args.z, args.rho_tolerance)
-            # proj(model.module, args.z)
+        # if args.use_pgd and args.steps > args.pgd_anneal_iters:
+        #     # print("args.step pgd_anneal_iters", args.steps, args.pgd_anneal_iters)
+        #     if args.steps % args.pgd_skip_steps == 0:
+        #         with torch.no_grad():
+        #             proj_sort(model.module, args.z, args.rho_tolerance)
+        #     # proj(model.module, args.z)
 
         args.steps += 1
         if "Dense" not in args.conv_type:
