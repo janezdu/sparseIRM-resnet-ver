@@ -411,6 +411,9 @@ def proj_sort(model, z, rho_tolerance):
         theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
         trimmed = (mu - theta).clamp(min=0)
 
+    # theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
+    # trimmed = (mu - theta).clamp(min=0)
+    
     print("rho", rho)
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
