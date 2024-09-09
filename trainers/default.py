@@ -268,7 +268,7 @@ def train(
                         )
                         # print("scalingpara at this batch", args.scaling_para)
 
-    if args.use_pgd:
+    if args.use_pgd and args.steps > args.pgd_anneal_iters:
         print("final projection at end of training")
         with torch.no_grad():
             proj_sort(model.module, args.z, args.rho_tolerance)
