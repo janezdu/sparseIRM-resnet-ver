@@ -225,9 +225,7 @@ def train(
         train_corr_meter.update(t_corr, train_x.size(0))
         l1_norm = model.module.fc.weight.norm(p=1)
         l1_meter.update(l1_norm.item(), train_x.size(0))
-        zero_count_meter.update(
-            (model.module.fc.weight == 0).sum().item(), train_x.size(0)
-        )
+
         # torch.nn.utils.clip_grad_norm_(model.parameters(), 3)
 
         if optimizer is not None:
@@ -274,7 +272,7 @@ def train(
         print("final projection at end of training")
         with torch.no_grad():
             proj_sort(model.module, args.z, args.rho_tolerance)
-
+    zero_count_meter.update((model.module.fc.weight == 0).sum().item(), train_x.size(0))
     progress.display(len(train_loader))
     progress.write_to_tensorboard(
         writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
@@ -403,17 +401,19 @@ def proj_sort(model, z, rho_tolerance):
     # even if l1 norm is satisfied, kill some weights
     if rho > dim_v - rho_tolerance:
         rho = dim_v - rho_tolerance
+        theta = mu[rho]
         print("artificially killing some weights")
-        mu[rho:] = 0
-        trimmed = mu
+        # mu[rho:] = 0
+        # trimmed = mu
     else:
-    # theta = mu[dim_v - rho_tolerance :].mean()
+        # theta = mu[dim_v - rho_tolerance :].mean()
         theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
-        trimmed = (mu - theta).clamp(min=0)
+        
+    trimmed = (mu - theta).clamp(min=0)
 
     # theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     # trimmed = (mu - theta).clamp(min=0)
-    
+
     print("rho", rho)
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
