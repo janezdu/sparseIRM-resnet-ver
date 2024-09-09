@@ -431,7 +431,8 @@ def proj_sort(model, z, rho_tolerance):
     if rho > dim_v - rho_tolerance:
         rho = dim_v - rho_tolerance
         # theta = mu[rho] # subtract mu rho from everything
-        theta = torch.zeros_like(mu) + mu[rho:]
+        theta = torch.zeros_like(mu) 
+        theta[rho:] = mu[rho]
         # should just kill the last "rho tolerance" weights, keeping all before
         print("artificially killing some weights")
     else:
