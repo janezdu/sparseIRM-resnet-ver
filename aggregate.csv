@@ -1,0 +1,2 @@
+runid,date,model,hidden_dim,algorithm,dataset,epochs,time elapsed,record_train_acc,record_test_acc,last_train_acc,last_test_acc,target density/prune,final l1 norm,learning rate,optimizer,momentum,percent zeros,irmv1_gradnorm penalty,irmv1_penalty_anneal_iter,pgd_anneal_iter,orig 28x28,ts,te,fraction z,pgd skip,rho tolerance
+o9emdqb8,2024-09-08 21:32:11,resnet18,390,pgd-IRMv1,mnistcifar,50,2.578141689300537,0.6165000108480454,0.706000030040741,0.5000000087022781,0.5,4.325304412841797,4.074329376220703,0.006,adam,None,0.0390625,10000.0,200,600,False,0.28,0.6,0.8,2,20
