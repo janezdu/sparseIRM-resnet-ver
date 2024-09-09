@@ -401,7 +401,9 @@ def proj_sort(model, z, rho_tolerance):
     # theta = mu[dim_v - rho_tolerance :].mean()
     theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
     trimmed = (mu - theta).clamp(min=0)
-    model.fc.weight.data = trimmed[p] * signs
+
+
+    model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
     print("num zeros", (model.fc.weight == 0).sum().item())
 
 
