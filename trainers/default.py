@@ -430,10 +430,10 @@ def proj_sort(model, z, rho_tolerance):
     # even if l1 norm is satisfied, kill some weights
     if rho > dim_v - rho_tolerance:
         rho = dim_v - rho_tolerance
-        theta = mu[rho]
+        # theta = mu[rho] # subtract mu rho from everything
+        theta = torch.zeros_like(mu) + mu[rho:]
+        # should just kill the last "rho tolerance" weights, keeping all before
         print("artificially killing some weights")
-        # mu[rho:] = 0
-        # trimmed = mu
     else:
         # theta = mu[dim_v - rho_tolerance :].mean()
         theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
