@@ -1,0 +1,1551 @@
+hello
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211116-coq76y1q
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/coq76y1q
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: \ 0.015 MB of 0.032 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/coq76y1q
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211116-coq76y1q/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211125-1oawlhji
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/1oawlhji
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: \ 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/1oawlhji
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211125-1oawlhji/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211134-0f6najz1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/0f6najz1
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/0f6najz1
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211134-0f6najz1/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211142-wflrkbes
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/wflrkbes
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/wflrkbes
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211142-wflrkbes/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211151-58raw8l9
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/58raw8l9
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: \ 0.015 MB of 0.032 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/58raw8l9
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211151-58raw8l9/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211200-z2hwoe1u
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/z2hwoe1u
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/z2hwoe1u
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211200-z2hwoe1u/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211209-m6awfg9r
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/m6awfg9r
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/m6awfg9r
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211209-m6awfg9r/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211217-nhz7m1ae
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/nhz7m1ae
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: \ 0.015 MB of 0.015 MB uploadedwandb: | 0.015 MB of 0.023 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/nhz7m1ae
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211217-nhz7m1ae/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211227-k3ljfhf5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/k3ljfhf5
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/k3ljfhf5
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211227-k3ljfhf5/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240908_211235-pmlec0e6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/pmlec0e6
+/home/zd16/scratch/mypython3/torch/cuda/__init__.py:88: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=200, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=15.0, pgd_anneal_iters=600, pgd_skip_steps=10, fraction_z=0.8, rho_tolerance=20)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+Traceback (most recent call last):
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 498, in <module>
+    main()
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 59, in main
+    main_worker(args)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 71, in main_worker
+    model = set_gpu(args, model)
+  File "/scratch/users/zd16/sparseIRM-resnet-ver/main.py", line 275, in set_gpu
+    assert torch.cuda.is_available(), "CPU-only experiments currently unsupported"
+AssertionError: CPU-only experiments currently unsupported
+wandb: - 0.015 MB of 0.015 MB uploadedwandb: \ 0.015 MB of 0.015 MB uploadedwandb: | 0.015 MB of 0.032 MB uploadedwandb: 🚀 View run name_random at: https://wandb.ai/janezdu-uiuc/irm/runs/pmlec0e6
+wandb: ⭐️ View project at: https://wandb.ai/janezdu-uiuc/irm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240908_211235-pmlec0e6/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
