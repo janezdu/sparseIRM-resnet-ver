@@ -242,7 +242,7 @@ def train(
         if weight_opt is not None:
             weight_opt.step()
 
-        if args.steps == args.pgd_anneal_iters:
+        if args.steps == args.pgd_anneal_iters - 100:
             # print("l1 at pgd_anneal_iters", l1_norm.item())
             proj_up(model.module, args.z)
             # with torch.no_grad():
