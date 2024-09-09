@@ -399,13 +399,17 @@ def proj_sort(model, z, rho_tolerance):
             rho = i - 1
             break
 
-    rho = min(rho, dim_v - rho_tolerance)
+    # rho = min(rho, dim_v - rho_tolerance)
     # even if l1 norm is satisfied, kill some weights
-
+    if rho < dim_v - rho_tolerance:
+        mu[rho:] = 0
+        trimmed = mu
+    else:
     # theta = mu[dim_v - rho_tolerance :].mean()
-    theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
-    trimmed = (mu - theta).clamp(min=0)
+        theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
+        trimmed = (mu - theta).clamp(min=0)
 
+    # print("rho, theta", rho, theta)
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
     print("num zeros", (model.fc.weight == 0).sum().item())
 
