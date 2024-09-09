@@ -434,7 +434,7 @@ def proj_sort(model, z, rho_tolerance):
         theta = torch.zeros_like(mu) 
         theta[rho:] = mu[rho]
         # should just kill the last "rho tolerance" weights, keeping all before
-        print("artificially killing some weights")
+        print("artificially killing some weights, smallest is ", mu[rho])
     else:
         # theta = mu[dim_v - rho_tolerance :].mean()
         theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
@@ -448,26 +448,6 @@ def proj_sort(model, z, rho_tolerance):
     # print("rho, theta", rho, theta)
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
     print("num zeros", (model.fc.weight == 0).sum().item())
-
-
-def proj_simplex(model, z):
-    v = model.fc.weight.data.flatten()
-    dim_v = v.shape[0]
-
-    mu, p = torch.sort(v, descending=True)
-    rho = dim_v - 1
-    for i in range(dim_v):
-        res = mu[i] - (torch.sum(mu[:i]) - z) / (i + 1)
-        if res <= 0:
-            rho = i - 1
-            break
-
-    theta = (torch.sum(mu[:rho]) - z) / (rho + 1)
-    trimmed = (mu - theta).clamp(min=0)
-    model.fc.weight.data = trimmed[p].reshape(model.fc.weight.shape)
-    print("num zeros", (model.fc.weight == 0).sum().item())
-    print("l1 norm", model.fc.weight.norm(p=1).item())
-    print("simplex projection done")
 
 
 def proj(model, z, device="cuda"):
