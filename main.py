@@ -162,10 +162,10 @@ def main_worker(args):
                 args.prune_rate = pr_target
         if args.TA:
             args.T = 1 / ((1 - 0.03) * (1 - epoch / args.epochs) + 0.03)
-        print("current lr: ", get_lr(optimizer))
-        if weight_opt is not None:
-            print("current weight lr: ", weight_opt.param_groups[0]["lr"])
-        print("current prune rate: ", args.prune_rate)
+        # print("current lr: ", get_lr(optimizer))
+        # if weight_opt is not None:
+        #     print("current weight lr: ", weight_opt.param_groups[0]["lr"])
+        # print("current prune rate: ", args.prune_rate)
         start_train = time.time()
         train_acc, train_minacc, train_majacc, train_corr = train(
             dp.get_train_loader(),
