@@ -242,6 +242,7 @@ def main_worker(args):
         "percent zeros": zero_count.item() / dim_v,
         "irmv1_gradnorm penalty": args.penalty_weight,
         "irmv1_penalty_anneal_iter": args.penalty_anneal_iters,
+        "pgd_anneal_iter": args.pgd_anneal_iters,
         "orig 28x28": False,
         "ts": args.ts,
         "te": args.te,
