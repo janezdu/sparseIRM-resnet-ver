@@ -1,0 +1,934 @@
+hello
+wandb: Currently logged in as: janezdu (janezdu-uiuc). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.9 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.17.7
+wandb: Run data is saved locally in /scratch/users/zd16/sparseIRM-resnet-ver/wandb/run-20240910_213627-lw8qnkam
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run name_random
+wandb: ⭐️ View project at https://wandb.ai/janezdu-uiuc/irm
+wandb: 🚀 View run at https://wandb.ai/janezdu-uiuc/irm/runs/lw8qnkam
+=> Reading YAML config from configs/smallscale/resnet18/resnet18-usc-unsigned.yaml
+Namespace(data='dataset/', optimizer='adam', weight_opt='adam', set='mnistcifar', arch='ResNet18', config='configs/smallscale/resnet18/resnet18-usc-unsigned.yaml', log_dir=None, workers=4, epochs=50, start_epoch=None, batch_size=390, lr=0.006, warmup_length=0, momentum=0.9, weight_decay=0.0, print_freq=10, num_classes=1, resume='', resume_train_weights='', evaluate=False, pretrained=None, pretrained_distill=None, alpha_distill=0.95, T_distill=2, seed=0, multigpu=[0], lr_policy='cosine_lr', lr_adjust=30, lr_gamma=0.1, name='baseline', save_every=-1, prune_rate=1.0, param_prune_rate=0.0, pr_start=1.0, low_data=1, width_mult=1.0, nesterov=False, threetimes=False, random_subnet=False, one_batch=False, conv_type='DenseConv', freeze_weights=False, st=False, mode='fan_in', nonlinearity='relu', bn_type='LearnedBatchNorm', init='kaiming_normal', no_bn_decay=False, scale_fan=False, first_layer_dense=False, last_layer_dense=True, approx=False, zero=False, flip=False, bs=False, gumbel_sample=False, multiply_prob=False, no_multiply=False, multiply_cont=False, multiply_prob_bs=False, indiv=False, label_smoothing=None, first_layer_type=None, trainer='default', score_init_constant=1.0, K=1, update_freq=20, D=0.01, T=1, TA=True, TA2=False, TA_grow=False, center=False, straight_through=False, PLA_factor=0.1, PLA_patience=10, gradient_loss_para=0, abs_loss_para=0, thres=0.9, runs_name='name_random', resume_compare_loss1='', resume_compare_loss2='', init_weights='', trained_mask='', weight_rescaling=False, constrain_by_layer=False, weight_rescaling_data=False, use_running_stats=False, not_clipping=False, rescaling_para=False, lasso_para=0, dont_freeze_weights=False, iterative=True, prob_by_weight=False, rescale_at_fix_subnet=False, train_weights_at_the_same_time=False, sample_from_training_set=False, load_true_para=False, distill=False, finetune=False, stablize=False, prev_best=0, weight_opt_lr=0.0006, n=500, ts=0.28, te=0.6, d=20000, s=80, c=0.75, init_prob=False, thres_before=0.001, wide_ratio=0.001, noise=1, cal_p_q=False, just_finetune=False, snip=False, envs_num=2, l2_regularizer_weight=0.001, data_num=50000, env_type='linear', irm_type='irmv1', hidden_dim=390, penalty_anneal_iters=400, penalty_weight=10000.0, grayscale_model=0, weight_lr_schedule=False, fix_subnet=False, freeze_weight=False, step='ours', prior_sd_coef=0, dim_inv=2, variance_gamma=1.0, dim_spu=10, image_scale=32, cons_ratio='0.999_0.7_0.1', noise_ratio=0.2, step_gamma=0.1, step_round=3, inner_steps=1, use_pgd=True, z=25.0, pgd_anneal_iters=1200, pgd_skip_steps=5, fraction_z=0.8, rho_tolerance=0)
+=> Creating model 'ResNet18'
+Here!!!!!!!!
+==> Conv Type: DenseConv
+==> BN Type: LearnedBatchNorm
+<class 'torch.nn.modules.conv.Conv2d'>
+<class 'torch.nn.modules.batchnorm.BatchNorm2d'>
+==> Building first layer with <class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+<class 'torch.nn.modules.conv.Conv2d'>
+init by 1
+ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=1)
+  (fc): Linear(in_features=512, out_features=1, bias=True)
+)
+=> Parallelizing on [0] gpus
+<DEBUG> gradient to module.conv1.weight
+<DEBUG> gradient to module.bn1.weight
+<DEBUG> gradient to module.bn1.bias
+<DEBUG> gradient to module.layer1.0.conv1.weight
+<DEBUG> gradient to module.layer1.0.bn1.weight
+<DEBUG> gradient to module.layer1.0.bn1.bias
+<DEBUG> gradient to module.layer1.0.conv2.weight
+<DEBUG> gradient to module.layer1.0.bn2.weight
+<DEBUG> gradient to module.layer1.0.bn2.bias
+<DEBUG> gradient to module.layer1.1.conv1.weight
+<DEBUG> gradient to module.layer1.1.bn1.weight
+<DEBUG> gradient to module.layer1.1.bn1.bias
+<DEBUG> gradient to module.layer1.1.conv2.weight
+<DEBUG> gradient to module.layer1.1.bn2.weight
+<DEBUG> gradient to module.layer1.1.bn2.bias
+<DEBUG> gradient to module.layer2.0.conv1.weight
+<DEBUG> gradient to module.layer2.0.bn1.weight
+<DEBUG> gradient to module.layer2.0.bn1.bias
+<DEBUG> gradient to module.layer2.0.conv2.weight
+<DEBUG> gradient to module.layer2.0.bn2.weight
+<DEBUG> gradient to module.layer2.0.bn2.bias
+<DEBUG> gradient to module.layer2.0.downsample.0.weight
+<DEBUG> gradient to module.layer2.0.downsample.1.weight
+<DEBUG> gradient to module.layer2.0.downsample.1.bias
+<DEBUG> gradient to module.layer2.1.conv1.weight
+<DEBUG> gradient to module.layer2.1.bn1.weight
+<DEBUG> gradient to module.layer2.1.bn1.bias
+<DEBUG> gradient to module.layer2.1.conv2.weight
+<DEBUG> gradient to module.layer2.1.bn2.weight
+<DEBUG> gradient to module.layer2.1.bn2.bias
+<DEBUG> gradient to module.layer3.0.conv1.weight
+<DEBUG> gradient to module.layer3.0.bn1.weight
+<DEBUG> gradient to module.layer3.0.bn1.bias
+<DEBUG> gradient to module.layer3.0.conv2.weight
+<DEBUG> gradient to module.layer3.0.bn2.weight
+<DEBUG> gradient to module.layer3.0.bn2.bias
+<DEBUG> gradient to module.layer3.0.downsample.0.weight
+<DEBUG> gradient to module.layer3.0.downsample.1.weight
+<DEBUG> gradient to module.layer3.0.downsample.1.bias
+<DEBUG> gradient to module.layer3.1.conv1.weight
+<DEBUG> gradient to module.layer3.1.bn1.weight
+<DEBUG> gradient to module.layer3.1.bn1.bias
+<DEBUG> gradient to module.layer3.1.conv2.weight
+<DEBUG> gradient to module.layer3.1.bn2.weight
+<DEBUG> gradient to module.layer3.1.bn2.bias
+<DEBUG> gradient to module.layer4.0.conv1.weight
+<DEBUG> gradient to module.layer4.0.bn1.weight
+<DEBUG> gradient to module.layer4.0.bn1.bias
+<DEBUG> gradient to module.layer4.0.conv2.weight
+<DEBUG> gradient to module.layer4.0.bn2.weight
+<DEBUG> gradient to module.layer4.0.bn2.bias
+<DEBUG> gradient to module.layer4.0.downsample.0.weight
+<DEBUG> gradient to module.layer4.0.downsample.1.weight
+<DEBUG> gradient to module.layer4.0.downsample.1.bias
+<DEBUG> gradient to module.layer4.1.conv1.weight
+<DEBUG> gradient to module.layer4.1.bn1.weight
+<DEBUG> gradient to module.layer4.1.bn1.bias
+<DEBUG> gradient to module.layer4.1.conv2.weight
+<DEBUG> gradient to module.layer4.1.bn2.weight
+<DEBUG> gradient to module.layer4.1.bn2.bias
+<DEBUG> gradient to module.fc.weight
+<DEBUG> gradient to module.fc.bias
+Files already downloaded and verified
+Files already downloaded and verified
+Adding Noise to Label, len(Y)=12000, Label_noise=1217
+Xmp (7877, 3, 32, 32) (6903, 3, 32, 32)
+Xcp (5961, 3, 32, 32) (6039, 3, 32, 32)
+env=0 2497 2497 3 3
+xn 2500 xp 2500
+env=1 1750 1750 750 750
+xn 2500 xp 2500
+env=2 50 50 450 450
+xn 500 xp 500
+=> Creating model 'EBD'
+EBD(
+  (embedings): Embedding(2, 1)
+)
+=> Parallelizing on [0] gpus
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:07<03:03,  7.33s/it] 12%|#1        | 3/26 [00:07<00:44,  1.94s/it] 27%|##6       | 7/26 [00:07<00:12,  1.56it/s] 42%|####2     | 11/26 [00:07<00:05,  2.96it/s] 58%|#####7    | 15/26 [00:07<00:02,  4.78it/s] 73%|#######3  | 19/26 [00:07<00:00,  7.08it/s] 88%|########8 | 23/26 [00:07<00:00,  9.87it/s]100%|##########| 26/26 [00:08<00:00,  3.07it/s]
+Epoch: [0][  26/  26]	Loss 0.466 (0.515)	train_nll   0.47 (  0.52)	train_penalty   0.09 (  0.16)	weight_norm   0.00 (  0.00)	train_acc   0.83 (  0.81)	train_minacc   0.00 (  0.05)	train_majacc   0.99 (  0.94)	train_corr   0.00 (  0.00)	l1 6.9334 (8.0113)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:09,  2.64it/s] 31%|###       | 8/26 [00:00<00:00, 20.86it/s]                                               31%|###       | 8/26 [00:00<00:00, 20.86it/s] 58%|#####7    | 15/26 [00:00<00:00, 33.89it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 33.89it/s] 85%|########4 | 22/26 [00:00<00:00, 41.19it/s]100%|##########| 26/26 [00:00<00:00, 31.41it/s]
+Test: [   0/  26]	Loss 0.397 (0.397)	test_acc   0.85 (  0.85)	test_minacc   0.05 (  0.05)	test_majacc   1.00 (  1.00)	Loss_d 0.397 (0.397)	test_acc_d   0.85 (  0.85)	test_minacc_d   0.05 (  0.05)	test_majacc_d   1.00 (  1.00)	test_corr_d   0.97 (  0.97)
+Test: [  10/  26]	Loss 0.434 (0.414)	test_acc   0.85 (  0.85)	test_minacc   0.00 (  0.01)	test_majacc   0.99 (  0.99)	Loss_d 0.434 (0.414)	test_acc_d   0.85 (  0.85)	test_minacc_d   0.00 (  0.01)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.97 (  0.97)
+Test: [  20/  26]	Loss 0.510 (0.427)	test_acc   0.81 (  0.85)	test_minacc   0.00 (  0.01)	test_majacc   0.99 (  1.00)	Loss_d 0.510 (0.427)	test_acc_d   0.81 (  0.85)	test_minacc_d   0.00 (  0.01)	test_majacc_d   0.99 (  1.00)	test_corr_d   0.97 (  0.97)
+Test: [  26/  26]	Loss 0.464 (0.425)	test_acc   0.83 (  0.85)	test_minacc   0.00 (  0.01)	test_majacc   0.99 (  1.00)	Loss_d 0.464 (0.425)	test_acc_d   0.83 (  0.85)	test_minacc_d   0.00 (  0.01)	test_majacc_d   0.99 (  1.00)	test_corr_d   0.97 (  0.97)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00,  1.72it/s]100%|##########| 1/1 [00:00<00:00,  1.72it/s]
+Test: [  0/  1]	Loss 1.873 (1.873)	test_acc   0.11 (  0.11)	test_minacc   0.01 (  0.01)	test_majacc   1.00 (  1.00)	Loss_d 1.873 (1.873)	test_acc_d   0.11 (  0.11)	test_minacc_d   0.01 (  0.01)	test_majacc_d   1.00 (  1.00)	test_corr_d   0.96 (  0.96)
+Test: [  1/  1]	Loss 1.873 (1.873)	test_acc   0.11 (  0.11)	test_minacc   0.01 (  0.01)	test_majacc   1.00 (  1.00)	Loss_d 1.873 (1.873)	test_acc_d   0.11 (  0.11)	test_minacc_d   0.01 (  0.01)	test_majacc_d   1.00 (  1.00)	test_corr_d   0.96 (  0.96)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  0/  1]	epoch_time 0.1822 (0.1822)	validation_time 0.0098 (0.0098)	train_time 0.1657 (0.1657)
+record: (train_acc, test_acc) (0.8467000267505645, 0.10700000822544098)
+last accs (train_acc, test_acc) (0.8467000267505645, 0.10700000822544098)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.24it/s] 19%|#9        | 5/26 [00:00<00:00, 23.18it/s] 35%|###4      | 9/26 [00:00<00:00, 28.94it/s] 50%|#####     | 13/26 [00:00<00:00, 31.08it/s] 65%|######5   | 17/26 [00:00<00:00, 32.02it/s] 81%|########  | 21/26 [00:00<00:00, 32.69it/s] 96%|#########6| 25/26 [00:00<00:00, 33.42it/s]100%|##########| 26/26 [00:00<00:00, 28.39it/s]
+Epoch: [1][  26/  26]	Loss 0.437 (0.405)	train_nll   0.44 (  0.40)	train_penalty   0.08 (  0.05)	weight_norm   0.00 (  0.00)	train_acc   0.84 (  0.85)	train_minacc   0.00 (  0.02)	train_majacc   1.00 (  0.99)	train_corr   0.00 (  0.00)	l1 6.7626 (6.7407)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.97it/s] 27%|##6       | 7/26 [00:00<00:00, 34.48it/s]                                               27%|##6       | 7/26 [00:00<00:00, 34.48it/s] 50%|#####     | 13/26 [00:00<00:00, 40.34it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.07it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.07it/s] 96%|#########6| 25/26 [00:00<00:00, 47.36it/s]100%|##########| 26/26 [00:00<00:00, 39.11it/s]
+Test: [   0/  26]	Loss 0.380 (0.380)	test_acc   0.85 (  0.85)	test_minacc   0.05 (  0.05)	test_majacc   0.99 (  0.99)	Loss_d 0.380 (0.380)	test_acc_d   0.85 (  0.85)	test_minacc_d   0.05 (  0.05)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.97 (  0.97)
+Test: [  10/  26]	Loss 0.414 (0.392)	test_acc   0.85 (  0.85)	test_minacc   0.00 (  0.01)	test_majacc   0.99 (  1.00)	Loss_d 0.414 (0.392)	test_acc_d   0.85 (  0.85)	test_minacc_d   0.00 (  0.01)	test_majacc_d   0.99 (  1.00)	test_corr_d   0.98 (  0.98)
+Test: [  20/  26]	Loss 0.466 (0.404)	test_acc   0.81 (  0.85)	test_minacc   0.03 (  0.01)	test_majacc   0.99 (  1.00)	Loss_d 0.466 (0.404)	test_acc_d   0.81 (  0.85)	test_minacc_d   0.03 (  0.01)	test_majacc_d   0.99 (  1.00)	test_corr_d   0.97 (  0.98)
+Test: [  26/  26]	Loss 0.425 (0.401)	test_acc   0.84 (  0.85)	test_minacc   0.00 (  0.01)	test_majacc   1.00 (  1.00)	Loss_d 0.425 (0.401)	test_acc_d   0.84 (  0.85)	test_minacc_d   0.00 (  0.01)	test_majacc_d   1.00 (  1.00)	test_corr_d   0.98 (  0.98)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.25it/s]
+Test: [  0/  1]	Loss 1.955 (1.955)	test_acc   0.10 (  0.10)	test_minacc   0.00 (  0.00)	test_majacc   0.99 (  0.99)	Loss_d 1.955 (1.955)	test_acc_d   0.10 (  0.10)	test_minacc_d   0.00 (  0.00)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.97 (  0.97)
+Test: [  1/  1]	Loss 1.955 (1.955)	test_acc   0.10 (  0.10)	test_minacc   0.00 (  0.00)	test_majacc   0.99 (  0.99)	Loss_d 1.955 (1.955)	test_acc_d   0.10 (  0.10)	test_minacc_d   0.00 (  0.00)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.97 (  0.97)
+Overall Timing[  1/  1]	epoch_time 0.0365 (0.1094)	validation_time 0.0004 (0.0051)	train_time 0.0361 (0.1009)
+record: (train_acc, test_acc) (0.8467000267505645, 0.10700000822544098)
+last accs (train_acc, test_acc) (0.848500028014183, 0.10300000756978989)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 17.00it/s] 23%|##3       | 6/26 [00:00<00:00, 28.78it/s] 38%|###8      | 10/26 [00:00<00:00, 32.84it/s] 54%|#####3    | 14/26 [00:00<00:00, 34.35it/s] 69%|######9   | 18/26 [00:00<00:00, 35.24it/s] 85%|########4 | 22/26 [00:00<00:00, 35.91it/s]100%|##########| 26/26 [00:00<00:00, 36.51it/s]100%|##########| 26/26 [00:00<00:00, 31.54it/s]
+Epoch: [2][  26/  26]	Loss 0.393 (0.383)	train_nll   0.39 (  0.38)	train_penalty   0.06 (  0.04)	weight_norm   0.00 (  0.00)	train_acc   0.84 (  0.85)	train_minacc   0.05 (  0.06)	train_majacc   0.99 (  0.99)	train_corr   0.00 (  0.00)	l1 6.8638 (6.6718)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 27.30it/s] 35%|###4      | 9/26 [00:00<00:00, 40.52it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.52it/s] 58%|#####7    | 15/26 [00:00<00:00, 48.07it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 48.07it/s] 81%|########  | 21/26 [00:00<00:00, 47.64it/s]100%|##########| 26/26 [00:00<00:00, 42.36it/s]
+Test: [   0/  26]	Loss 0.353 (0.353)	test_acc   0.86 (  0.86)	test_minacc   0.10 (  0.10)	test_majacc   0.99 (  0.99)	Loss_d 0.353 (0.353)	test_acc_d   0.86 (  0.86)	test_minacc_d   0.10 (  0.10)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.94 (  0.94)
+Test: [  10/  26]	Loss 0.369 (0.355)	test_acc   0.86 (  0.86)	test_minacc   0.07 (  0.07)	test_majacc   0.99 (  0.99)	Loss_d 0.369 (0.355)	test_acc_d   0.86 (  0.86)	test_minacc_d   0.07 (  0.07)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.95 (  0.95)
+Test: [  20/  26]	Loss 0.406 (0.360)	test_acc   0.82 (  0.85)	test_minacc   0.07 (  0.07)	test_majacc   0.99 (  0.99)	Loss_d 0.406 (0.360)	test_acc_d   0.82 (  0.85)	test_minacc_d   0.07 (  0.07)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.93 (  0.95)
+Test: [  26/  26]	Loss 0.378 (0.358)	test_acc   0.83 (  0.85)	test_minacc   0.03 (  0.06)	test_majacc   0.99 (  0.99)	Loss_d 0.378 (0.358)	test_acc_d   0.83 (  0.85)	test_minacc_d   0.03 (  0.06)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.95 (  0.95)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.51it/s]
+Test: [  0/  1]	Loss 1.960 (1.960)	test_acc   0.12 (  0.12)	test_minacc   0.02 (  0.02)	test_majacc   0.99 (  0.99)	Loss_d 1.960 (1.960)	test_acc_d   0.12 (  0.12)	test_minacc_d   0.02 (  0.02)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.92 (  0.92)
+Test: [  1/  1]	Loss 1.960 (1.960)	test_acc   0.12 (  0.12)	test_minacc   0.02 (  0.02)	test_majacc   0.99 (  0.99)	Loss_d 1.960 (1.960)	test_acc_d   0.12 (  0.12)	test_minacc_d   0.02 (  0.02)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.92 (  0.92)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  2/  1]	epoch_time 0.0358 (0.0848)	validation_time 0.0003 (0.0035)	train_time 0.0354 (0.0791)
+record: (train_acc, test_acc) (0.8519000264406205, 0.11800000816583633)
+last accs (train_acc, test_acc) (0.8519000264406205, 0.11800000816583633)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 15.71it/s] 23%|##3       | 6/26 [00:00<00:00, 26.03it/s] 38%|###8      | 10/26 [00:00<00:00, 30.64it/s] 54%|#####3    | 14/26 [00:00<00:00, 33.03it/s] 69%|######9   | 18/26 [00:00<00:00, 34.32it/s] 85%|########4 | 22/26 [00:00<00:00, 35.14it/s]100%|##########| 26/26 [00:00<00:00, 35.49it/s]100%|##########| 26/26 [00:00<00:00, 30.41it/s]
+Epoch: [3][  26/  26]	Loss 0.351 (0.355)	train_nll   0.35 (  0.35)	train_penalty   0.04 (  0.03)	weight_norm   0.00 (  0.00)	train_acc   0.84 (  0.85)	train_minacc   0.08 (  0.14)	train_majacc   0.99 (  0.98)	train_corr   0.00 (  0.00)	l1 7.0493 (6.8214)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 26.00it/s] 31%|###       | 8/26 [00:00<00:00, 35.95it/s]                                               31%|###       | 8/26 [00:00<00:00, 35.95it/s] 54%|#####3    | 14/26 [00:00<00:00, 45.27it/s] 77%|#######6  | 20/26 [00:00<00:00, 46.32it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 46.32it/s]100%|##########| 26/26 [00:00<00:00, 50.75it/s]100%|##########| 26/26 [00:00<00:00, 41.28it/s]
+Test: [   0/  26]	Loss 0.351 (0.351)	test_acc   0.86 (  0.86)	test_minacc   0.12 (  0.12)	test_majacc   0.99 (  0.99)	Loss_d 0.351 (0.351)	test_acc_d   0.86 (  0.86)	test_minacc_d   0.12 (  0.12)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.93 (  0.93)
+Test: [  10/  26]	Loss 0.364 (0.340)	test_acc   0.85 (  0.86)	test_minacc   0.09 (  0.12)	test_majacc   0.99 (  0.99)	Loss_d 0.364 (0.340)	test_acc_d   0.85 (  0.86)	test_minacc_d   0.09 (  0.12)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.94 (  0.93)
+Test: [  20/  26]	Loss 0.391 (0.346)	test_acc   0.83 (  0.85)	test_minacc   0.15 (  0.12)	test_majacc   0.99 (  0.99)	Loss_d 0.391 (0.346)	test_acc_d   0.83 (  0.85)	test_minacc_d   0.15 (  0.12)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.92 (  0.93)
+Test: [  26/  26]	Loss 0.320 (0.343)	test_acc   0.84 (  0.85)	test_minacc   0.10 (  0.12)	test_majacc   0.98 (  0.99)	Loss_d 0.320 (0.343)	test_acc_d   0.84 (  0.85)	test_minacc_d   0.10 (  0.12)	test_majacc_d   0.98 (  0.99)	test_corr_d   0.93 (  0.93)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.69it/s]
+Test: [  0/  1]	Loss 2.067 (2.067)	test_acc   0.15 (  0.15)	test_minacc   0.06 (  0.06)	test_majacc   0.99 (  0.99)	Loss_d 2.067 (2.067)	test_acc_d   0.15 (  0.15)	test_minacc_d   0.06 (  0.06)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.88 (  0.88)
+Test: [  1/  1]	Loss 2.067 (2.067)	test_acc   0.15 (  0.15)	test_minacc   0.06 (  0.06)	test_majacc   0.99 (  0.99)	Loss_d 2.067 (2.067)	test_acc_d   0.15 (  0.15)	test_minacc_d   0.06 (  0.06)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.88 (  0.88)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  3/  1]	epoch_time 0.0363 (0.0727)	validation_time 0.0005 (0.0028)	train_time 0.0358 (0.0683)
+record: (train_acc, test_acc) (0.8546000218391419, 0.14900000393390656)
+last accs (train_acc, test_acc) (0.8546000218391419, 0.14900000393390656)
+  0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 25.62it/s] 27%|##6       | 7/26 [00:00<00:00, 30.60it/s] 42%|####2     | 11/26 [00:00<00:00, 32.82it/s] 58%|#####7    | 15/26 [00:00<00:00, 34.42it/s] 73%|#######3  | 19/26 [00:00<00:00, 35.23it/s] 88%|########8 | 23/26 [00:00<00:00, 35.62it/s]100%|##########| 26/26 [00:00<00:00, 31.02it/s]
+Epoch: [4][  26/  26]	Loss 0.309 (0.335)	train_nll   0.31 (  0.34)	train_penalty   0.02 (  0.02)	weight_norm   0.00 (  0.00)	train_acc   0.85 (  0.85)	train_minacc   0.25 (  0.21)	train_majacc   0.96 (  0.97)	train_corr   0.00 (  0.00)	l1 7.2977 (6.9125)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 17.06it/s] 27%|##6       | 7/26 [00:00<00:00, 33.11it/s]                                               27%|##6       | 7/26 [00:00<00:00, 33.11it/s] 50%|#####     | 13/26 [00:00<00:00, 43.47it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.36it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.36it/s] 96%|#########6| 25/26 [00:00<00:00, 50.66it/s]100%|##########| 26/26 [00:00<00:00, 41.26it/s]
+Test: [   0/  26]	Loss 0.312 (0.312)	test_acc   0.87 (  0.87)	test_minacc   0.24 (  0.24)	test_majacc   0.98 (  0.98)	Loss_d 0.312 (0.312)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.24 (  0.24)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.90 (  0.90)
+Test: [  10/  26]	Loss 0.358 (0.316)	test_acc   0.87 (  0.87)	test_minacc   0.31 (  0.29)	test_majacc   0.97 (  0.97)	Loss_d 0.358 (0.316)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.31 (  0.29)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.90 (  0.90)
+Test: [  20/  26]	Loss 0.370 (0.325)	test_acc   0.83 (  0.86)	test_minacc   0.29 (  0.27)	test_majacc   0.96 (  0.96)	Loss_d 0.370 (0.325)	test_acc_d   0.83 (  0.86)	test_minacc_d   0.29 (  0.27)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.88 (  0.90)
+Test: [  26/  26]	Loss 0.290 (0.321)	test_acc   0.88 (  0.86)	test_minacc   0.40 (  0.28)	test_majacc   0.97 (  0.96)	Loss_d 0.290 (0.321)	test_acc_d   0.88 (  0.86)	test_minacc_d   0.40 (  0.28)	test_majacc_d   0.97 (  0.96)	test_corr_d   0.89 (  0.90)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 62.63it/s]
+Test: [  0/  1]	Loss 2.079 (2.079)	test_acc   0.25 (  0.25)	test_minacc   0.17 (  0.17)	test_majacc   0.98 (  0.98)	Loss_d 2.079 (2.079)	test_acc_d   0.25 (  0.25)	test_minacc_d   0.17 (  0.17)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.78 (  0.78)
+Test: [  1/  1]	Loss 2.079 (2.079)	test_acc   0.25 (  0.25)	test_minacc   0.17 (  0.17)	test_majacc   0.98 (  0.98)	Loss_d 2.079 (2.079)	test_acc_d   0.25 (  0.25)	test_minacc_d   0.17 (  0.17)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.78 (  0.78)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  4/  1]	epoch_time 0.0366 (0.0655)	validation_time 0.0004 (0.0023)	train_time 0.0362 (0.0619)
+record: (train_acc, test_acc) (0.8616000220179558, 0.25300002098083496)
+last accs (train_acc, test_acc) (0.8616000220179558, 0.25300002098083496)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.53it/s] 19%|#9        | 5/26 [00:00<00:00, 22.63it/s] 35%|###4      | 9/26 [00:00<00:00, 28.26it/s] 50%|#####     | 13/26 [00:00<00:00, 31.57it/s] 65%|######5   | 17/26 [00:00<00:00, 33.52it/s] 81%|########  | 21/26 [00:00<00:00, 34.48it/s] 96%|#########6| 25/26 [00:00<00:00, 35.48it/s]100%|##########| 26/26 [00:00<00:00, 29.26it/s]
+Epoch: [5][  26/  26]	Loss 0.317 (0.324)	train_nll   0.32 (  0.32)	train_penalty   0.02 (  0.02)	weight_norm   0.00 (  0.00)	train_acc   0.84 (  0.86)	train_minacc   0.20 (  0.28)	train_majacc   0.97 (  0.96)	train_corr   0.00 (  0.00)	l1 7.3665 (6.9302)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.36it/s] 27%|##6       | 7/26 [00:00<00:00, 36.34it/s]                                               27%|##6       | 7/26 [00:00<00:00, 36.34it/s] 50%|#####     | 13/26 [00:00<00:00, 41.63it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.39it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.39it/s] 96%|#########6| 25/26 [00:00<00:00, 46.42it/s]100%|##########| 26/26 [00:00<00:00, 39.52it/s]
+Test: [   0/  26]	Loss 0.295 (0.295)	test_acc   0.87 (  0.87)	test_minacc   0.36 (  0.36)	test_majacc   0.97 (  0.97)	Loss_d 0.295 (0.295)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.36 (  0.36)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.89 (  0.89)
+Test: [  10/  26]	Loss 0.320 (0.293)	test_acc   0.86 (  0.87)	test_minacc   0.36 (  0.37)	test_majacc   0.95 (  0.95)	Loss_d 0.320 (0.293)	test_acc_d   0.86 (  0.87)	test_minacc_d   0.36 (  0.37)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.89 (  0.88)
+Test: [  20/  26]	Loss 0.317 (0.302)	test_acc   0.85 (  0.87)	test_minacc   0.41 (  0.36)	test_majacc   0.96 (  0.96)	Loss_d 0.317 (0.302)	test_acc_d   0.85 (  0.87)	test_minacc_d   0.41 (  0.36)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.87 (  0.88)
+Test: [  26/  26]	Loss 0.283 (0.297)	test_acc   0.88 (  0.87)	test_minacc   0.43 (  0.37)	test_majacc   0.96 (  0.96)	Loss_d 0.283 (0.297)	test_acc_d   0.88 (  0.87)	test_minacc_d   0.43 (  0.37)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.88 (  0.88)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.43it/s]
+Test: [  0/  1]	Loss 2.079 (2.079)	test_acc   0.27 (  0.27)	test_minacc   0.19 (  0.19)	test_majacc   0.96 (  0.96)	Loss_d 2.079 (2.079)	test_acc_d   0.27 (  0.27)	test_minacc_d   0.19 (  0.19)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.73 (  0.73)
+Test: [  1/  1]	Loss 2.079 (2.079)	test_acc   0.27 (  0.27)	test_minacc   0.19 (  0.19)	test_majacc   0.96 (  0.96)	Loss_d 2.079 (2.079)	test_acc_d   0.27 (  0.27)	test_minacc_d   0.19 (  0.19)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.73 (  0.73)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  5/  1]	epoch_time 0.0360 (0.0606)	validation_time 0.0003 (0.0020)	train_time 0.0357 (0.0575)
+record: (train_acc, test_acc) (0.8669000251889228, 0.26900002360343933)
+last accs (train_acc, test_acc) (0.8669000251889228, 0.26900002360343933)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.94it/s] 19%|#9        | 5/26 [00:00<00:00, 24.42it/s] 35%|###4      | 9/26 [00:00<00:00, 29.52it/s] 50%|#####     | 13/26 [00:00<00:00, 32.42it/s] 65%|######5   | 17/26 [00:00<00:00, 34.16it/s] 81%|########  | 21/26 [00:00<00:00, 34.11it/s] 96%|#########6| 25/26 [00:00<00:00, 34.29it/s]100%|##########| 26/26 [00:00<00:00, 29.55it/s]
+Epoch: [6][  26/  26]	Loss 0.284 (0.314)	train_nll   0.28 (  0.31)	train_penalty   0.01 (  0.02)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.86)	train_minacc   0.30 (  0.31)	train_majacc   0.96 (  0.96)	train_corr   0.00 (  0.00)	l1 6.9397 (6.8746)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 28.11it/s] 35%|###4      | 9/26 [00:00<00:00, 40.86it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.86it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.81it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.81it/s] 81%|########  | 21/26 [00:00<00:00, 47.02it/s]100%|##########| 26/26 [00:00<00:00, 41.34it/s]
+Test: [   0/  26]	Loss 0.266 (0.266)	test_acc   0.88 (  0.88)	test_minacc   0.44 (  0.44)	test_majacc   0.96 (  0.96)	Loss_d 0.266 (0.266)	test_acc_d   0.88 (  0.88)	test_minacc_d   0.44 (  0.44)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.87 (  0.87)
+Test: [  10/  26]	Loss 0.329 (0.288)	test_acc   0.85 (  0.87)	test_minacc   0.33 (  0.42)	test_majacc   0.94 (  0.94)	Loss_d 0.329 (0.288)	test_acc_d   0.85 (  0.87)	test_minacc_d   0.33 (  0.42)	test_majacc_d   0.94 (  0.94)	test_corr_d   0.87 (  0.86)
+Test: [  20/  26]	Loss 0.324 (0.295)	test_acc   0.86 (  0.87)	test_minacc   0.45 (  0.41)	test_majacc   0.95 (  0.95)	Loss_d 0.324 (0.295)	test_acc_d   0.86 (  0.87)	test_minacc_d   0.45 (  0.41)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.84 (  0.86)
+Test: [  26/  26]	Loss 0.252 (0.288)	test_acc   0.89 (  0.87)	test_minacc   0.50 (  0.43)	test_majacc   0.96 (  0.95)	Loss_d 0.252 (0.288)	test_acc_d   0.89 (  0.87)	test_minacc_d   0.50 (  0.43)	test_majacc_d   0.96 (  0.95)	test_corr_d   0.85 (  0.86)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.37it/s]
+Test: [  0/  1]	Loss 1.992 (1.992)	test_acc   0.36 (  0.36)	test_minacc   0.29 (  0.29)	test_majacc   0.95 (  0.95)	Loss_d 1.992 (1.992)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.29 (  0.29)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.64 (  0.64)
+Test: [  1/  1]	Loss 1.992 (1.992)	test_acc   0.36 (  0.36)	test_minacc   0.29 (  0.29)	test_majacc   0.95 (  0.95)	Loss_d 1.992 (1.992)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.29 (  0.29)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.64 (  0.64)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[  6/  1]	epoch_time 0.0360 (0.0571)	validation_time 0.0005 (0.0018)	train_time 0.0355 (0.0544)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.56it/s] 19%|#9        | 5/26 [00:00<00:00, 23.87it/s] 35%|###4      | 9/26 [00:00<00:00, 29.22it/s] 50%|#####     | 13/26 [00:00<00:00, 31.82it/s] 65%|######5   | 17/26 [00:00<00:00, 33.49it/s] 81%|########  | 21/26 [00:00<00:00, 34.43it/s] 96%|#########6| 25/26 [00:00<00:00, 35.13it/s]100%|##########| 26/26 [00:00<00:00, 29.73it/s]
+Epoch: [7][  26/  26]	Loss 0.286 (0.307)	train_nll   0.29 (  0.31)	train_penalty   0.01 (  0.02)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.86)	train_minacc   0.30 (  0.38)	train_majacc   0.96 (  0.95)	train_corr   0.00 (  0.00)	l1 6.5613 (6.7738)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.95it/s] 31%|###       | 8/26 [00:00<00:00, 35.55it/s]                                               31%|###       | 8/26 [00:00<00:00, 35.55it/s] 50%|#####     | 13/26 [00:00<00:00, 39.98it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.95it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.95it/s] 96%|#########6| 25/26 [00:00<00:00, 47.26it/s]100%|##########| 26/26 [00:00<00:00, 38.57it/s]
+Test: [   0/  26]	Loss 0.274 (0.274)	test_acc   0.88 (  0.88)	test_minacc   0.39 (  0.39)	test_majacc   0.97 (  0.97)	Loss_d 0.274 (0.274)	test_acc_d   0.88 (  0.88)	test_minacc_d   0.39 (  0.39)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.89 (  0.89)
+Test: [  10/  26]	Loss 0.305 (0.281)	test_acc   0.86 (  0.87)	test_minacc   0.29 (  0.38)	test_majacc   0.96 (  0.96)	Loss_d 0.305 (0.281)	test_acc_d   0.86 (  0.87)	test_minacc_d   0.29 (  0.38)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.89 (  0.88)
+Test: [  20/  26]	Loss 0.326 (0.289)	test_acc   0.84 (  0.87)	test_minacc   0.32 (  0.37)	test_majacc   0.97 (  0.96)	Loss_d 0.326 (0.289)	test_acc_d   0.84 (  0.87)	test_minacc_d   0.32 (  0.37)	test_majacc_d   0.97 (  0.96)	test_corr_d   0.87 (  0.89)
+Test: [  26/  26]	Loss 0.264 (0.284)	test_acc   0.87 (  0.87)	test_minacc   0.40 (  0.37)	test_majacc   0.96 (  0.96)	Loss_d 0.264 (0.284)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.40 (  0.37)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.87 (  0.88)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 64.46it/s]
+Test: [  0/  1]	Loss 2.031 (2.031)	test_acc   0.29 (  0.29)	test_minacc   0.21 (  0.21)	test_majacc   0.96 (  0.96)	Loss_d 2.031 (2.031)	test_acc_d   0.29 (  0.29)	test_minacc_d   0.21 (  0.21)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.74 (  0.74)
+Test: [  1/  1]	Loss 2.031 (2.031)	test_acc   0.29 (  0.29)	test_minacc   0.21 (  0.21)	test_majacc   0.96 (  0.96)	Loss_d 2.031 (2.031)	test_acc_d   0.29 (  0.29)	test_minacc_d   0.21 (  0.21)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.74 (  0.74)
+Overall Timing[  7/  1]	epoch_time 0.0366 (0.0545)	validation_time 0.0004 (0.0016)	train_time 0.0362 (0.0521)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.8713000212311744, 0.28700000047683716)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  5.60it/s] 19%|#9        | 5/26 [00:00<00:01, 19.82it/s] 35%|###4      | 9/26 [00:00<00:00, 26.25it/s] 50%|#####     | 13/26 [00:00<00:00, 30.10it/s] 65%|######5   | 17/26 [00:00<00:00, 32.42it/s] 81%|########  | 21/26 [00:00<00:00, 32.90it/s] 96%|#########6| 25/26 [00:00<00:00, 33.29it/s]100%|##########| 26/26 [00:00<00:00, 27.40it/s]
+Epoch: [8][  26/  26]	Loss 0.269 (0.300)	train_nll   0.27 (  0.30)	train_penalty   0.01 (  0.02)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.87)	train_minacc   0.35 (  0.39)	train_majacc   0.96 (  0.95)	train_corr   0.00 (  0.00)	l1 6.3270 (6.6454)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.21it/s] 27%|##6       | 7/26 [00:00<00:00, 35.95it/s]                                               27%|##6       | 7/26 [00:00<00:00, 35.95it/s] 50%|#####     | 13/26 [00:00<00:00, 41.14it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.26it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.26it/s] 96%|#########6| 25/26 [00:00<00:00, 47.50it/s]100%|##########| 26/26 [00:00<00:00, 39.34it/s]
+Test: [   0/  26]	Loss 0.291 (0.291)	test_acc   0.87 (  0.87)	test_minacc   0.34 (  0.34)	test_majacc   0.97 (  0.97)	Loss_d 0.291 (0.291)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.34 (  0.34)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.89 (  0.89)
+Test: [  10/  26]	Loss 0.299 (0.277)	test_acc   0.87 (  0.88)	test_minacc   0.29 (  0.36)	test_majacc   0.97 (  0.97)	Loss_d 0.299 (0.277)	test_acc_d   0.87 (  0.88)	test_minacc_d   0.29 (  0.36)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.90 (  0.89)
+Test: [  20/  26]	Loss 0.312 (0.280)	test_acc   0.87 (  0.88)	test_minacc   0.44 (  0.37)	test_majacc   0.97 (  0.97)	Loss_d 0.312 (0.280)	test_acc_d   0.87 (  0.88)	test_minacc_d   0.44 (  0.37)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.87 (  0.89)
+Test: [  26/  26]	Loss 0.254 (0.277)	test_acc   0.87 (  0.88)	test_minacc   0.43 (  0.38)	test_majacc   0.96 (  0.97)	Loss_d 0.254 (0.277)	test_acc_d   0.87 (  0.88)	test_minacc_d   0.43 (  0.38)	test_majacc_d   0.96 (  0.97)	test_corr_d   0.87 (  0.89)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.24it/s]
+Test: [  0/  1]	Loss 1.928 (1.928)	test_acc   0.32 (  0.32)	test_minacc   0.25 (  0.25)	test_majacc   0.97 (  0.97)	Loss_d 1.928 (1.928)	test_acc_d   0.32 (  0.32)	test_minacc_d   0.25 (  0.25)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.70 (  0.70)
+Test: [  1/  1]	Loss 1.928 (1.928)	test_acc   0.32 (  0.32)	test_minacc   0.25 (  0.25)	test_majacc   0.97 (  0.97)	Loss_d 1.928 (1.928)	test_acc_d   0.32 (  0.32)	test_minacc_d   0.25 (  0.25)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.70 (  0.70)
+Overall Timing[  8/  1]	epoch_time 0.0386 (0.0527)	validation_time 0.0003 (0.0014)	train_time 0.0383 (0.0506)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.8781000208258629, 0.32100000977516174)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  5.80it/s] 19%|#9        | 5/26 [00:00<00:01, 19.83it/s] 35%|###4      | 9/26 [00:00<00:00, 26.41it/s] 50%|#####     | 13/26 [00:00<00:00, 30.27it/s] 65%|######5   | 17/26 [00:00<00:00, 32.46it/s] 81%|########  | 21/26 [00:00<00:00, 33.67it/s] 96%|#########6| 25/26 [00:00<00:00, 34.69it/s]100%|##########| 26/26 [00:00<00:00, 27.95it/s]
+Epoch: [9][  26/  26]	Loss 0.284 (0.283)	train_nll   0.28 (  0.28)	train_penalty   0.02 (  0.01)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.87)	train_minacc   0.33 (  0.45)	train_majacc   0.96 (  0.94)	train_corr   0.00 (  0.00)	l1 6.8501 (6.8486)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.97it/s] 35%|###4      | 9/26 [00:00<00:00, 40.31it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.31it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.06it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.06it/s] 81%|########  | 21/26 [00:00<00:00, 46.16it/s]100%|##########| 26/26 [00:00<00:00, 40.97it/s]
+Test: [   0/  26]	Loss 0.279 (0.279)	test_acc   0.90 (  0.90)	test_minacc   0.37 (  0.37)	test_majacc   0.99 (  0.99)	Loss_d 0.279 (0.279)	test_acc_d   0.90 (  0.90)	test_minacc_d   0.37 (  0.37)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.91 (  0.91)
+Test: [  10/  26]	Loss 0.323 (0.289)	test_acc   0.87 (  0.88)	test_minacc   0.31 (  0.36)	test_majacc   0.96 (  0.97)	Loss_d 0.323 (0.289)	test_acc_d   0.87 (  0.88)	test_minacc_d   0.31 (  0.36)	test_majacc_d   0.96 (  0.97)	test_corr_d   0.92 (  0.91)
+Test: [  20/  26]	Loss 0.352 (0.291)	test_acc   0.84 (  0.88)	test_minacc   0.29 (  0.34)	test_majacc   0.96 (  0.97)	Loss_d 0.352 (0.291)	test_acc_d   0.84 (  0.88)	test_minacc_d   0.29 (  0.34)	test_majacc_d   0.96 (  0.97)	test_corr_d   0.90 (  0.91)
+Test: [  26/  26]	Loss 0.264 (0.286)	test_acc   0.87 (  0.88)	test_minacc   0.40 (  0.36)	test_majacc   0.96 (  0.97)	Loss_d 0.264 (0.286)	test_acc_d   0.87 (  0.88)	test_minacc_d   0.40 (  0.36)	test_majacc_d   0.96 (  0.97)	test_corr_d   0.89 (  0.91)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.50it/s]
+Test: [  0/  1]	Loss 2.272 (2.272)	test_acc   0.26 (  0.26)	test_minacc   0.18 (  0.18)	test_majacc   0.97 (  0.97)	Loss_d 2.272 (2.272)	test_acc_d   0.26 (  0.26)	test_minacc_d   0.18 (  0.18)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.80 (  0.80)
+Test: [  1/  1]	Loss 2.272 (2.272)	test_acc   0.26 (  0.26)	test_minacc   0.18 (  0.18)	test_majacc   0.97 (  0.97)	Loss_d 2.272 (2.272)	test_acc_d   0.26 (  0.26)	test_minacc_d   0.18 (  0.18)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.80 (  0.80)
+Overall Timing[  9/  1]	epoch_time 0.0359 (0.0511)	validation_time 0.0004 (0.0013)	train_time 0.0355 (0.0491)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.8790000219345093, 0.25600001215934753)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 17.78it/s] 23%|##3       | 6/26 [00:00<00:00, 27.68it/s] 38%|###8      | 10/26 [00:00<00:00, 31.31it/s] 54%|#####3    | 14/26 [00:00<00:00, 33.41it/s] 69%|######9   | 18/26 [00:00<00:00, 33.91it/s] 85%|########4 | 22/26 [00:00<00:00, 35.05it/s]100%|##########| 26/26 [00:00<00:00, 35.91it/s]100%|##########| 26/26 [00:00<00:00, 30.82it/s]
+Epoch: [10][  26/  26]	Loss 0.222 (0.256)	train_nll   0.22 (  0.26)	train_penalty   0.00 (  0.01)	weight_norm   0.00 (  0.00)	train_acc   0.92 (  0.89)	train_minacc   0.68 (  0.56)	train_majacc   0.97 (  0.95)	train_corr   0.00 (  0.00)	l1 7.4860 (7.1532)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.68it/s] 27%|##6       | 7/26 [00:00<00:00, 32.57it/s]                                               27%|##6       | 7/26 [00:00<00:00, 32.57it/s] 46%|####6     | 12/26 [00:00<00:00, 38.63it/s] 69%|######9   | 18/26 [00:00<00:00, 45.10it/s]                                                69%|######9   | 18/26 [00:00<00:00, 45.10it/s] 92%|#########2| 24/26 [00:00<00:00, 47.17it/s]100%|##########| 26/26 [00:00<00:00, 37.84it/s]
+Test: [   0/  26]	Loss 0.243 (0.243)	test_acc   0.91 (  0.91)	test_minacc   0.53 (  0.53)	test_majacc   0.97 (  0.97)	Loss_d 0.243 (0.243)	test_acc_d   0.91 (  0.91)	test_minacc_d   0.53 (  0.53)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.87 (  0.87)
+Test: [  10/  26]	Loss 0.262 (0.243)	test_acc   0.88 (  0.90)	test_minacc   0.47 (  0.54)	test_majacc   0.95 (  0.96)	Loss_d 0.262 (0.243)	test_acc_d   0.88 (  0.90)	test_minacc_d   0.47 (  0.54)	test_majacc_d   0.95 (  0.96)	test_corr_d   0.88 (  0.87)
+Test: [  20/  26]	Loss 0.265 (0.243)	test_acc   0.89 (  0.90)	test_minacc   0.52 (  0.54)	test_majacc   0.97 (  0.97)	Loss_d 0.265 (0.243)	test_acc_d   0.89 (  0.90)	test_minacc_d   0.52 (  0.54)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.86 (  0.87)
+Test: [  26/  26]	Loss 0.195 (0.237)	test_acc   0.93 (  0.90)	test_minacc   0.73 (  0.55)	test_majacc   0.97 (  0.96)	Loss_d 0.195 (0.237)	test_acc_d   0.93 (  0.90)	test_minacc_d   0.73 (  0.55)	test_majacc_d   0.97 (  0.96)	test_corr_d   0.84 (  0.87)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.25it/s]
+Test: [  0/  1]	Loss 2.340 (2.340)	test_acc   0.36 (  0.36)	test_minacc   0.29 (  0.29)	test_majacc   0.96 (  0.96)	Loss_d 2.340 (2.340)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.29 (  0.29)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.63 (  0.63)
+Test: [  1/  1]	Loss 2.340 (2.340)	test_acc   0.36 (  0.36)	test_minacc   0.29 (  0.29)	test_majacc   0.96 (  0.96)	Loss_d 2.340 (2.340)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.29 (  0.29)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.63 (  0.63)
+Overall Timing[ 10/  1]	epoch_time 0.0374 (0.0498)	validation_time 0.0003 (0.0012)	train_time 0.0370 (0.0480)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.9021000193357468, 0.3580000102519989)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.31it/s] 19%|#9        | 5/26 [00:00<00:00, 25.28it/s] 35%|###4      | 9/26 [00:00<00:00, 30.27it/s] 50%|#####     | 13/26 [00:00<00:00, 32.71it/s] 65%|######5   | 17/26 [00:00<00:00, 34.12it/s] 81%|########  | 21/26 [00:00<00:00, 33.98it/s] 96%|#########6| 25/26 [00:00<00:00, 33.89it/s]100%|##########| 26/26 [00:00<00:00, 29.51it/s]
+Epoch: [11][  26/  26]	Loss 0.189 (0.235)	train_nll   0.19 (  0.23)	train_penalty   0.00 (  0.01)	weight_norm   0.00 (  0.00)	train_acc   0.93 (  0.90)	train_minacc   0.75 (  0.62)	train_majacc   0.97 (  0.95)	train_corr   0.00 (  0.00)	l1 8.1057 (7.5611)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 23.72it/s] 35%|###4      | 9/26 [00:00<00:00, 42.63it/s]                                               35%|###4      | 9/26 [00:00<00:00, 42.63it/s] 58%|#####7    | 15/26 [00:00<00:00, 45.13it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 45.13it/s] 81%|########  | 21/26 [00:00<00:00, 49.97it/s]100%|##########| 26/26 [00:00<00:00, 42.52it/s]
+Test: [   0/  26]	Loss 0.249 (0.249)	test_acc   0.91 (  0.91)	test_minacc   0.59 (  0.59)	test_majacc   0.97 (  0.97)	Loss_d 0.249 (0.249)	test_acc_d   0.91 (  0.91)	test_minacc_d   0.59 (  0.59)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.85 (  0.85)
+Test: [  10/  26]	Loss 0.232 (0.239)	test_acc   0.89 (  0.90)	test_minacc   0.50 (  0.57)	test_majacc   0.95 (  0.96)	Loss_d 0.232 (0.239)	test_acc_d   0.89 (  0.90)	test_minacc_d   0.50 (  0.57)	test_majacc_d   0.95 (  0.96)	test_corr_d   0.86 (  0.85)
+Test: [  20/  26]	Loss 0.209 (0.223)	test_acc   0.91 (  0.91)	test_minacc   0.63 (  0.60)	test_majacc   0.98 (  0.96)	Loss_d 0.209 (0.223)	test_acc_d   0.91 (  0.91)	test_minacc_d   0.63 (  0.60)	test_majacc_d   0.98 (  0.96)	test_corr_d   0.83 (  0.85)
+Test: [  26/  26]	Loss 0.150 (0.212)	test_acc   0.96 (  0.91)	test_minacc   0.85 (  0.63)	test_majacc   0.98 (  0.96)	Loss_d 0.150 (0.212)	test_acc_d   0.96 (  0.91)	test_minacc_d   0.85 (  0.63)	test_majacc_d   0.98 (  0.96)	test_corr_d   0.81 (  0.85)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.06it/s]
+Test: [  0/  1]	Loss 2.636 (2.636)	test_acc   0.35 (  0.35)	test_minacc   0.28 (  0.28)	test_majacc   0.95 (  0.95)	Loss_d 2.636 (2.636)	test_acc_d   0.35 (  0.35)	test_minacc_d   0.28 (  0.28)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.62 (  0.62)
+Test: [  1/  1]	Loss 2.636 (2.636)	test_acc   0.35 (  0.35)	test_minacc   0.28 (  0.28)	test_majacc   0.95 (  0.95)	Loss_d 2.636 (2.636)	test_acc_d   0.35 (  0.35)	test_minacc_d   0.28 (  0.28)	test_majacc_d   0.95 (  0.95)	test_corr_d   0.62 (  0.62)
+Overall Timing[ 11/  1]	epoch_time 0.0362 (0.0487)	validation_time 0.0006 (0.0012)	train_time 0.0356 (0.0469)
+record: (train_acc, test_acc) (0.869700022161007, 0.3580000102519989)
+last accs (train_acc, test_acc) (0.9133000221252442, 0.34700000286102295)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.52it/s] 19%|#9        | 5/26 [00:00<00:00, 25.55it/s] 35%|###4      | 9/26 [00:00<00:00, 31.09it/s] 50%|#####     | 13/26 [00:00<00:00, 33.87it/s] 65%|######5   | 17/26 [00:00<00:00, 35.25it/s] 81%|########  | 21/26 [00:00<00:00, 35.12it/s] 96%|#########6| 25/26 [00:00<00:00, 35.31it/s]100%|##########| 26/26 [00:00<00:00, 30.54it/s]
+Epoch: [12][  26/  26]	Loss 0.168 (0.211)	train_nll   0.17 (  0.21)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.94 (  0.91)	train_minacc   0.85 (  0.69)	train_majacc   0.96 (  0.95)	train_corr   0.00 (  0.00)	l1 8.8236 (8.1970)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 18.72it/s] 31%|###       | 8/26 [00:00<00:00, 42.28it/s]                                               31%|###       | 8/26 [00:00<00:00, 42.28it/s] 50%|#####     | 13/26 [00:00<00:00, 42.85it/s] 73%|#######3  | 19/26 [00:00<00:00, 48.27it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 48.27it/s] 96%|#########6| 25/26 [00:00<00:00, 48.09it/s]100%|##########| 26/26 [00:00<00:00, 41.61it/s]
+Test: [   0/  26]	Loss 0.203 (0.203)	test_acc   0.93 (  0.93)	test_minacc   0.71 (  0.71)	test_majacc   0.97 (  0.97)	Loss_d 0.203 (0.203)	test_acc_d   0.93 (  0.93)	test_minacc_d   0.71 (  0.71)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.81 (  0.81)
+Test: [  10/  26]	Loss 0.249 (0.253)	test_acc   0.88 (  0.90)	test_minacc   0.62 (  0.65)	test_majacc   0.92 (  0.94)	Loss_d 0.249 (0.253)	test_acc_d   0.88 (  0.90)	test_minacc_d   0.62 (  0.65)	test_majacc_d   0.92 (  0.94)	test_corr_d   0.79 (  0.79)
+Test: [  20/  26]	Loss 0.217 (0.238)	test_acc   0.91 (  0.90)	test_minacc   0.66 (  0.66)	test_majacc   0.97 (  0.95)	Loss_d 0.217 (0.238)	test_acc_d   0.91 (  0.90)	test_minacc_d   0.66 (  0.66)	test_majacc_d   0.97 (  0.95)	test_corr_d   0.79 (  0.79)
+Test: [  26/  26]	Loss 0.125 (0.224)	test_acc   0.96 (  0.91)	test_minacc   0.88 (  0.68)	test_majacc   0.98 (  0.95)	Loss_d 0.125 (0.224)	test_acc_d   0.96 (  0.91)	test_minacc_d   0.88 (  0.68)	test_majacc_d   0.98 (  0.95)	test_corr_d   0.76 (  0.79)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.88it/s]
+Test: [  0/  1]	Loss 2.868 (2.868)	test_acc   0.36 (  0.36)	test_minacc   0.30 (  0.30)	test_majacc   0.90 (  0.90)	Loss_d 2.868 (2.868)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.30 (  0.30)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.55 (  0.55)
+Test: [  1/  1]	Loss 2.868 (2.868)	test_acc   0.36 (  0.36)	test_minacc   0.30 (  0.30)	test_majacc   0.90 (  0.90)	Loss_d 2.868 (2.868)	test_acc_d   0.36 (  0.36)	test_minacc_d   0.30 (  0.30)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.55 (  0.55)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 12/  1]	epoch_time 0.0366 (0.0478)	validation_time 0.0003 (0.0011)	train_time 0.0363 (0.0461)
+record: (train_acc, test_acc) (0.9078000193834305, 0.36000001430511475)
+last accs (train_acc, test_acc) (0.9078000193834305, 0.36000001430511475)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.00it/s] 19%|#9        | 5/26 [00:00<00:00, 22.19it/s] 35%|###4      | 9/26 [00:00<00:00, 27.25it/s] 50%|#####     | 13/26 [00:00<00:00, 30.09it/s] 65%|######5   | 17/26 [00:00<00:00, 31.65it/s] 81%|########  | 21/26 [00:00<00:00, 33.28it/s] 96%|#########6| 25/26 [00:00<00:00, 34.00it/s]100%|##########| 26/26 [00:00<00:00, 28.36it/s]
+Epoch: [13][  26/  26]	Loss 0.179 (0.221)	train_nll   0.18 (  0.22)	train_penalty   0.00 (  0.01)	weight_norm   0.00 (  0.00)	train_acc   0.93 (  0.91)	train_minacc   0.62 (  0.66)	train_majacc   0.99 (  0.95)	train_corr   0.00 (  0.00)	l1 8.1523 (8.3559)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.36it/s] 27%|##6       | 7/26 [00:00<00:00, 36.22it/s]                                               27%|##6       | 7/26 [00:00<00:00, 36.22it/s] 50%|#####     | 13/26 [00:00<00:00, 42.01it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.97it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.97it/s] 96%|#########6| 25/26 [00:00<00:00, 48.04it/s]100%|##########| 26/26 [00:00<00:00, 39.93it/s]
+Test: [   0/  26]	Loss 0.216 (0.216)	test_acc   0.91 (  0.91)	test_minacc   0.59 (  0.59)	test_majacc   0.97 (  0.97)	Loss_d 0.216 (0.216)	test_acc_d   0.91 (  0.91)	test_minacc_d   0.59 (  0.59)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.85 (  0.85)
+Test: [  10/  26]	Loss 0.168 (0.190)	test_acc   0.93 (  0.92)	test_minacc   0.66 (  0.65)	test_majacc   0.97 (  0.97)	Loss_d 0.168 (0.190)	test_acc_d   0.93 (  0.92)	test_minacc_d   0.66 (  0.65)	test_majacc_d   0.97 (  0.97)	test_corr_d   0.85 (  0.84)
+Test: [  20/  26]	Loss 0.172 (0.183)	test_acc   0.93 (  0.92)	test_minacc   0.70 (  0.65)	test_majacc   0.98 (  0.97)	Loss_d 0.172 (0.183)	test_acc_d   0.93 (  0.92)	test_minacc_d   0.70 (  0.65)	test_majacc_d   0.98 (  0.97)	test_corr_d   0.81 (  0.84)
+Test: [  26/  26]	Loss 0.114 (0.175)	test_acc   0.97 (  0.93)	test_minacc   0.85 (  0.67)	test_majacc   0.99 (  0.97)	Loss_d 0.114 (0.175)	test_acc_d   0.97 (  0.93)	test_minacc_d   0.85 (  0.67)	test_majacc_d   0.99 (  0.97)	test_corr_d   0.82 (  0.84)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 64.08it/s]
+Test: [  0/  1]	Loss 2.750 (2.750)	test_acc   0.35 (  0.35)	test_minacc   0.28 (  0.28)	test_majacc   0.93 (  0.93)	Loss_d 2.750 (2.750)	test_acc_d   0.35 (  0.35)	test_minacc_d   0.28 (  0.28)	test_majacc_d   0.93 (  0.93)	test_corr_d   0.63 (  0.63)
+Test: [  1/  1]	Loss 2.750 (2.750)	test_acc   0.35 (  0.35)	test_minacc   0.28 (  0.28)	test_majacc   0.93 (  0.93)	Loss_d 2.750 (2.750)	test_acc_d   0.35 (  0.35)	test_minacc_d   0.28 (  0.28)	test_majacc_d   0.93 (  0.93)	test_corr_d   0.63 (  0.63)
+Overall Timing[ 13/  1]	epoch_time 0.0373 (0.0470)	validation_time 0.0004 (0.0011)	train_time 0.0369 (0.0455)
+record: (train_acc, test_acc) (0.9078000193834305, 0.36000001430511475)
+last accs (train_acc, test_acc) (0.927300016105175, 0.34700000286102295)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.52it/s] 19%|#9        | 5/26 [00:00<00:00, 25.87it/s] 35%|###4      | 9/26 [00:00<00:00, 30.83it/s] 50%|#####     | 13/26 [00:00<00:00, 33.66it/s] 65%|######5   | 17/26 [00:00<00:00, 35.39it/s] 81%|########  | 21/26 [00:00<00:00, 36.50it/s] 96%|#########6| 25/26 [00:00<00:00, 37.16it/s]100%|##########| 26/26 [00:00<00:00, 31.77it/s]
+Epoch: [14][  26/  26]	Loss 0.179 (0.194)	train_nll   0.18 (  0.19)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.91 (  0.92)	train_minacc   0.55 (  0.72)	train_majacc   0.98 (  0.95)	train_corr   0.00 (  0.00)	l1 8.6672 (8.9563)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.97it/s] 27%|##6       | 7/26 [00:00<00:00, 36.41it/s]                                               27%|##6       | 7/26 [00:00<00:00, 36.41it/s] 50%|#####     | 13/26 [00:00<00:00, 40.94it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.94it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.94it/s] 96%|#########6| 25/26 [00:00<00:00, 46.98it/s]100%|##########| 26/26 [00:00<00:00, 38.44it/s]
+Test: [   0/  26]	Loss 0.205 (0.205)	test_acc   0.92 (  0.92)	test_minacc   0.51 (  0.51)	test_majacc   0.99 (  0.99)	Loss_d 0.205 (0.205)	test_acc_d   0.92 (  0.92)	test_minacc_d   0.51 (  0.51)	test_majacc_d   0.99 (  0.99)	test_corr_d   0.88 (  0.88)
+Test: [  10/  26]	Loss 0.188 (0.196)	test_acc   0.91 (  0.92)	test_minacc   0.53 (  0.54)	test_majacc   0.98 (  0.98)	Loss_d 0.188 (0.196)	test_acc_d   0.91 (  0.92)	test_minacc_d   0.53 (  0.54)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.86 (  0.87)
+Test: [  20/  26]	Loss 0.205 (0.191)	test_acc   0.89 (  0.92)	test_minacc   0.44 (  0.53)	test_majacc   0.99 (  0.98)	Loss_d 0.205 (0.191)	test_acc_d   0.89 (  0.92)	test_minacc_d   0.44 (  0.53)	test_majacc_d   0.99 (  0.98)	test_corr_d   0.86 (  0.87)
+Test: [  26/  26]	Loss 0.140 (0.183)	test_acc   0.93 (  0.92)	test_minacc   0.65 (  0.55)	test_majacc   0.99 (  0.98)	Loss_d 0.140 (0.183)	test_acc_d   0.93 (  0.92)	test_minacc_d   0.65 (  0.55)	test_majacc_d   0.99 (  0.98)	test_corr_d   0.83 (  0.87)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.37it/s]
+Test: [  0/  1]	Loss 2.965 (2.965)	test_acc   0.27 (  0.27)	test_minacc   0.20 (  0.20)	test_majacc   0.96 (  0.96)	Loss_d 2.965 (2.965)	test_acc_d   0.27 (  0.27)	test_minacc_d   0.20 (  0.20)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.73 (  0.73)
+Test: [  1/  1]	Loss 2.965 (2.965)	test_acc   0.27 (  0.27)	test_minacc   0.20 (  0.20)	test_majacc   0.96 (  0.96)	Loss_d 2.965 (2.965)	test_acc_d   0.27 (  0.27)	test_minacc_d   0.20 (  0.20)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.73 (  0.73)
+Overall Timing[ 14/  1]	epoch_time 0.0364 (0.0463)	validation_time 0.0003 (0.0010)	train_time 0.0361 (0.0448)
+record: (train_acc, test_acc) (0.9078000193834305, 0.36000001430511475)
+last accs (train_acc, test_acc) (0.9189000220298768, 0.2720000147819519)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 16.17it/s] 23%|##3       | 6/26 [00:00<00:00, 27.78it/s] 38%|###8      | 10/26 [00:00<00:00, 32.07it/s] 54%|#####3    | 14/26 [00:00<00:00, 34.23it/s] 69%|######9   | 18/26 [00:00<00:00, 35.46it/s] 85%|########4 | 22/26 [00:00<00:00, 36.35it/s]100%|##########| 26/26 [00:00<00:00, 36.60it/s]100%|##########| 26/26 [00:00<00:00, 31.21it/s]
+Epoch: [15][  26/  26]	Loss 0.000 (0.071)	train_nll   0.28 (  0.22)	train_penalty   0.00 (  0.01)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.91)	train_minacc   0.78 (  0.74)	train_majacc   0.87 (  0.94)	train_corr   0.00 (  0.00)	l1 6.9052 (8.5728)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.48it/s] 27%|##6       | 7/26 [00:00<00:00, 31.62it/s]                                               27%|##6       | 7/26 [00:00<00:00, 31.62it/s] 50%|#####     | 13/26 [00:00<00:00, 38.58it/s] 73%|#######3  | 19/26 [00:00<00:00, 45.12it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 45.12it/s] 96%|#########6| 25/26 [00:00<00:00, 45.69it/s]100%|##########| 26/26 [00:00<00:00, 37.18it/s]
+Test: [   0/  26]	Loss 0.322 (0.322)	test_acc   0.84 (  0.84)	test_minacc   0.71 (  0.71)	test_majacc   0.86 (  0.86)	Loss_d 0.322 (0.322)	test_acc_d   0.84 (  0.84)	test_minacc_d   0.71 (  0.71)	test_majacc_d   0.86 (  0.86)	test_corr_d   0.70 (  0.70)
+Test: [  10/  26]	Loss 0.315 (0.288)	test_acc   0.85 (  0.86)	test_minacc   0.72 (  0.80)	test_majacc   0.87 (  0.87)	Loss_d 0.315 (0.288)	test_acc_d   0.85 (  0.86)	test_minacc_d   0.72 (  0.80)	test_majacc_d   0.87 (  0.87)	test_corr_d   0.69 (  0.69)
+Test: [  20/  26]	Loss 0.247 (0.283)	test_acc   0.90 (  0.87)	test_minacc   0.86 (  0.79)	test_majacc   0.91 (  0.88)	Loss_d 0.247 (0.283)	test_acc_d   0.90 (  0.87)	test_minacc_d   0.86 (  0.79)	test_majacc_d   0.91 (  0.88)	test_corr_d   0.67 (  0.69)
+Test: [  26/  26]	Loss 0.300 (0.288)	test_acc   0.86 (  0.86)	test_minacc   0.78 (  0.79)	test_majacc   0.88 (  0.88)	Loss_d 0.300 (0.288)	test_acc_d   0.86 (  0.86)	test_minacc_d   0.78 (  0.79)	test_majacc_d   0.88 (  0.88)	test_corr_d   0.67 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 60.95it/s]
+Test: [  0/  1]	Loss 1.865 (1.865)	test_acc   0.49 (  0.49)	test_minacc   0.45 (  0.45)	test_majacc   0.90 (  0.90)	Loss_d 1.865 (1.865)	test_acc_d   0.49 (  0.49)	test_minacc_d   0.45 (  0.45)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.34 (  0.34)
+Test: [  1/  1]	Loss 1.865 (1.865)	test_acc   0.49 (  0.49)	test_minacc   0.45 (  0.45)	test_majacc   0.90 (  0.90)	Loss_d 1.865 (1.865)	test_acc_d   0.49 (  0.49)	test_minacc_d   0.45 (  0.45)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.34 (  0.34)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 15/  1]	epoch_time 0.0364 (0.0457)	validation_time 0.0004 (0.0010)	train_time 0.0360 (0.0443)
+record: (train_acc, test_acc) (0.8636000233888627, 0.4910000264644623)
+last accs (train_acc, test_acc) (0.8636000233888627, 0.4910000264644623)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.65it/s] 19%|#9        | 5/26 [00:00<00:00, 21.13it/s] 35%|###4      | 9/26 [00:00<00:00, 27.23it/s] 50%|#####     | 13/26 [00:00<00:00, 30.37it/s] 65%|######5   | 17/26 [00:00<00:00, 32.47it/s] 81%|########  | 21/26 [00:00<00:00, 33.51it/s] 96%|#########6| 25/26 [00:00<00:00, 34.05it/s]100%|##########| 26/26 [00:00<00:00, 28.26it/s]
+Epoch: [16][  26/  26]	Loss 0.000 (0.002)	train_nll   0.37 (  0.36)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.68 (  0.74)	train_majacc   0.84 (  0.83)	train_corr   0.00 (  0.00)	l1 5.5459 (5.9104)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 18.75it/s] 35%|###4      | 9/26 [00:00<00:00, 40.92it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.92it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.84it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.84it/s] 81%|########  | 21/26 [00:00<00:00, 47.50it/s]100%|##########| 26/26 [00:00<00:00, 41.83it/s]
+Test: [   0/  26]	Loss 0.356 (0.356)	test_acc   0.82 (  0.82)	test_minacc   0.66 (  0.66)	test_majacc   0.85 (  0.85)	Loss_d 0.356 (0.356)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.66 (  0.66)	test_majacc_d   0.85 (  0.85)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.358 (0.343)	test_acc   0.81 (  0.83)	test_minacc   0.64 (  0.72)	test_majacc   0.84 (  0.85)	Loss_d 0.358 (0.343)	test_acc_d   0.81 (  0.83)	test_minacc_d   0.64 (  0.72)	test_majacc_d   0.84 (  0.85)	test_corr_d   0.70 (  0.70)
+Test: [  20/  26]	Loss 0.306 (0.341)	test_acc   0.88 (  0.83)	test_minacc   0.82 (  0.71)	test_majacc   0.89 (  0.85)	Loss_d 0.306 (0.341)	test_acc_d   0.88 (  0.83)	test_minacc_d   0.82 (  0.71)	test_majacc_d   0.89 (  0.85)	test_corr_d   0.67 (  0.70)
+Test: [  26/  26]	Loss 0.350 (0.340)	test_acc   0.83 (  0.83)	test_minacc   0.70 (  0.71)	test_majacc   0.85 (  0.85)	Loss_d 0.350 (0.340)	test_acc_d   0.83 (  0.83)	test_minacc_d   0.70 (  0.71)	test_majacc_d   0.85 (  0.85)	test_corr_d   0.70 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 62.63it/s]
+Test: [  0/  1]	Loss 1.546 (1.546)	test_acc   0.47 (  0.47)	test_minacc   0.43 (  0.43)	test_majacc   0.85 (  0.85)	Loss_d 1.546 (1.546)	test_acc_d   0.47 (  0.47)	test_minacc_d   0.43 (  0.43)	test_majacc_d   0.85 (  0.85)	test_corr_d   0.41 (  0.41)
+Test: [  1/  1]	Loss 1.546 (1.546)	test_acc   0.47 (  0.47)	test_minacc   0.43 (  0.43)	test_majacc   0.85 (  0.85)	Loss_d 1.546 (1.546)	test_acc_d   0.47 (  0.47)	test_minacc_d   0.43 (  0.43)	test_majacc_d   0.85 (  0.85)	test_corr_d   0.41 (  0.41)
+Overall Timing[ 16/  1]	epoch_time 0.0366 (0.0452)	validation_time 0.0003 (0.0009)	train_time 0.0363 (0.0438)
+record: (train_acc, test_acc) (0.8636000233888627, 0.4910000264644623)
+last accs (train_acc, test_acc) (0.8325000277161598, 0.4740000367164612)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 12.86it/s] 23%|##3       | 6/26 [00:00<00:00, 23.33it/s] 38%|###8      | 10/26 [00:00<00:00, 28.14it/s] 54%|#####3    | 14/26 [00:00<00:00, 30.78it/s] 69%|######9   | 18/26 [00:00<00:00, 33.19it/s] 85%|########4 | 22/26 [00:00<00:00, 34.74it/s]100%|##########| 26/26 [00:00<00:00, 35.85it/s]100%|##########| 26/26 [00:00<00:00, 29.31it/s]
+Epoch: [17][  26/  26]	Loss 0.005 (0.003)	train_nll   0.40 (  0.35)	train_penalty   0.01 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.80 (  0.82)	train_minacc   0.80 (  0.77)	train_majacc   0.80 (  0.83)	train_corr   0.00 (  0.00)	l1 6.4999 (5.8381)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.50it/s] 31%|###       | 8/26 [00:00<00:00, 38.99it/s]                                               31%|###       | 8/26 [00:00<00:00, 38.99it/s] 50%|#####     | 13/26 [00:00<00:00, 41.61it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.88it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.88it/s] 96%|#########6| 25/26 [00:00<00:00, 47.40it/s]100%|##########| 26/26 [00:00<00:00, 40.07it/s]
+Test: [   0/  26]	Loss 0.397 (0.397)	test_acc   0.76 (  0.76)	test_minacc   0.78 (  0.78)	test_majacc   0.76 (  0.76)	Loss_d 0.397 (0.397)	test_acc_d   0.76 (  0.76)	test_minacc_d   0.78 (  0.78)	test_majacc_d   0.76 (  0.76)	test_corr_d   0.60 (  0.60)
+Test: [  10/  26]	Loss 0.378 (0.387)	test_acc   0.80 (  0.78)	test_minacc   0.79 (  0.79)	test_majacc   0.80 (  0.78)	Loss_d 0.378 (0.387)	test_acc_d   0.80 (  0.78)	test_minacc_d   0.79 (  0.79)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.61 (  0.60)
+Test: [  20/  26]	Loss 0.359 (0.385)	test_acc   0.81 (  0.79)	test_minacc   0.86 (  0.79)	test_majacc   0.80 (  0.79)	Loss_d 0.359 (0.385)	test_acc_d   0.81 (  0.79)	test_minacc_d   0.86 (  0.79)	test_majacc_d   0.80 (  0.79)	test_corr_d   0.57 (  0.60)
+Test: [  26/  26]	Loss 0.391 (0.382)	test_acc   0.81 (  0.79)	test_minacc   0.82 (  0.80)	test_majacc   0.80 (  0.79)	Loss_d 0.391 (0.382)	test_acc_d   0.81 (  0.79)	test_minacc_d   0.82 (  0.80)	test_majacc_d   0.80 (  0.79)	test_corr_d   0.61 (  0.60)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 65.07it/s]
+Test: [  0/  1]	Loss 1.737 (1.737)	test_acc   0.57 (  0.57)	test_minacc   0.55 (  0.55)	test_majacc   0.76 (  0.76)	Loss_d 1.737 (1.737)	test_acc_d   0.57 (  0.57)	test_minacc_d   0.55 (  0.55)	test_majacc_d   0.76 (  0.76)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 1.737 (1.737)	test_acc   0.57 (  0.57)	test_minacc   0.55 (  0.55)	test_majacc   0.76 (  0.76)	Loss_d 1.737 (1.737)	test_acc_d   0.57 (  0.57)	test_minacc_d   0.55 (  0.55)	test_majacc_d   0.76 (  0.76)	test_corr_d   0.17 (  0.17)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 17/  1]	epoch_time 0.0364 (0.0447)	validation_time 0.0003 (0.0009)	train_time 0.0360 (0.0434)
+record: (train_acc, test_acc) (0.7897000303864479, 0.5740000009536743)
+last accs (train_acc, test_acc) (0.7897000303864479, 0.5740000009536743)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 17.37it/s] 23%|##3       | 6/26 [00:00<00:00, 26.76it/s] 38%|###8      | 10/26 [00:00<00:00, 30.74it/s] 54%|#####3    | 14/26 [00:00<00:00, 32.83it/s] 69%|######9   | 18/26 [00:00<00:00, 34.05it/s] 85%|########4 | 22/26 [00:00<00:00, 34.82it/s]100%|##########| 26/26 [00:00<00:00, 35.49it/s]100%|##########| 26/26 [00:00<00:00, 30.27it/s]
+Epoch: [18][  26/  26]	Loss 0.001 (0.002)	train_nll   0.32 (  0.33)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.83 (  0.82)	train_minacc   0.90 (  0.81)	train_majacc   0.81 (  0.82)	train_corr   0.00 (  0.00)	l1 6.7847 (6.5402)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 26.24it/s] 35%|###4      | 9/26 [00:00<00:00, 39.18it/s]                                               35%|###4      | 9/26 [00:00<00:00, 39.18it/s] 58%|#####7    | 15/26 [00:00<00:00, 46.83it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 46.83it/s] 81%|########  | 21/26 [00:00<00:00, 47.17it/s]100%|##########| 26/26 [00:00<00:00, 41.75it/s]
+Test: [   0/  26]	Loss 0.321 (0.321)	test_acc   0.81 (  0.81)	test_minacc   0.88 (  0.88)	test_majacc   0.79 (  0.79)	Loss_d 0.321 (0.321)	test_acc_d   0.81 (  0.81)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.79 (  0.79)	test_corr_d   0.64 (  0.64)
+Test: [  10/  26]	Loss 0.334 (0.340)	test_acc   0.81 (  0.79)	test_minacc   0.84 (  0.85)	test_majacc   0.81 (  0.78)	Loss_d 0.334 (0.340)	test_acc_d   0.81 (  0.79)	test_minacc_d   0.84 (  0.85)	test_majacc_d   0.81 (  0.78)	test_corr_d   0.64 (  0.62)
+Test: [  20/  26]	Loss 0.339 (0.342)	test_acc   0.82 (  0.79)	test_minacc   0.92 (  0.85)	test_majacc   0.79 (  0.78)	Loss_d 0.339 (0.342)	test_acc_d   0.82 (  0.79)	test_minacc_d   0.92 (  0.85)	test_majacc_d   0.79 (  0.78)	test_corr_d   0.57 (  0.62)
+Test: [  26/  26]	Loss 0.320 (0.339)	test_acc   0.83 (  0.80)	test_minacc   0.93 (  0.86)	test_majacc   0.81 (  0.79)	Loss_d 0.320 (0.339)	test_acc_d   0.83 (  0.80)	test_minacc_d   0.93 (  0.86)	test_majacc_d   0.81 (  0.79)	test_corr_d   0.63 (  0.62)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.27it/s]
+Test: [  0/  1]	Loss 1.726 (1.726)	test_acc   0.63 (  0.63)	test_minacc   0.62 (  0.62)	test_majacc   0.75 (  0.75)	Loss_d 1.726 (1.726)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.62 (  0.62)	test_majacc_d   0.75 (  0.75)	test_corr_d   0.10 (  0.10)
+Test: [  1/  1]	Loss 1.726 (1.726)	test_acc   0.63 (  0.63)	test_minacc   0.62 (  0.62)	test_majacc   0.75 (  0.75)	Loss_d 1.726 (1.726)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.62 (  0.62)	test_majacc_d   0.75 (  0.75)	test_corr_d   0.10 (  0.10)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 18/  1]	epoch_time 0.0367 (0.0442)	validation_time 0.0004 (0.0009)	train_time 0.0362 (0.0430)
+record: (train_acc, test_acc) (0.797700027346611, 0.6320000290870667)
+last accs (train_acc, test_acc) (0.797700027346611, 0.6320000290870667)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 16.94it/s] 23%|##3       | 6/26 [00:00<00:00, 26.98it/s] 35%|###4      | 9/26 [00:00<00:00, 27.41it/s] 50%|#####     | 13/26 [00:00<00:00, 30.43it/s] 65%|######5   | 17/26 [00:00<00:00, 32.21it/s] 81%|########  | 21/26 [00:00<00:00, 33.35it/s] 96%|#########6| 25/26 [00:00<00:00, 33.74it/s]100%|##########| 26/26 [00:00<00:00, 29.18it/s]
+Epoch: [19][  26/  26]	Loss 0.000 (0.000)	train_nll   0.33 (  0.33)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.81)	train_minacc   0.90 (  0.86)	train_majacc   0.80 (  0.80)	train_corr   0.00 (  0.00)	l1 6.8111 (6.6818)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.44it/s] 23%|##3       | 6/26 [00:00<00:00, 27.59it/s]                                               23%|##3       | 6/26 [00:00<00:00, 27.59it/s] 46%|####6     | 12/26 [00:00<00:00, 36.50it/s] 69%|######9   | 18/26 [00:00<00:00, 43.84it/s]                                                69%|######9   | 18/26 [00:00<00:00, 43.84it/s] 92%|#########2| 24/26 [00:00<00:00, 45.49it/s]100%|##########| 26/26 [00:00<00:00, 36.99it/s]
+Test: [   0/  26]	Loss 0.342 (0.342)	test_acc   0.80 (  0.80)	test_minacc   0.83 (  0.83)	test_majacc   0.79 (  0.79)	Loss_d 0.342 (0.342)	test_acc_d   0.80 (  0.80)	test_minacc_d   0.83 (  0.83)	test_majacc_d   0.79 (  0.79)	test_corr_d   0.65 (  0.65)
+Test: [  10/  26]	Loss 0.351 (0.349)	test_acc   0.81 (  0.79)	test_minacc   0.84 (  0.84)	test_majacc   0.80 (  0.78)	Loss_d 0.351 (0.349)	test_acc_d   0.81 (  0.79)	test_minacc_d   0.84 (  0.84)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.64 (  0.62)
+Test: [  20/  26]	Loss 0.338 (0.353)	test_acc   0.82 (  0.79)	test_minacc   0.92 (  0.83)	test_majacc   0.80 (  0.78)	Loss_d 0.338 (0.353)	test_acc_d   0.82 (  0.79)	test_minacc_d   0.92 (  0.83)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.59 (  0.62)
+Test: [  26/  26]	Loss 0.334 (0.351)	test_acc   0.82 (  0.79)	test_minacc   0.90 (  0.84)	test_majacc   0.80 (  0.78)	Loss_d 0.334 (0.351)	test_acc_d   0.82 (  0.79)	test_minacc_d   0.90 (  0.84)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.65 (  0.62)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.72it/s]
+Test: [  0/  1]	Loss 1.794 (1.794)	test_acc   0.62 (  0.62)	test_minacc   0.60 (  0.60)	test_majacc   0.77 (  0.77)	Loss_d 1.794 (1.794)	test_acc_d   0.62 (  0.62)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.77 (  0.77)	test_corr_d   0.13 (  0.13)
+Test: [  1/  1]	Loss 1.794 (1.794)	test_acc   0.62 (  0.62)	test_minacc   0.60 (  0.60)	test_majacc   0.77 (  0.77)	Loss_d 1.794 (1.794)	test_acc_d   0.62 (  0.62)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.77 (  0.77)	test_corr_d   0.13 (  0.13)
+Overall Timing[ 19/  1]	epoch_time 0.0363 (0.0438)	validation_time 0.0004 (0.0009)	train_time 0.0359 (0.0426)
+record: (train_acc, test_acc) (0.797700027346611, 0.6320000290870667)
+last accs (train_acc, test_acc) (0.7928000248074532, 0.6190000176429749)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.44it/s] 19%|#9        | 5/26 [00:00<00:00, 24.05it/s] 35%|###4      | 9/26 [00:00<00:00, 29.26it/s] 50%|#####     | 13/26 [00:00<00:00, 32.21it/s] 65%|######5   | 17/26 [00:00<00:00, 33.84it/s] 81%|########  | 21/26 [00:00<00:00, 35.07it/s] 96%|#########6| 25/26 [00:00<00:00, 35.67it/s]100%|##########| 26/26 [00:00<00:00, 30.24it/s]
+Epoch: [20][  26/  26]	Loss 0.000 (0.000)	train_nll   0.33 (  0.33)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.81)	train_minacc   0.90 (  0.84)	train_majacc   0.80 (  0.80)	train_corr   0.00 (  0.00)	l1 6.8887 (6.7299)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 23.60it/s] 31%|###       | 8/26 [00:00<00:00, 33.73it/s]                                               31%|###       | 8/26 [00:00<00:00, 33.73it/s] 54%|#####3    | 14/26 [00:00<00:00, 42.63it/s] 77%|#######6  | 20/26 [00:00<00:00, 44.98it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 44.98it/s]100%|##########| 26/26 [00:00<00:00, 49.54it/s]100%|##########| 26/26 [00:00<00:00, 39.91it/s]
+Test: [   0/  26]	Loss 0.327 (0.327)	test_acc   0.82 (  0.82)	test_minacc   0.88 (  0.88)	test_majacc   0.80 (  0.80)	Loss_d 0.327 (0.327)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.65 (  0.65)
+Test: [  10/  26]	Loss 0.339 (0.335)	test_acc   0.81 (  0.80)	test_minacc   0.84 (  0.86)	test_majacc   0.80 (  0.78)	Loss_d 0.339 (0.335)	test_acc_d   0.81 (  0.80)	test_minacc_d   0.84 (  0.86)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.64 (  0.62)
+Test: [  20/  26]	Loss 0.344 (0.342)	test_acc   0.81 (  0.79)	test_minacc   0.92 (  0.86)	test_majacc   0.78 (  0.78)	Loss_d 0.344 (0.342)	test_acc_d   0.81 (  0.79)	test_minacc_d   0.92 (  0.86)	test_majacc_d   0.78 (  0.78)	test_corr_d   0.58 (  0.62)
+Test: [  26/  26]	Loss 0.330 (0.341)	test_acc   0.81 (  0.80)	test_minacc   0.90 (  0.86)	test_majacc   0.80 (  0.78)	Loss_d 0.330 (0.341)	test_acc_d   0.81 (  0.80)	test_minacc_d   0.90 (  0.86)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.64 (  0.62)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.92it/s]
+Test: [  0/  1]	Loss 1.782 (1.782)	test_acc   0.63 (  0.63)	test_minacc   0.62 (  0.62)	test_majacc   0.77 (  0.77)	Loss_d 1.782 (1.782)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.62 (  0.62)	test_majacc_d   0.77 (  0.77)	test_corr_d   0.10 (  0.10)
+Test: [  1/  1]	Loss 1.782 (1.782)	test_acc   0.63 (  0.63)	test_minacc   0.62 (  0.62)	test_majacc   0.77 (  0.77)	Loss_d 1.782 (1.782)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.62 (  0.62)	test_majacc_d   0.77 (  0.77)	test_corr_d   0.10 (  0.10)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 20/  1]	epoch_time 0.0350 (0.0434)	validation_time 0.0003 (0.0008)	train_time 0.0346 (0.0423)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  6.17it/s] 19%|#9        | 5/26 [00:00<00:01, 20.18it/s] 35%|###4      | 9/26 [00:00<00:00, 26.81it/s] 50%|#####     | 13/26 [00:00<00:00, 29.97it/s] 65%|######5   | 17/26 [00:00<00:00, 32.17it/s] 81%|########  | 21/26 [00:00<00:00, 33.79it/s] 96%|#########6| 25/26 [00:00<00:00, 34.72it/s]100%|##########| 26/26 [00:00<00:00, 28.30it/s]
+Epoch: [21][  26/  26]	Loss 0.000 (0.000)	train_nll   0.31 (  0.32)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.81)	train_minacc   0.90 (  0.86)	train_majacc   0.81 (  0.80)	train_corr   0.00 (  0.00)	l1 6.9599 (6.8682)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  6.14it/s] 23%|##3       | 6/26 [00:00<00:00, 25.35it/s]                                               23%|##3       | 6/26 [00:00<00:00, 25.35it/s] 46%|####6     | 12/26 [00:00<00:00, 34.23it/s] 69%|######9   | 18/26 [00:00<00:00, 42.16it/s]                                                69%|######9   | 18/26 [00:00<00:00, 42.16it/s] 92%|#########2| 24/26 [00:00<00:00, 43.43it/s]100%|##########| 26/26 [00:00<00:00, 35.75it/s]
+Test: [   0/  26]	Loss 0.311 (0.311)	test_acc   0.83 (  0.83)	test_minacc   0.88 (  0.88)	test_majacc   0.82 (  0.82)	Loss_d 0.311 (0.311)	test_acc_d   0.83 (  0.83)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.82 (  0.82)	test_corr_d   0.68 (  0.68)
+Test: [  10/  26]	Loss 0.317 (0.311)	test_acc   0.82 (  0.81)	test_minacc   0.88 (  0.86)	test_majacc   0.81 (  0.80)	Loss_d 0.317 (0.311)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.88 (  0.86)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.67 (  0.66)
+Test: [  20/  26]	Loss 0.339 (0.322)	test_acc   0.82 (  0.81)	test_minacc   0.89 (  0.86)	test_majacc   0.80 (  0.80)	Loss_d 0.339 (0.322)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.89 (  0.86)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.60 (  0.65)
+Test: [  26/  26]	Loss 0.318 (0.322)	test_acc   0.82 (  0.81)	test_minacc   0.90 (  0.86)	test_majacc   0.80 (  0.80)	Loss_d 0.318 (0.322)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.90 (  0.86)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.66 (  0.65)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.52it/s]
+Test: [  0/  1]	Loss 1.836 (1.836)	test_acc   0.63 (  0.63)	test_minacc   0.61 (  0.61)	test_majacc   0.83 (  0.83)	Loss_d 1.836 (1.836)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.61 (  0.61)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.15 (  0.15)
+Test: [  1/  1]	Loss 1.836 (1.836)	test_acc   0.63 (  0.63)	test_minacc   0.61 (  0.61)	test_majacc   0.83 (  0.83)	Loss_d 1.836 (1.836)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.61 (  0.61)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.15 (  0.15)
+Overall Timing[ 21/  1]	epoch_time 0.0367 (0.0431)	validation_time 0.0004 (0.0008)	train_time 0.0363 (0.0420)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.8059000265598297, 0.6300000548362732)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.18it/s] 19%|#9        | 5/26 [00:00<00:00, 22.35it/s] 35%|###4      | 9/26 [00:00<00:00, 28.59it/s] 50%|#####     | 13/26 [00:00<00:00, 31.66it/s] 65%|######5   | 17/26 [00:00<00:00, 33.29it/s] 81%|########  | 21/26 [00:00<00:00, 34.18it/s] 96%|#########6| 25/26 [00:00<00:00, 34.93it/s]100%|##########| 26/26 [00:00<00:00, 29.35it/s]
+Epoch: [22][  26/  26]	Loss 0.000 (0.001)	train_nll   0.30 (  0.32)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.83 (  0.81)	train_minacc   0.88 (  0.86)	train_majacc   0.82 (  0.80)	train_corr   0.00 (  0.00)	l1 7.0134 (7.0419)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.85it/s] 27%|##6       | 7/26 [00:00<00:00, 34.01it/s]                                               27%|##6       | 7/26 [00:00<00:00, 34.01it/s] 50%|#####     | 13/26 [00:00<00:00, 40.68it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.28it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.28it/s] 96%|#########6| 25/26 [00:00<00:00, 47.82it/s]100%|##########| 26/26 [00:00<00:00, 39.28it/s]
+Test: [   0/  26]	Loss 0.296 (0.296)	test_acc   0.84 (  0.84)	test_minacc   0.86 (  0.86)	test_majacc   0.84 (  0.84)	Loss_d 0.296 (0.296)	test_acc_d   0.84 (  0.84)	test_minacc_d   0.86 (  0.86)	test_majacc_d   0.84 (  0.84)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.286 (0.283)	test_acc   0.84 (  0.84)	test_minacc   0.90 (  0.88)	test_majacc   0.83 (  0.83)	Loss_d 0.286 (0.283)	test_acc_d   0.84 (  0.84)	test_minacc_d   0.90 (  0.88)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.71 (  0.70)
+Test: [  20/  26]	Loss 0.327 (0.296)	test_acc   0.82 (  0.83)	test_minacc   0.88 (  0.86)	test_majacc   0.80 (  0.82)	Loss_d 0.327 (0.296)	test_acc_d   0.82 (  0.83)	test_minacc_d   0.88 (  0.86)	test_majacc_d   0.80 (  0.82)	test_corr_d   0.64 (  0.69)
+Test: [  26/  26]	Loss 0.305 (0.297)	test_acc   0.82 (  0.83)	test_minacc   0.88 (  0.87)	test_majacc   0.81 (  0.82)	Loss_d 0.305 (0.297)	test_acc_d   0.82 (  0.83)	test_minacc_d   0.88 (  0.87)	test_majacc_d   0.81 (  0.82)	test_corr_d   0.68 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.35it/s]
+Test: [  0/  1]	Loss 1.874 (1.874)	test_acc   0.61 (  0.61)	test_minacc   0.59 (  0.59)	test_majacc   0.83 (  0.83)	Loss_d 1.874 (1.874)	test_acc_d   0.61 (  0.61)	test_minacc_d   0.59 (  0.59)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.21 (  0.21)
+Test: [  1/  1]	Loss 1.874 (1.874)	test_acc   0.61 (  0.61)	test_minacc   0.59 (  0.59)	test_majacc   0.83 (  0.83)	Loss_d 1.874 (1.874)	test_acc_d   0.61 (  0.61)	test_minacc_d   0.59 (  0.59)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.21 (  0.21)
+Overall Timing[ 22/  1]	epoch_time 0.0378 (0.0429)	validation_time 0.0006 (0.0008)	train_time 0.0373 (0.0418)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.8261000267267227, 0.612000048160553)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.34it/s] 19%|#9        | 5/26 [00:00<00:00, 22.65it/s] 35%|###4      | 9/26 [00:00<00:00, 27.68it/s] 50%|#####     | 13/26 [00:00<00:00, 30.72it/s] 65%|######5   | 17/26 [00:00<00:00, 31.99it/s] 81%|########  | 21/26 [00:00<00:00, 33.43it/s] 96%|#########6| 25/26 [00:00<00:00, 34.13it/s]100%|##########| 26/26 [00:00<00:00, 28.41it/s]
+Epoch: [23][  26/  26]	Loss 0.001 (0.001)	train_nll   0.30 (  0.31)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.84 (  0.82)	train_minacc   0.88 (  0.86)	train_majacc   0.84 (  0.81)	train_corr   0.00 (  0.00)	l1 7.0999 (7.2875)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 15%|#5        | 4/26 [00:00<00:00, 35.86it/s] 35%|###4      | 9/26 [00:00<00:00, 40.44it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.44it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.78it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.78it/s] 81%|########  | 21/26 [00:00<00:00, 47.81it/s]100%|##########| 26/26 [00:00<00:00, 42.75it/s]
+Test: [   0/  26]	Loss 0.280 (0.280)	test_acc   0.87 (  0.87)	test_minacc   0.90 (  0.90)	test_majacc   0.86 (  0.86)	Loss_d 0.280 (0.280)	test_acc_d   0.87 (  0.87)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.86 (  0.86)	test_corr_d   0.75 (  0.75)
+Test: [  10/  26]	Loss 0.266 (0.269)	test_acc   0.86 (  0.85)	test_minacc   0.79 (  0.85)	test_majacc   0.87 (  0.85)	Loss_d 0.266 (0.269)	test_acc_d   0.86 (  0.85)	test_minacc_d   0.79 (  0.85)	test_majacc_d   0.87 (  0.85)	test_corr_d   0.76 (  0.74)
+Test: [  20/  26]	Loss 0.316 (0.275)	test_acc   0.83 (  0.85)	test_minacc   0.86 (  0.85)	test_majacc   0.82 (  0.85)	Loss_d 0.316 (0.275)	test_acc_d   0.83 (  0.85)	test_minacc_d   0.86 (  0.85)	test_majacc_d   0.82 (  0.85)	test_corr_d   0.68 (  0.74)
+Test: [  26/  26]	Loss 0.299 (0.278)	test_acc   0.84 (  0.85)	test_minacc   0.88 (  0.85)	test_majacc   0.84 (  0.85)	Loss_d 0.299 (0.278)	test_acc_d   0.84 (  0.85)	test_minacc_d   0.88 (  0.85)	test_majacc_d   0.84 (  0.85)	test_corr_d   0.72 (  0.73)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.32it/s]
+Test: [  0/  1]	Loss 1.959 (1.959)	test_acc   0.59 (  0.59)	test_minacc   0.56 (  0.56)	test_majacc   0.84 (  0.84)	Loss_d 1.959 (1.959)	test_acc_d   0.59 (  0.59)	test_minacc_d   0.56 (  0.56)	test_majacc_d   0.84 (  0.84)	test_corr_d   0.31 (  0.31)
+Test: [  1/  1]	Loss 1.959 (1.959)	test_acc   0.59 (  0.59)	test_minacc   0.56 (  0.56)	test_majacc   0.84 (  0.84)	Loss_d 1.959 (1.959)	test_acc_d   0.59 (  0.59)	test_minacc_d   0.56 (  0.56)	test_majacc_d   0.84 (  0.84)	test_corr_d   0.31 (  0.31)
+Overall Timing[ 23/  1]	epoch_time 0.0370 (0.0426)	validation_time 0.0004 (0.0008)	train_time 0.0366 (0.0416)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.8469000238776206, 0.5920000076293945)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.59it/s] 19%|#9        | 5/26 [00:00<00:00, 24.51it/s] 35%|###4      | 9/26 [00:00<00:00, 30.40it/s] 50%|#####     | 13/26 [00:00<00:00, 33.36it/s] 65%|######5   | 17/26 [00:00<00:00, 34.94it/s] 81%|########  | 21/26 [00:00<00:00, 36.03it/s] 96%|#########6| 25/26 [00:00<00:00, 36.26it/s]100%|##########| 26/26 [00:00<00:00, 30.75it/s]
+Epoch: [24][  26/  26]	Loss 0.000 (0.001)	train_nll   0.30 (  0.30)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.80 (  0.82)	train_minacc   0.85 (  0.86)	train_majacc   0.80 (  0.81)	train_corr   0.00 (  0.00)	l1 7.4086 (7.5302)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 29.01it/s] 35%|###4      | 9/26 [00:00<00:00, 40.94it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.94it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.86it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.86it/s] 81%|########  | 21/26 [00:00<00:00, 47.18it/s]100%|##########| 26/26 [00:00<00:00, 42.03it/s]
+Test: [   0/  26]	Loss 0.290 (0.290)	test_acc   0.84 (  0.84)	test_minacc   0.88 (  0.88)	test_majacc   0.83 (  0.83)	Loss_d 0.290 (0.290)	test_acc_d   0.84 (  0.84)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.73 (  0.73)
+Test: [  10/  26]	Loss 0.267 (0.274)	test_acc   0.86 (  0.84)	test_minacc   0.84 (  0.87)	test_majacc   0.86 (  0.84)	Loss_d 0.267 (0.274)	test_acc_d   0.86 (  0.84)	test_minacc_d   0.84 (  0.87)	test_majacc_d   0.86 (  0.84)	test_corr_d   0.74 (  0.72)
+Test: [  20/  26]	Loss 0.294 (0.274)	test_acc   0.82 (  0.84)	test_minacc   0.89 (  0.87)	test_majacc   0.81 (  0.84)	Loss_d 0.294 (0.274)	test_acc_d   0.82 (  0.84)	test_minacc_d   0.89 (  0.87)	test_majacc_d   0.81 (  0.84)	test_corr_d   0.67 (  0.72)
+Test: [  26/  26]	Loss 0.296 (0.278)	test_acc   0.81 (  0.84)	test_minacc   0.88 (  0.87)	test_majacc   0.80 (  0.83)	Loss_d 0.296 (0.278)	test_acc_d   0.81 (  0.84)	test_minacc_d   0.88 (  0.87)	test_majacc_d   0.80 (  0.83)	test_corr_d   0.70 (  0.72)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.06it/s]
+Test: [  0/  1]	Loss 1.975 (1.975)	test_acc   0.63 (  0.63)	test_minacc   0.60 (  0.60)	test_majacc   0.84 (  0.84)	Loss_d 1.975 (1.975)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.84 (  0.84)	test_corr_d   0.24 (  0.24)
+Test: [  1/  1]	Loss 1.975 (1.975)	test_acc   0.63 (  0.63)	test_minacc   0.60 (  0.60)	test_majacc   0.84 (  0.84)	Loss_d 1.975 (1.975)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.84 (  0.84)	test_corr_d   0.24 (  0.24)
+Overall Timing[ 24/  1]	epoch_time 0.0366 (0.0424)	validation_time 0.0003 (0.0008)	train_time 0.0362 (0.0414)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.8396000252962112, 0.6270000338554382)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.17it/s] 19%|#9        | 5/26 [00:00<00:00, 24.93it/s] 35%|###4      | 9/26 [00:00<00:00, 29.70it/s] 50%|#####     | 13/26 [00:00<00:00, 32.16it/s] 65%|######5   | 17/26 [00:00<00:00, 31.77it/s] 81%|########  | 21/26 [00:00<00:00, 33.43it/s] 96%|#########6| 25/26 [00:00<00:00, 34.57it/s]100%|##########| 26/26 [00:00<00:00, 29.64it/s]
+Epoch: [25][  26/  26]	Loss 0.000 (0.001)	train_nll   0.32 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.83)	train_minacc   0.90 (  0.88)	train_majacc   0.80 (  0.82)	train_corr   0.00 (  0.00)	l1 7.7305 (7.5811)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.32it/s] 23%|##3       | 6/26 [00:00<00:00, 31.09it/s]                                               23%|##3       | 6/26 [00:00<00:00, 31.09it/s] 42%|####2     | 11/26 [00:00<00:00, 37.17it/s] 65%|######5   | 17/26 [00:00<00:00, 45.34it/s]                                                65%|######5   | 17/26 [00:00<00:00, 45.34it/s] 88%|########8 | 23/26 [00:00<00:00, 46.38it/s]100%|##########| 26/26 [00:00<00:00, 39.52it/s]
+Test: [   0/  26]	Loss 0.310 (0.310)	test_acc   0.82 (  0.82)	test_minacc   0.86 (  0.86)	test_majacc   0.81 (  0.81)	Loss_d 0.310 (0.310)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.86 (  0.86)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.289 (0.296)	test_acc   0.84 (  0.82)	test_minacc   0.84 (  0.86)	test_majacc   0.83 (  0.81)	Loss_d 0.289 (0.296)	test_acc_d   0.84 (  0.82)	test_minacc_d   0.84 (  0.86)	test_majacc_d   0.83 (  0.81)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.294 (0.291)	test_acc   0.82 (  0.83)	test_minacc   0.90 (  0.87)	test_majacc   0.79 (  0.82)	Loss_d 0.294 (0.291)	test_acc_d   0.82 (  0.83)	test_minacc_d   0.90 (  0.87)	test_majacc_d   0.79 (  0.82)	test_corr_d   0.65 (  0.70)
+Test: [  26/  26]	Loss 0.309 (0.293)	test_acc   0.81 (  0.83)	test_minacc   0.90 (  0.87)	test_majacc   0.79 (  0.82)	Loss_d 0.309 (0.293)	test_acc_d   0.81 (  0.83)	test_minacc_d   0.90 (  0.87)	test_majacc_d   0.79 (  0.82)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 64.51it/s]
+Test: [  0/  1]	Loss 2.051 (2.051)	test_acc   0.63 (  0.63)	test_minacc   0.60 (  0.60)	test_majacc   0.83 (  0.83)	Loss_d 2.051 (2.051)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.21 (  0.21)
+Test: [  1/  1]	Loss 2.051 (2.051)	test_acc   0.63 (  0.63)	test_minacc   0.60 (  0.60)	test_majacc   0.83 (  0.83)	Loss_d 2.051 (2.051)	test_acc_d   0.63 (  0.63)	test_minacc_d   0.60 (  0.60)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.21 (  0.21)
+Overall Timing[ 25/  1]	epoch_time 0.0368 (0.0422)	validation_time 0.0003 (0.0008)	train_time 0.0364 (0.0412)
+record: (train_acc, test_acc) (0.795000020980835, 0.6340000033378601)
+last accs (train_acc, test_acc) (0.8259000282287597, 0.6260000467300415)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.77it/s] 19%|#9        | 5/26 [00:00<00:00, 21.79it/s] 35%|###4      | 9/26 [00:00<00:00, 28.21it/s] 50%|#####     | 13/26 [00:00<00:00, 31.70it/s] 65%|######5   | 17/26 [00:00<00:00, 33.18it/s] 81%|########  | 21/26 [00:00<00:00, 34.53it/s] 96%|#########6| 25/26 [00:00<00:00, 34.88it/s]100%|##########| 26/26 [00:00<00:00, 28.96it/s]
+Epoch: [26][  26/  26]	Loss 0.000 (0.001)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.83 (  0.83)	train_minacc   0.90 (  0.87)	train_majacc   0.81 (  0.82)	train_corr   0.00 (  0.00)	l1 8.0145 (7.6448)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.06it/s] 27%|##6       | 7/26 [00:00<00:00, 33.59it/s]                                               27%|##6       | 7/26 [00:00<00:00, 33.59it/s] 50%|#####     | 13/26 [00:00<00:00, 40.11it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.72it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.72it/s] 96%|#########6| 25/26 [00:00<00:00, 46.75it/s]100%|##########| 26/26 [00:00<00:00, 38.58it/s]
+Test: [   0/  26]	Loss 0.297 (0.297)	test_acc   0.82 (  0.82)	test_minacc   0.88 (  0.88)	test_majacc   0.81 (  0.81)	Loss_d 0.297 (0.297)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.69 (  0.69)
+Test: [  10/  26]	Loss 0.311 (0.311)	test_acc   0.81 (  0.80)	test_minacc   0.83 (  0.85)	test_majacc   0.81 (  0.79)	Loss_d 0.311 (0.311)	test_acc_d   0.81 (  0.80)	test_minacc_d   0.83 (  0.85)	test_majacc_d   0.81 (  0.79)	test_corr_d   0.69 (  0.67)
+Test: [  20/  26]	Loss 0.317 (0.310)	test_acc   0.81 (  0.81)	test_minacc   0.88 (  0.86)	test_majacc   0.79 (  0.80)	Loss_d 0.317 (0.310)	test_acc_d   0.81 (  0.81)	test_minacc_d   0.88 (  0.86)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.63 (  0.67)
+Test: [  26/  26]	Loss 0.300 (0.310)	test_acc   0.83 (  0.81)	test_minacc   0.90 (  0.87)	test_majacc   0.81 (  0.80)	Loss_d 0.300 (0.310)	test_acc_d   0.83 (  0.81)	test_minacc_d   0.90 (  0.87)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.68 (  0.67)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.19it/s]
+Test: [  0/  1]	Loss 2.072 (2.072)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.78 (  0.78)	Loss_d 2.072 (2.072)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.78 (  0.78)	test_corr_d   0.13 (  0.13)
+Test: [  1/  1]	Loss 2.072 (2.072)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.78 (  0.78)	Loss_d 2.072 (2.072)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.78 (  0.78)	test_corr_d   0.13 (  0.13)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 26/  1]	epoch_time 0.0368 (0.0420)	validation_time 0.0004 (0.0007)	train_time 0.0363 (0.0410)
+record: (train_acc, test_acc) (0.8098000279068946, 0.6550000309944153)
+last accs (train_acc, test_acc) (0.8098000279068946, 0.6550000309944153)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  5.38it/s] 19%|#9        | 5/26 [00:00<00:01, 18.43it/s] 35%|###4      | 9/26 [00:00<00:00, 24.68it/s] 46%|####6     | 12/26 [00:00<00:00, 26.06it/s] 62%|######1   | 16/26 [00:00<00:00, 28.37it/s] 77%|#######6  | 20/26 [00:00<00:00, 30.98it/s] 92%|#########2| 24/26 [00:00<00:00, 32.89it/s]100%|##########| 26/26 [00:00<00:00, 26.11it/s]
+Epoch: [27][  26/  26]	Loss 0.001 (0.000)	train_nll   0.30 (  0.30)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.98 (  0.88)	train_majacc   0.79 (  0.81)	train_corr   0.00 (  0.00)	l1 7.7801 (7.7904)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.76it/s] 31%|###       | 8/26 [00:00<00:00, 40.74it/s]                                               31%|###       | 8/26 [00:00<00:00, 40.74it/s] 50%|#####     | 13/26 [00:00<00:00, 42.27it/s] 73%|#######3  | 19/26 [00:00<00:00, 48.31it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 48.31it/s] 96%|#########6| 25/26 [00:00<00:00, 47.86it/s]100%|##########| 26/26 [00:00<00:00, 40.26it/s]
+Test: [   0/  26]	Loss 0.298 (0.298)	test_acc   0.81 (  0.81)	test_minacc   0.88 (  0.88)	test_majacc   0.80 (  0.80)	Loss_d 0.298 (0.298)	test_acc_d   0.81 (  0.81)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.69 (  0.69)
+Test: [  10/  26]	Loss 0.297 (0.294)	test_acc   0.80 (  0.81)	test_minacc   0.88 (  0.91)	test_majacc   0.79 (  0.80)	Loss_d 0.297 (0.294)	test_acc_d   0.80 (  0.81)	test_minacc_d   0.88 (  0.91)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.69 (  0.68)
+Test: [  20/  26]	Loss 0.310 (0.302)	test_acc   0.82 (  0.81)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.310 (0.302)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.65 (  0.68)
+Test: [  26/  26]	Loss 0.300 (0.302)	test_acc   0.82 (  0.81)	test_minacc   0.98 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.300 (0.302)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.98 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.66 (  0.68)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.75it/s]
+Test: [  0/  1]	Loss 2.016 (2.016)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.81 (  0.81)	Loss_d 2.016 (2.016)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.016 (2.016)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.81 (  0.81)	Loss_d 2.016 (2.016)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.16 (  0.16)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 27/  1]	epoch_time 0.0375 (0.0418)	validation_time 0.0007 (0.0007)	train_time 0.0367 (0.0408)
+record: (train_acc, test_acc) (0.8125000247955322, 0.6580000519752502)
+last accs (train_acc, test_acc) (0.8125000247955322, 0.6580000519752502)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.79it/s] 19%|#9        | 5/26 [00:00<00:00, 22.92it/s] 35%|###4      | 9/26 [00:00<00:00, 27.45it/s] 50%|#####     | 13/26 [00:00<00:00, 30.41it/s] 65%|######5   | 17/26 [00:00<00:00, 31.68it/s] 81%|########  | 21/26 [00:00<00:00, 32.63it/s] 96%|#########6| 25/26 [00:00<00:00, 33.77it/s]100%|##########| 26/26 [00:00<00:00, 28.41it/s]
+Epoch: [28][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.30)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.81)	train_minacc   0.90 (  0.89)	train_majacc   0.80 (  0.80)	train_corr   0.00 (  0.00)	l1 7.6741 (7.8415)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.25it/s] 27%|##6       | 7/26 [00:00<00:00, 33.99it/s]                                               27%|##6       | 7/26 [00:00<00:00, 33.99it/s] 50%|#####     | 13/26 [00:00<00:00, 40.67it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.40it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.40it/s] 96%|#########6| 25/26 [00:00<00:00, 47.89it/s]100%|##########| 26/26 [00:00<00:00, 38.84it/s]
+Test: [   0/  26]	Loss 0.284 (0.284)	test_acc   0.82 (  0.82)	test_minacc   0.88 (  0.88)	test_majacc   0.80 (  0.80)	Loss_d 0.284 (0.284)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.88 (  0.88)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.73 (  0.73)
+Test: [  10/  26]	Loss 0.277 (0.277)	test_acc   0.84 (  0.83)	test_minacc   0.90 (  0.90)	test_majacc   0.83 (  0.82)	Loss_d 0.277 (0.277)	test_acc_d   0.84 (  0.83)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.83 (  0.82)	test_corr_d   0.73 (  0.71)
+Test: [  20/  26]	Loss 0.308 (0.282)	test_acc   0.83 (  0.83)	test_minacc   0.89 (  0.89)	test_majacc   0.81 (  0.82)	Loss_d 0.308 (0.282)	test_acc_d   0.83 (  0.83)	test_minacc_d   0.89 (  0.89)	test_majacc_d   0.81 (  0.82)	test_corr_d   0.68 (  0.71)
+Test: [  26/  26]	Loss 0.298 (0.283)	test_acc   0.81 (  0.83)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.82)	Loss_d 0.298 (0.283)	test_acc_d   0.81 (  0.83)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.82)	test_corr_d   0.69 (  0.71)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.77it/s]
+Test: [  0/  1]	Loss 2.011 (2.011)	test_acc   0.65 (  0.65)	test_minacc   0.63 (  0.63)	test_majacc   0.82 (  0.82)	Loss_d 2.011 (2.011)	test_acc_d   0.65 (  0.65)	test_minacc_d   0.63 (  0.63)	test_majacc_d   0.82 (  0.82)	test_corr_d   0.22 (  0.22)
+Test: [  1/  1]	Loss 2.011 (2.011)	test_acc   0.65 (  0.65)	test_minacc   0.63 (  0.63)	test_majacc   0.82 (  0.82)	Loss_d 2.011 (2.011)	test_acc_d   0.65 (  0.65)	test_minacc_d   0.63 (  0.63)	test_majacc_d   0.82 (  0.82)	test_corr_d   0.22 (  0.22)
+Overall Timing[ 28/  1]	epoch_time 0.0378 (0.0417)	validation_time 0.0003 (0.0007)	train_time 0.0375 (0.0407)
+record: (train_acc, test_acc) (0.8125000247955322, 0.6580000519752502)
+last accs (train_acc, test_acc) (0.828700020134449, 0.6510000228881836)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.97it/s] 19%|#9        | 5/26 [00:00<00:00, 23.68it/s] 35%|###4      | 9/26 [00:00<00:00, 28.51it/s] 50%|#####     | 13/26 [00:00<00:00, 31.16it/s] 65%|######5   | 17/26 [00:00<00:00, 32.30it/s] 81%|########  | 21/26 [00:00<00:00, 33.10it/s] 96%|#########6| 25/26 [00:00<00:00, 34.04it/s]100%|##########| 26/26 [00:00<00:00, 28.87it/s]
+Epoch: [29][  26/  26]	Loss 0.000 (0.000)	train_nll   0.31 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.80 (  0.82)	train_minacc   0.88 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0051 (7.9870)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 28.04it/s] 35%|###4      | 9/26 [00:00<00:00, 40.75it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.75it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.82it/s] 77%|#######6  | 20/26 [00:00<00:00, 47.47it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 47.47it/s]100%|##########| 26/26 [00:00<00:00, 50.45it/s]100%|##########| 26/26 [00:00<00:00, 41.56it/s]
+Test: [   0/  26]	Loss 0.296 (0.296)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.296 (0.296)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.72 (  0.72)
+Test: [  10/  26]	Loss 0.281 (0.284)	test_acc   0.83 (  0.82)	test_minacc   0.86 (  0.89)	test_majacc   0.83 (  0.81)	Loss_d 0.281 (0.284)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.86 (  0.89)	test_majacc_d   0.83 (  0.81)	test_corr_d   0.73 (  0.71)
+Test: [  20/  26]	Loss 0.299 (0.283)	test_acc   0.82 (  0.83)	test_minacc   0.89 (  0.89)	test_majacc   0.80 (  0.82)	Loss_d 0.299 (0.283)	test_acc_d   0.82 (  0.83)	test_minacc_d   0.89 (  0.89)	test_majacc_d   0.80 (  0.82)	test_corr_d   0.67 (  0.71)
+Test: [  26/  26]	Loss 0.305 (0.285)	test_acc   0.80 (  0.83)	test_minacc   0.88 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.305 (0.285)	test_acc_d   0.80 (  0.83)	test_minacc_d   0.88 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.69 (  0.71)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 62.79it/s]
+Test: [  0/  1]	Loss 2.077 (2.077)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.81 (  0.81)	Loss_d 2.077 (2.077)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.19 (  0.19)
+Test: [  1/  1]	Loss 2.077 (2.077)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.81 (  0.81)	Loss_d 2.077 (2.077)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.19 (  0.19)
+Overall Timing[ 29/  1]	epoch_time 0.0365 (0.0415)	validation_time 0.0004 (0.0007)	train_time 0.0360 (0.0406)
+record: (train_acc, test_acc) (0.8125000247955322, 0.6580000519752502)
+last accs (train_acc, test_acc) (0.8262000233530998, 0.6580000519752502)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.17it/s] 19%|#9        | 5/26 [00:00<00:00, 22.98it/s] 35%|###4      | 9/26 [00:00<00:00, 29.18it/s] 50%|#####     | 13/26 [00:00<00:00, 32.37it/s] 65%|######5   | 17/26 [00:00<00:00, 34.22it/s] 81%|########  | 21/26 [00:00<00:00, 34.96it/s] 96%|#########6| 25/26 [00:00<00:00, 34.91it/s]100%|##########| 26/26 [00:00<00:00, 29.66it/s]
+Epoch: [30][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.28)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.83)	train_minacc   0.93 (  0.90)	train_majacc   0.80 (  0.81)	train_corr   0.00 (  0.00)	l1 8.2005 (7.9935)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 26.73it/s] 31%|###       | 8/26 [00:00<00:00, 35.24it/s]                                               31%|###       | 8/26 [00:00<00:00, 35.24it/s] 54%|#####3    | 14/26 [00:00<00:00, 45.29it/s] 77%|#######6  | 20/26 [00:00<00:00, 46.42it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 46.42it/s]100%|##########| 26/26 [00:00<00:00, 41.54it/s]
+Test: [   0/  26]	Loss 0.298 (0.298)	test_acc   0.82 (  0.82)	test_minacc   0.92 (  0.92)	test_majacc   0.80 (  0.80)	Loss_d 0.298 (0.298)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.92 (  0.92)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.69 (  0.69)
+Test: [  10/  26]	Loss 0.294 (0.298)	test_acc   0.82 (  0.81)	test_minacc   0.88 (  0.89)	test_majacc   0.81 (  0.80)	Loss_d 0.294 (0.298)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.88 (  0.89)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.70 (  0.68)
+Test: [  20/  26]	Loss 0.299 (0.297)	test_acc   0.81 (  0.82)	test_minacc   0.89 (  0.89)	test_majacc   0.79 (  0.80)	Loss_d 0.299 (0.297)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.89 (  0.89)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.64 (  0.68)
+Test: [  26/  26]	Loss 0.299 (0.297)	test_acc   0.82 (  0.82)	test_minacc   0.93 (  0.89)	test_majacc   0.80 (  0.80)	Loss_d 0.299 (0.297)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.93 (  0.89)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.67 (  0.68)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.40it/s]
+Test: [  0/  1]	Loss 2.075 (2.075)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.78 (  0.78)	Loss_d 2.075 (2.075)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.78 (  0.78)	test_corr_d   0.12 (  0.12)
+Test: [  1/  1]	Loss 2.075 (2.075)	test_acc   0.66 (  0.66)	test_minacc   0.64 (  0.64)	test_majacc   0.78 (  0.78)	Loss_d 2.075 (2.075)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.64 (  0.64)	test_majacc_d   0.78 (  0.78)	test_corr_d   0.12 (  0.12)
+Overall Timing[ 30/  1]	epoch_time 0.0357 (0.0413)	validation_time 0.0004 (0.0007)	train_time 0.0353 (0.0404)
+record: (train_acc, test_acc) (0.8125000247955322, 0.6580000519752502)
+last accs (train_acc, test_acc) (0.8161000282764435, 0.6570000052452087)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.49it/s] 19%|#9        | 5/26 [00:00<00:00, 23.81it/s] 35%|###4      | 9/26 [00:00<00:00, 29.37it/s] 50%|#####     | 13/26 [00:00<00:00, 32.38it/s] 65%|######5   | 17/26 [00:00<00:00, 34.15it/s] 81%|########  | 21/26 [00:00<00:00, 35.27it/s] 96%|#########6| 25/26 [00:00<00:00, 36.08it/s]100%|##########| 26/26 [00:00<00:00, 30.05it/s]
+Epoch: [31][  26/  26]	Loss 0.000 (0.000)	train_nll   0.29 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.83 (  0.82)	train_minacc   0.98 (  0.89)	train_majacc   0.80 (  0.81)	train_corr   0.00 (  0.00)	l1 7.9366 (8.0142)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 17.94it/s] 31%|###       | 8/26 [00:00<00:00, 41.12it/s]                                               31%|###       | 8/26 [00:00<00:00, 41.12it/s] 50%|#####     | 13/26 [00:00<00:00, 43.32it/s] 73%|#######3  | 19/26 [00:00<00:00, 49.06it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 49.06it/s] 96%|#########6| 25/26 [00:00<00:00, 48.79it/s]100%|##########| 26/26 [00:00<00:00, 41.42it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.81 (  0.81)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.288 (0.288)	test_acc_d   0.81 (  0.81)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.70 (  0.70)
+Test: [  10/  26]	Loss 0.284 (0.288)	test_acc   0.83 (  0.82)	test_minacc   0.91 (  0.91)	test_majacc   0.82 (  0.80)	Loss_d 0.284 (0.288)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.91 (  0.91)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.71 (  0.69)
+Test: [  20/  26]	Loss 0.306 (0.292)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.306 (0.292)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.65 (  0.69)
+Test: [  26/  26]	Loss 0.296 (0.293)	test_acc   0.82 (  0.82)	test_minacc   0.98 (  0.91)	test_majacc   0.79 (  0.80)	Loss_d 0.296 (0.293)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.98 (  0.91)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.67 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.15it/s]
+Test: [  0/  1]	Loss 2.018 (2.018)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.018 (2.018)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.15 (  0.15)
+Test: [  1/  1]	Loss 2.018 (2.018)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.018 (2.018)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.15 (  0.15)
+==> New best, saving at runs/resnet18-usc-unsigned/baseline/prune_rate=1.0/311/checkpoints/model_best.pth
+Overall Timing[ 31/  1]	epoch_time 0.0356 (0.0411)	validation_time 0.0003 (0.0007)	train_time 0.0352 (0.0402)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 15.82it/s] 23%|##3       | 6/26 [00:00<00:00, 27.15it/s] 38%|###8      | 10/26 [00:00<00:00, 31.25it/s] 54%|#####3    | 14/26 [00:00<00:00, 33.16it/s] 69%|######9   | 18/26 [00:00<00:00, 33.34it/s] 85%|########4 | 22/26 [00:00<00:00, 34.17it/s]100%|##########| 26/26 [00:00<00:00, 35.43it/s]100%|##########| 26/26 [00:00<00:00, 30.42it/s]
+Epoch: [32][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.30)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.81)	train_minacc   0.98 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 7.9295 (8.0135)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 27.16it/s] 35%|###4      | 9/26 [00:00<00:00, 39.44it/s]                                               35%|###4      | 9/26 [00:00<00:00, 39.44it/s] 58%|#####7    | 15/26 [00:00<00:00, 47.00it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 47.00it/s] 81%|########  | 21/26 [00:00<00:00, 47.02it/s]100%|##########| 26/26 [00:00<00:00, 41.61it/s]
+Test: [   0/  26]	Loss 0.291 (0.291)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.291 (0.291)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.72 (  0.72)
+Test: [  10/  26]	Loss 0.280 (0.284)	test_acc   0.83 (  0.82)	test_minacc   0.88 (  0.90)	test_majacc   0.82 (  0.81)	Loss_d 0.280 (0.284)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.88 (  0.90)	test_majacc_d   0.82 (  0.81)	test_corr_d   0.72 (  0.71)
+Test: [  20/  26]	Loss 0.307 (0.287)	test_acc   0.81 (  0.82)	test_minacc   0.89 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.307 (0.287)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.89 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.67 (  0.71)
+Test: [  26/  26]	Loss 0.300 (0.288)	test_acc   0.81 (  0.82)	test_minacc   0.98 (  0.90)	test_majacc   0.78 (  0.81)	Loss_d 0.300 (0.288)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.98 (  0.90)	test_majacc_d   0.78 (  0.81)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.77it/s]
+Test: [  0/  1]	Loss 2.043 (2.043)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.043 (2.043)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.19 (  0.19)
+Test: [  1/  1]	Loss 2.043 (2.043)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.043 (2.043)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.19 (  0.19)
+Overall Timing[ 32/  1]	epoch_time 0.0362 (0.0410)	validation_time 0.0004 (0.0007)	train_time 0.0358 (0.0401)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8214000287055969, 0.6660000085830688)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.96it/s] 19%|#9        | 5/26 [00:00<00:00, 24.52it/s] 35%|###4      | 9/26 [00:00<00:00, 29.45it/s] 50%|#####     | 13/26 [00:00<00:00, 31.64it/s] 65%|######5   | 17/26 [00:00<00:00, 33.32it/s] 81%|########  | 21/26 [00:00<00:00, 34.32it/s] 96%|#########6| 25/26 [00:00<00:00, 34.98it/s]100%|##########| 26/26 [00:00<00:00, 29.72it/s]
+Epoch: [33][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.1081 (8.0315)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.58it/s] 27%|##6       | 7/26 [00:00<00:00, 36.29it/s]                                               27%|##6       | 7/26 [00:00<00:00, 36.29it/s] 50%|#####     | 13/26 [00:00<00:00, 41.01it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.38it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.38it/s] 96%|#########6| 25/26 [00:00<00:00, 47.78it/s]100%|##########| 26/26 [00:00<00:00, 39.45it/s]
+Test: [   0/  26]	Loss 0.297 (0.297)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.297 (0.297)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.70 (  0.70)
+Test: [  10/  26]	Loss 0.287 (0.292)	test_acc   0.82 (  0.81)	test_minacc   0.86 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.287 (0.292)	test_acc_d   0.82 (  0.81)	test_minacc_d   0.86 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.71 (  0.69)
+Test: [  20/  26]	Loss 0.305 (0.292)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.89)	test_majacc   0.79 (  0.80)	Loss_d 0.305 (0.292)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.89)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.302 (0.292)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.302 (0.292)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.67 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.71it/s]
+Test: [  0/  1]	Loss 2.073 (2.073)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.073 (2.073)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.073 (2.073)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.073 (2.073)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Overall Timing[ 33/  1]	epoch_time 0.0364 (0.0409)	validation_time 0.0003 (0.0007)	train_time 0.0361 (0.0400)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8180000228881836, 0.6650000214576721)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.45it/s] 19%|#9        | 5/26 [00:00<00:00, 22.66it/s] 35%|###4      | 9/26 [00:00<00:00, 28.64it/s] 50%|#####     | 13/26 [00:00<00:00, 31.61it/s] 65%|######5   | 17/26 [00:00<00:00, 33.65it/s] 81%|########  | 21/26 [00:00<00:00, 34.79it/s] 96%|#########6| 25/26 [00:00<00:00, 34.93it/s]100%|##########| 26/26 [00:00<00:00, 29.25it/s]
+Epoch: [34][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.80 (  0.81)	train_corr   0.00 (  0.00)	l1 8.0966 (8.0384)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.66it/s] 31%|###       | 8/26 [00:00<00:00, 42.18it/s]                                               31%|###       | 8/26 [00:00<00:00, 42.18it/s] 54%|#####3    | 14/26 [00:00<00:00, 44.84it/s] 77%|#######6  | 20/26 [00:00<00:00, 49.78it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 49.78it/s]100%|##########| 26/26 [00:00<00:00, 52.58it/s]100%|##########| 26/26 [00:00<00:00, 42.96it/s]
+Test: [   0/  26]	Loss 0.292 (0.292)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.292 (0.292)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.70 (  0.70)
+Test: [  10/  26]	Loss 0.289 (0.293)	test_acc   0.83 (  0.81)	test_minacc   0.90 (  0.91)	test_majacc   0.81 (  0.80)	Loss_d 0.289 (0.293)	test_acc_d   0.83 (  0.81)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.70 (  0.69)
+Test: [  20/  26]	Loss 0.306 (0.294)	test_acc   0.81 (  0.82)	test_minacc   0.92 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.306 (0.294)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.92 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.65 (  0.69)
+Test: [  26/  26]	Loss 0.300 (0.294)	test_acc   0.82 (  0.82)	test_minacc   0.95 (  0.91)	test_majacc   0.80 (  0.80)	Loss_d 0.300 (0.294)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.95 (  0.91)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.67 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.34it/s]
+Test: [  0/  1]	Loss 2.057 (2.057)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.057 (2.057)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.14 (  0.14)
+Test: [  1/  1]	Loss 2.057 (2.057)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.057 (2.057)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.14 (  0.14)
+Overall Timing[ 34/  1]	epoch_time 0.0365 (0.0407)	validation_time 0.0004 (0.0007)	train_time 0.0361 (0.0399)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8170000261068344, 0.6660000085830688)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.90it/s] 19%|#9        | 5/26 [00:00<00:00, 24.32it/s] 35%|###4      | 9/26 [00:00<00:00, 29.61it/s] 50%|#####     | 13/26 [00:00<00:00, 32.28it/s] 65%|######5   | 17/26 [00:00<00:00, 33.75it/s] 81%|########  | 21/26 [00:00<00:00, 34.62it/s] 96%|#########6| 25/26 [00:00<00:00, 34.69it/s]100%|##########| 26/26 [00:00<00:00, 29.64it/s]
+Epoch: [35][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.95 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0060 (8.0525)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  5.65it/s] 31%|###       | 8/26 [00:00<00:00, 32.74it/s]                                               31%|###       | 8/26 [00:00<00:00, 32.74it/s] 50%|#####     | 13/26 [00:00<00:00, 37.25it/s] 73%|#######3  | 19/26 [00:00<00:00, 44.13it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 44.13it/s] 96%|#########6| 25/26 [00:00<00:00, 45.42it/s]100%|##########| 26/26 [00:00<00:00, 36.54it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.288 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.284 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.91)	test_majacc   0.81 (  0.80)	Loss_d 0.284 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.71 (  0.70)
+Test: [  20/  26]	Loss 0.307 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.80)	Loss_d 0.307 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.298 (0.291)	test_acc   0.82 (  0.82)	test_minacc   0.98 (  0.91)	test_majacc   0.79 (  0.80)	Loss_d 0.298 (0.291)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.98 (  0.91)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.80it/s]
+Test: [  0/  1]	Loss 2.050 (2.050)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.050 (2.050)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.050 (2.050)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.050 (2.050)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 35/  1]	epoch_time 0.0377 (0.0406)	validation_time 0.0003 (0.0007)	train_time 0.0374 (0.0398)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8186000246405601, 0.6680000424385071)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.54it/s] 19%|#9        | 5/26 [00:00<00:00, 24.43it/s] 35%|###4      | 9/26 [00:00<00:00, 29.32it/s] 50%|#####     | 13/26 [00:00<00:00, 32.19it/s] 65%|######5   | 17/26 [00:00<00:00, 33.92it/s] 81%|########  | 21/26 [00:00<00:00, 35.01it/s] 96%|#########6| 25/26 [00:00<00:00, 35.10it/s]100%|##########| 26/26 [00:00<00:00, 29.77it/s]
+Epoch: [36][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0219 (8.0544)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.11it/s] 27%|##6       | 7/26 [00:00<00:00, 35.96it/s]                                               27%|##6       | 7/26 [00:00<00:00, 35.96it/s] 46%|####6     | 12/26 [00:00<00:00, 39.77it/s] 69%|######9   | 18/26 [00:00<00:00, 47.20it/s]                                                69%|######9   | 18/26 [00:00<00:00, 47.20it/s] 92%|#########2| 24/26 [00:00<00:00, 47.42it/s]100%|##########| 26/26 [00:00<00:00, 40.93it/s]
+Test: [   0/  26]	Loss 0.289 (0.289)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.289 (0.289)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.283 (0.287)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.283 (0.287)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.307 (0.289)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.307 (0.289)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.300 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.300 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 64.01it/s]
+Test: [  0/  1]	Loss 2.059 (2.059)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.059 (2.059)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.059 (2.059)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.059 (2.059)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 36/  1]	epoch_time 0.0373 (0.0406)	validation_time 0.0004 (0.0007)	train_time 0.0369 (0.0397)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8193000262975693, 0.6670000553131104)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 16.05it/s] 23%|##3       | 6/26 [00:00<00:00, 25.73it/s] 38%|###8      | 10/26 [00:00<00:00, 29.58it/s] 54%|#####3    | 14/26 [00:00<00:00, 32.05it/s] 69%|######9   | 18/26 [00:00<00:00, 33.53it/s] 85%|########4 | 22/26 [00:00<00:00, 34.21it/s]100%|##########| 26/26 [00:00<00:00, 33.98it/s]100%|##########| 26/26 [00:00<00:00, 28.80it/s]
+Epoch: [37][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0902 (8.0591)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 18.23it/s] 31%|###       | 8/26 [00:00<00:00, 41.79it/s]                                               31%|###       | 8/26 [00:00<00:00, 41.79it/s] 50%|#####     | 13/26 [00:00<00:00, 42.31it/s] 73%|#######3  | 19/26 [00:00<00:00, 48.00it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 48.00it/s] 96%|#########6| 25/26 [00:00<00:00, 47.41it/s]100%|##########| 26/26 [00:00<00:00, 40.65it/s]
+Test: [   0/  26]	Loss 0.292 (0.292)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.292 (0.292)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.285 (0.290)	test_acc   0.83 (  0.82)	test_minacc   0.88 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.285 (0.290)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.88 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.71 (  0.70)
+Test: [  20/  26]	Loss 0.306 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.89)	test_majacc   0.78 (  0.80)	Loss_d 0.306 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.89)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.301 (0.291)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.301 (0.291)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 65.52it/s]
+Test: [  0/  1]	Loss 2.071 (2.071)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.071 (2.071)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.071 (2.071)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.071 (2.071)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Overall Timing[ 37/  1]	epoch_time 0.0374 (0.0405)	validation_time 0.0003 (0.0006)	train_time 0.0371 (0.0396)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8183000277280807, 0.6640000343322754)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.56it/s] 19%|#9        | 5/26 [00:00<00:00, 23.00it/s] 35%|###4      | 9/26 [00:00<00:00, 28.97it/s] 50%|#####     | 13/26 [00:00<00:00, 31.81it/s] 65%|######5   | 17/26 [00:00<00:00, 33.42it/s] 81%|########  | 21/26 [00:00<00:00, 34.52it/s] 96%|#########6| 25/26 [00:00<00:00, 35.19it/s]100%|##########| 26/26 [00:00<00:00, 29.33it/s]
+Epoch: [38][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.80 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0962 (8.0614)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.02it/s] 31%|###       | 8/26 [00:00<00:00, 41.89it/s]                                               31%|###       | 8/26 [00:00<00:00, 41.89it/s] 50%|#####     | 13/26 [00:00<00:00, 42.52it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.81it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.81it/s] 96%|#########6| 25/26 [00:00<00:00, 47.96it/s]100%|##########| 26/26 [00:00<00:00, 40.79it/s]
+Test: [   0/  26]	Loss 0.290 (0.290)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.290 (0.290)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.70 (  0.70)
+Test: [  10/  26]	Loss 0.286 (0.290)	test_acc   0.83 (  0.81)	test_minacc   0.90 (  0.91)	test_majacc   0.81 (  0.80)	Loss_d 0.286 (0.290)	test_acc_d   0.83 (  0.81)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.71 (  0.69)
+Test: [  20/  26]	Loss 0.306 (0.291)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.80)	Loss_d 0.306 (0.291)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.65 (  0.69)
+Test: [  26/  26]	Loss 0.300 (0.292)	test_acc   0.82 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.300 (0.292)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.68 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 66.68it/s]
+Test: [  0/  1]	Loss 2.069 (2.069)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.069 (2.069)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.15 (  0.15)
+Test: [  1/  1]	Loss 2.069 (2.069)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.069 (2.069)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.15 (  0.15)
+Overall Timing[ 38/  1]	epoch_time 0.0371 (0.0404)	validation_time 0.0004 (0.0006)	train_time 0.0367 (0.0396)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8171000235676765, 0.6670000553131104)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.24it/s] 19%|#9        | 5/26 [00:00<00:00, 23.54it/s] 35%|###4      | 9/26 [00:00<00:00, 29.14it/s] 50%|#####     | 13/26 [00:00<00:00, 32.07it/s] 65%|######5   | 17/26 [00:00<00:00, 33.88it/s] 81%|########  | 21/26 [00:00<00:00, 34.92it/s] 96%|#########6| 25/26 [00:00<00:00, 35.58it/s]100%|##########| 26/26 [00:00<00:00, 29.73it/s]
+Epoch: [39][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0455 (8.0670)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 27.21it/s] 35%|###4      | 9/26 [00:00<00:00, 40.38it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.38it/s] 58%|#####7    | 15/26 [00:00<00:00, 48.11it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 48.11it/s] 81%|########  | 21/26 [00:00<00:00, 47.63it/s]100%|##########| 26/26 [00:00<00:00, 42.66it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.288 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.284 (0.288)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.91)	test_majacc   0.81 (  0.80)	Loss_d 0.284 (0.288)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.71 (  0.70)
+Test: [  20/  26]	Loss 0.307 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.80)	Loss_d 0.307 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.298 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.298 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.64it/s]
+Test: [  0/  1]	Loss 2.062 (2.062)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.062 (2.062)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.062 (2.062)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.062 (2.062)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Overall Timing[ 39/  1]	epoch_time 0.0362 (0.0403)	validation_time 0.0004 (0.0006)	train_time 0.0358 (0.0395)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8185000207424163, 0.6650000214576721)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.77it/s] 19%|#9        | 5/26 [00:00<00:00, 25.48it/s] 35%|###4      | 9/26 [00:00<00:00, 30.15it/s] 50%|#####     | 13/26 [00:00<00:00, 32.25it/s] 65%|######5   | 17/26 [00:00<00:00, 32.07it/s] 81%|########  | 21/26 [00:00<00:00, 32.77it/s] 96%|#########6| 25/26 [00:00<00:00, 33.45it/s]100%|##########| 26/26 [00:00<00:00, 29.34it/s]
+Epoch: [40][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0457 (8.0709)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.60it/s] 27%|##6       | 7/26 [00:00<00:00, 35.65it/s]                                               27%|##6       | 7/26 [00:00<00:00, 35.65it/s] 46%|####6     | 12/26 [00:00<00:00, 41.17it/s] 65%|######5   | 17/26 [00:00<00:00, 42.72it/s]                                                65%|######5   | 17/26 [00:00<00:00, 42.72it/s] 88%|########8 | 23/26 [00:00<00:00, 48.27it/s]100%|##########| 26/26 [00:00<00:00, 39.29it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.288 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.282 (0.287)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.282 (0.287)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.306 (0.288)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.306 (0.288)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.299 (0.289)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.299 (0.289)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.27it/s]
+Test: [  0/  1]	Loss 2.068 (2.068)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.068 (2.068)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.068 (2.068)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.068 (2.068)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 40/  1]	epoch_time 0.0366 (0.0402)	validation_time 0.0003 (0.0006)	train_time 0.0363 (0.0394)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8197000253200531, 0.6660000085830688)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.37it/s] 19%|#9        | 5/26 [00:00<00:00, 21.22it/s] 35%|###4      | 9/26 [00:00<00:00, 27.48it/s] 50%|#####     | 13/26 [00:00<00:00, 30.86it/s] 65%|######5   | 17/26 [00:00<00:00, 32.91it/s] 81%|########  | 21/26 [00:00<00:00, 34.22it/s] 96%|#########6| 25/26 [00:00<00:00, 35.15it/s]100%|##########| 26/26 [00:00<00:00, 28.73it/s]
+Epoch: [41][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.91)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0904 (8.0754)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.25it/s] 27%|##6       | 7/26 [00:00<00:00, 36.09it/s]                                               27%|##6       | 7/26 [00:00<00:00, 36.09it/s] 46%|####6     | 12/26 [00:00<00:00, 39.70it/s] 69%|######9   | 18/26 [00:00<00:00, 46.64it/s]                                                69%|######9   | 18/26 [00:00<00:00, 46.64it/s] 92%|#########2| 24/26 [00:00<00:00, 46.76it/s]100%|##########| 26/26 [00:00<00:00, 39.49it/s]
+Test: [   0/  26]	Loss 0.290 (0.290)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.290 (0.290)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.283 (0.288)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.283 (0.288)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.305 (0.289)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.81)	Loss_d 0.305 (0.289)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.81)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.300 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.300 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.55it/s]
+Test: [  0/  1]	Loss 2.076 (2.076)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.076 (2.076)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.076 (2.076)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.076 (2.076)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 41/  1]	epoch_time 0.0360 (0.0401)	validation_time 0.0003 (0.0006)	train_time 0.0356 (0.0393)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8191000253558159, 0.6630000472068787)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.07it/s] 19%|#9        | 5/26 [00:00<00:00, 25.19it/s] 35%|###4      | 9/26 [00:00<00:00, 29.95it/s] 50%|#####     | 13/26 [00:00<00:00, 32.53it/s] 65%|######5   | 17/26 [00:00<00:00, 34.00it/s] 81%|########  | 21/26 [00:00<00:00, 34.85it/s] 96%|#########6| 25/26 [00:00<00:00, 35.44it/s]100%|##########| 26/26 [00:00<00:00, 29.94it/s]
+Epoch: [42][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.80 (  0.80)	train_corr   0.00 (  0.00)	l1 8.1059 (8.0790)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:04,  5.45it/s] 31%|###       | 8/26 [00:00<00:00, 31.73it/s]                                               31%|###       | 8/26 [00:00<00:00, 31.73it/s] 50%|#####     | 13/26 [00:00<00:00, 36.61it/s] 73%|#######3  | 19/26 [00:00<00:00, 44.27it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 44.27it/s] 96%|#########6| 25/26 [00:00<00:00, 45.10it/s]100%|##########| 26/26 [00:00<00:00, 36.38it/s]
+Test: [   0/  26]	Loss 0.289 (0.289)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.289 (0.289)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.285 (0.289)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.91)	test_majacc   0.82 (  0.80)	Loss_d 0.285 (0.289)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.71 (  0.69)
+Test: [  20/  26]	Loss 0.305 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.80)	Loss_d 0.305 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.299 (0.291)	test_acc   0.82 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.299 (0.291)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.68 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.26it/s]
+Test: [  0/  1]	Loss 2.075 (2.075)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.075 (2.075)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.075 (2.075)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.075 (2.075)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Overall Timing[ 42/  1]	epoch_time 0.0378 (0.0400)	validation_time 0.0004 (0.0006)	train_time 0.0374 (0.0393)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8181000244617462, 0.6660000085830688)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.87it/s] 23%|##3       | 6/26 [00:00<00:00, 29.69it/s] 38%|###8      | 10/26 [00:00<00:00, 32.88it/s] 54%|#####3    | 14/26 [00:00<00:00, 33.03it/s] 69%|######9   | 18/26 [00:00<00:00, 33.63it/s] 85%|########4 | 22/26 [00:00<00:00, 33.71it/s]100%|##########| 26/26 [00:00<00:00, 34.12it/s]100%|##########| 26/26 [00:00<00:00, 30.50it/s]
+Epoch: [43][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0780 (8.0809)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 26.72it/s] 35%|###4      | 9/26 [00:00<00:00, 41.24it/s]                                               35%|###4      | 9/26 [00:00<00:00, 41.24it/s] 54%|#####3    | 14/26 [00:00<00:00, 44.81it/s] 77%|#######6  | 20/26 [00:00<00:00, 49.48it/s]                                                77%|#######6  | 20/26 [00:00<00:00, 49.48it/s]100%|##########| 26/26 [00:00<00:00, 51.63it/s]100%|##########| 26/26 [00:00<00:00, 42.50it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.80 (  0.80)	Loss_d 0.288 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.283 (0.287)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.91)	test_majacc   0.81 (  0.80)	Loss_d 0.283 (0.287)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.91)	test_majacc_d   0.81 (  0.80)	test_corr_d   0.71 (  0.70)
+Test: [  20/  26]	Loss 0.306 (0.289)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.78 (  0.80)	Loss_d 0.306 (0.289)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.78 (  0.80)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.298 (0.290)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.80)	Loss_d 0.298 (0.290)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.80)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 64.18it/s]
+Test: [  0/  1]	Loss 2.073 (2.073)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.073 (2.073)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Test: [  1/  1]	Loss 2.073 (2.073)	test_acc   0.67 (  0.67)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.073 (2.073)	test_acc_d   0.67 (  0.67)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.16 (  0.16)
+Overall Timing[ 43/  1]	epoch_time 0.0352 (0.0399)	validation_time 0.0006 (0.0006)	train_time 0.0346 (0.0392)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8185000230669975, 0.6650000214576721)
+  0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 16.06it/s] 23%|##3       | 6/26 [00:00<00:00, 26.79it/s] 38%|###8      | 10/26 [00:00<00:00, 30.96it/s] 54%|#####3    | 14/26 [00:00<00:00, 33.08it/s] 69%|######9   | 18/26 [00:00<00:00, 31.49it/s] 85%|########4 | 22/26 [00:00<00:00, 33.33it/s]100%|##########| 26/26 [00:00<00:00, 34.55it/s]100%|##########| 26/26 [00:00<00:00, 29.76it/s]
+Epoch: [44][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0652 (8.0833)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  6.94it/s] 27%|##6       | 7/26 [00:00<00:00, 33.31it/s]                                               27%|##6       | 7/26 [00:00<00:00, 33.31it/s] 50%|#####     | 13/26 [00:00<00:00, 39.94it/s] 73%|#######3  | 19/26 [00:00<00:00, 46.54it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 46.54it/s] 96%|#########6| 25/26 [00:00<00:00, 46.83it/s]100%|##########| 26/26 [00:00<00:00, 38.04it/s]
+Test: [   0/  26]	Loss 0.287 (0.287)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.287 (0.287)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.282 (0.286)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.282 (0.286)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.305 (0.288)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.305 (0.288)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.298 (0.289)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.298 (0.289)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.39it/s]
+Test: [  0/  1]	Loss 2.075 (2.075)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.075 (2.075)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.075 (2.075)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.075 (2.075)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 44/  1]	epoch_time 0.0355 (0.0398)	validation_time 0.0003 (0.0006)	train_time 0.0352 (0.0391)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8203000252842904, 0.6640000343322754)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  8.15it/s] 19%|#9        | 5/26 [00:00<00:00, 23.59it/s] 35%|###4      | 9/26 [00:00<00:00, 29.30it/s] 46%|####6     | 12/26 [00:00<00:00, 29.38it/s] 62%|######1   | 16/26 [00:00<00:00, 31.42it/s] 77%|#######6  | 20/26 [00:00<00:00, 32.55it/s] 92%|#########2| 24/26 [00:00<00:00, 33.38it/s]100%|##########| 26/26 [00:00<00:00, 28.31it/s]
+Epoch: [45][  26/  26]	Loss 0.000 (0.000)	train_nll   0.30 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.81 (  0.82)	train_minacc   0.93 (  0.90)	train_majacc   0.79 (  0.80)	train_corr   0.00 (  0.00)	l1 8.0810 (8.0898)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  8.81it/s] 35%|###4      | 9/26 [00:00<00:00, 40.22it/s]                                               35%|###4      | 9/26 [00:00<00:00, 40.22it/s] 58%|#####7    | 15/26 [00:00<00:00, 46.75it/s]                                                58%|#####7    | 15/26 [00:00<00:00, 46.75it/s] 81%|########  | 21/26 [00:00<00:00, 47.16it/s]100%|##########| 26/26 [00:00<00:00, 40.95it/s]
+Test: [   0/  26]	Loss 0.288 (0.288)	test_acc   0.82 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.81 (  0.81)	Loss_d 0.288 (0.288)	test_acc_d   0.82 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.81 (  0.81)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.281 (0.286)	test_acc   0.83 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.82 (  0.80)	Loss_d 0.281 (0.286)	test_acc_d   0.83 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.82 (  0.80)	test_corr_d   0.72 (  0.70)
+Test: [  20/  26]	Loss 0.304 (0.287)	test_acc   0.81 (  0.82)	test_minacc   0.90 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.304 (0.287)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.90 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.66 (  0.70)
+Test: [  26/  26]	Loss 0.299 (0.288)	test_acc   0.81 (  0.82)	test_minacc   0.93 (  0.90)	test_majacc   0.79 (  0.81)	Loss_d 0.299 (0.288)	test_acc_d   0.81 (  0.82)	test_minacc_d   0.93 (  0.90)	test_majacc_d   0.79 (  0.81)	test_corr_d   0.68 (  0.70)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 62.68it/s]
+Test: [  0/  1]	Loss 2.079 (2.079)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.079 (2.079)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Test: [  1/  1]	Loss 2.079 (2.079)	test_acc   0.66 (  0.66)	test_minacc   0.65 (  0.65)	test_majacc   0.80 (  0.80)	Loss_d 2.079 (2.079)	test_acc_d   0.66 (  0.66)	test_minacc_d   0.65 (  0.65)	test_majacc_d   0.80 (  0.80)	test_corr_d   0.17 (  0.17)
+Overall Timing[ 45/  1]	epoch_time 0.0372 (0.0398)	validation_time 0.0004 (0.0006)	train_time 0.0368 (0.0390)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8204000310897828, 0.6640000343322754)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.12it/s] 19%|#9        | 5/26 [00:00<00:00, 21.10it/s] 35%|###4      | 9/26 [00:00<00:00, 27.58it/s] 46%|####6     | 12/26 [00:00<00:00, 22.83it/s] 58%|#####7    | 15/26 [00:00<00:00, 23.84it/s] 73%|#######3  | 19/26 [00:00<00:00, 27.83it/s] 85%|########4 | 22/26 [00:00<00:00, 27.68it/s] 96%|#########6| 25/26 [00:00<00:00, 27.31it/s]100%|##########| 26/26 [00:01<00:00, 24.10it/s]
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+final projection at end of training
+rho 511
+num zeros 0
+Epoch: [46][  26/  26]	Loss 0.003 (0.003)	train_nll   0.23 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.91 (  0.84)	train_minacc   0.55 (  0.79)	train_majacc   0.98 (  0.85)	train_corr   0.00 (  0.00)	l1 25.0299 (18.3174)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.28it/s] 27%|##6       | 7/26 [00:00<00:00, 31.74it/s]                                               27%|##6       | 7/26 [00:00<00:00, 31.74it/s] 50%|#####     | 13/26 [00:00<00:00, 43.12it/s] 73%|#######3  | 19/26 [00:00<00:00, 44.98it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 44.98it/s] 96%|#########6| 25/26 [00:00<00:00, 49.44it/s]100%|##########| 26/26 [00:00<00:00, 40.06it/s]
+Test: [   0/  26]	Loss 0.266 (0.266)	test_acc   0.88 (  0.88)	test_minacc   0.29 (  0.29)	test_majacc   0.98 (  0.98)	Loss_d 0.266 (0.266)	test_acc_d   0.88 (  0.88)	test_minacc_d   0.29 (  0.29)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.84 (  0.84)
+Test: [  10/  26]	Loss 0.251 (0.252)	test_acc   0.85 (  0.87)	test_minacc   0.12 (  0.26)	test_majacc   0.98 (  0.98)	Loss_d 0.251 (0.252)	test_acc_d   0.85 (  0.87)	test_minacc_d   0.12 (  0.26)	test_majacc_d   0.98 (  0.98)	test_corr_d   0.85 (  0.84)
+Test: [  20/  26]	Loss 0.269 (0.249)	test_acc   0.85 (  0.87)	test_minacc   0.25 (  0.24)	test_majacc   0.99 (  0.98)	Loss_d 0.269 (0.249)	test_acc_d   0.85 (  0.87)	test_minacc_d   0.25 (  0.24)	test_majacc_d   0.99 (  0.98)	test_corr_d   0.83 (  0.84)
+Test: [  26/  26]	Loss 0.243 (0.250)	test_acc   0.88 (  0.87)	test_minacc   0.30 (  0.24)	test_majacc   0.99 (  0.98)	Loss_d 0.243 (0.250)	test_acc_d   0.88 (  0.87)	test_minacc_d   0.30 (  0.24)	test_majacc_d   0.99 (  0.98)	test_corr_d   0.84 (  0.84)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.29it/s]
+Test: [  0/  1]	Loss 3.413 (3.413)	test_acc   0.29 (  0.29)	test_minacc   0.22 (  0.22)	test_majacc   0.96 (  0.96)	Loss_d 3.413 (3.413)	test_acc_d   0.29 (  0.29)	test_minacc_d   0.22 (  0.22)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.57 (  0.57)
+Test: [  1/  1]	Loss 3.413 (3.413)	test_acc   0.29 (  0.29)	test_minacc   0.22 (  0.22)	test_majacc   0.96 (  0.96)	Loss_d 3.413 (3.413)	test_acc_d   0.29 (  0.29)	test_minacc_d   0.22 (  0.22)	test_majacc_d   0.96 (  0.96)	test_corr_d   0.57 (  0.57)
+Overall Timing[ 46/  1]	epoch_time 0.0405 (0.0398)	validation_time 0.0004 (0.0006)	train_time 0.0401 (0.0390)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8696000229120254, 0.2900000214576721)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.64it/s] 15%|#5        | 4/26 [00:00<00:01, 19.19it/s] 31%|###       | 8/26 [00:00<00:00, 27.22it/s] 42%|####2     | 11/26 [00:00<00:00, 25.75it/s] 54%|#####3    | 14/26 [00:00<00:00, 25.95it/s] 69%|######9   | 18/26 [00:00<00:00, 29.37it/s] 81%|########  | 21/26 [00:00<00:00, 28.34it/s] 92%|#########2| 24/26 [00:00<00:00, 27.91it/s]100%|##########| 26/26 [00:01<00:00, 25.26it/s]
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+final projection at end of training
+rho 511
+num zeros 0
+Epoch: [47][  26/  26]	Loss 0.000 (0.001)	train_nll   0.32 (  0.29)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.77 (  0.83)	train_minacc   0.62 (  0.66)	train_majacc   0.80 (  0.86)	train_corr   0.00 (  0.00)	l1 25.0006 (24.9779)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  8%|7         | 2/26 [00:00<00:01, 19.21it/s] 19%|#9        | 5/26 [00:00<00:00, 24.75it/s]                                               19%|#9        | 5/26 [00:00<00:00, 24.75it/s] 42%|####2     | 11/26 [00:00<00:00, 40.07it/s] 62%|######1   | 16/26 [00:00<00:00, 42.08it/s]                                                62%|######1   | 16/26 [00:00<00:00, 42.08it/s] 85%|########4 | 22/26 [00:00<00:00, 48.19it/s]100%|##########| 26/26 [00:00<00:00, 38.81it/s]
+Test: [   0/  26]	Loss 0.365 (0.365)	test_acc   0.75 (  0.75)	test_minacc   0.75 (  0.75)	test_majacc   0.75 (  0.75)	Loss_d 0.365 (0.365)	test_acc_d   0.75 (  0.75)	test_minacc_d   0.75 (  0.75)	test_majacc_d   0.75 (  0.75)	test_corr_d   0.67 (  0.67)
+Test: [  10/  26]	Loss 0.345 (0.347)	test_acc   0.76 (  0.76)	test_minacc   0.62 (  0.66)	test_majacc   0.79 (  0.77)	Loss_d 0.345 (0.347)	test_acc_d   0.76 (  0.76)	test_minacc_d   0.62 (  0.66)	test_majacc_d   0.79 (  0.77)	test_corr_d   0.71 (  0.69)
+Test: [  20/  26]	Loss 0.312 (0.337)	test_acc   0.80 (  0.76)	test_minacc   0.78 (  0.68)	test_majacc   0.80 (  0.78)	Loss_d 0.312 (0.337)	test_acc_d   0.80 (  0.76)	test_minacc_d   0.78 (  0.68)	test_majacc_d   0.80 (  0.78)	test_corr_d   0.68 (  0.69)
+Test: [  26/  26]	Loss 0.326 (0.338)	test_acc   0.76 (  0.76)	test_minacc   0.62 (  0.67)	test_majacc   0.79 (  0.78)	Loss_d 0.326 (0.338)	test_acc_d   0.76 (  0.76)	test_minacc_d   0.62 (  0.67)	test_majacc_d   0.79 (  0.78)	test_corr_d   0.70 (  0.69)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 63.38it/s]
+Test: [  0/  1]	Loss 2.729 (2.729)	test_acc   0.42 (  0.42)	test_minacc   0.36 (  0.36)	test_majacc   0.88 (  0.88)	Loss_d 2.729 (2.729)	test_acc_d   0.42 (  0.42)	test_minacc_d   0.36 (  0.36)	test_majacc_d   0.88 (  0.88)	test_corr_d   0.48 (  0.48)
+Test: [  1/  1]	Loss 2.729 (2.729)	test_acc   0.42 (  0.42)	test_minacc   0.36 (  0.36)	test_majacc   0.88 (  0.88)	Loss_d 2.729 (2.729)	test_acc_d   0.42 (  0.42)	test_minacc_d   0.36 (  0.36)	test_majacc_d   0.88 (  0.88)	test_corr_d   0.48 (  0.48)
+Overall Timing[ 47/  1]	epoch_time 0.0405 (0.0398)	validation_time 0.0004 (0.0006)	train_time 0.0401 (0.0391)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.7646000325679779, 0.4150000214576721)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.49it/s] 15%|#5        | 4/26 [00:00<00:01, 18.14it/s] 31%|###       | 8/26 [00:00<00:00, 23.46it/s] 46%|####6     | 12/26 [00:00<00:00, 28.36it/s] 58%|#####7    | 15/26 [00:00<00:00, 27.63it/s] 69%|######9   | 18/26 [00:00<00:00, 27.38it/s] 85%|########4 | 22/26 [00:00<00:00, 30.67it/s]100%|##########| 26/26 [00:00<00:00, 30.37it/s]100%|##########| 26/26 [00:01<00:00, 25.52it/s]
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+final projection at end of training
+rho 511
+num zeros 0
+Epoch: [48][  26/  26]	Loss 0.001 (0.001)	train_nll   0.31 (  0.34)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.82 (  0.78)	train_minacc   0.60 (  0.80)	train_majacc   0.86 (  0.77)	train_corr   0.00 (  0.00)	l1 24.9957 (25.0081)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:02,  9.02it/s] 27%|##6       | 7/26 [00:00<00:00, 37.14it/s]                                               27%|##6       | 7/26 [00:00<00:00, 37.14it/s] 50%|#####     | 13/26 [00:00<00:00, 41.94it/s] 73%|#######3  | 19/26 [00:00<00:00, 47.42it/s]                                                73%|#######3  | 19/26 [00:00<00:00, 47.42it/s] 96%|#########6| 25/26 [00:00<00:00, 47.26it/s]100%|##########| 26/26 [00:00<00:00, 39.47it/s]
+Test: [   0/  26]	Loss 0.310 (0.310)	test_acc   0.84 (  0.84)	test_minacc   0.51 (  0.51)	test_majacc   0.90 (  0.90)	Loss_d 0.310 (0.310)	test_acc_d   0.84 (  0.84)	test_minacc_d   0.51 (  0.51)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.77 (  0.77)
+Test: [  10/  26]	Loss 0.328 (0.312)	test_acc   0.83 (  0.83)	test_minacc   0.50 (  0.47)	test_majacc   0.88 (  0.89)	Loss_d 0.328 (0.312)	test_acc_d   0.83 (  0.83)	test_minacc_d   0.50 (  0.47)	test_majacc_d   0.88 (  0.89)	test_corr_d   0.77 (  0.77)
+Test: [  20/  26]	Loss 0.321 (0.314)	test_acc   0.79 (  0.83)	test_minacc   0.33 (  0.44)	test_majacc   0.90 (  0.90)	Loss_d 0.321 (0.314)	test_acc_d   0.79 (  0.83)	test_minacc_d   0.33 (  0.44)	test_majacc_d   0.90 (  0.90)	test_corr_d   0.77 (  0.77)
+Test: [  26/  26]	Loss 0.305 (0.315)	test_acc   0.84 (  0.83)	test_minacc   0.50 (  0.45)	test_majacc   0.90 (  0.89)	Loss_d 0.305 (0.315)	test_acc_d   0.84 (  0.83)	test_minacc_d   0.50 (  0.45)	test_majacc_d   0.90 (  0.89)	test_corr_d   0.76 (  0.77)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 65.94it/s]
+Test: [  0/  1]	Loss 2.800 (2.800)	test_acc   0.40 (  0.40)	test_minacc   0.34 (  0.34)	test_majacc   0.91 (  0.91)	Loss_d 2.800 (2.800)	test_acc_d   0.40 (  0.40)	test_minacc_d   0.34 (  0.34)	test_majacc_d   0.91 (  0.91)	test_corr_d   0.58 (  0.58)
+Test: [  1/  1]	Loss 2.800 (2.800)	test_acc   0.40 (  0.40)	test_minacc   0.34 (  0.34)	test_majacc   0.91 (  0.91)	Loss_d 2.800 (2.800)	test_acc_d   0.40 (  0.40)	test_minacc_d   0.34 (  0.34)	test_majacc_d   0.91 (  0.91)	test_corr_d   0.58 (  0.58)
+Overall Timing[ 48/  1]	epoch_time 0.0389 (0.0398)	validation_time 0.0003 (0.0006)	train_time 0.0386 (0.0391)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.8276000294685364, 0.4000000059604645)
+  0%|          | 0/26 [00:00<?, ?it/s]  4%|3         | 1/26 [00:00<00:03,  7.89it/s] 15%|#5        | 4/26 [00:00<00:01, 18.36it/s] 27%|##6       | 7/26 [00:00<00:00, 22.20it/s] 42%|####2     | 11/26 [00:00<00:00, 27.98it/s] 54%|#####3    | 14/26 [00:00<00:00, 26.91it/s] 65%|######5   | 17/26 [00:00<00:00, 24.22it/s] 81%|########  | 21/26 [00:00<00:00, 27.48it/s] 92%|#########2| 24/26 [00:00<00:00, 26.65it/s]100%|##########| 26/26 [00:01<00:00, 24.02it/s]
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+rho 511
+num zeros 0
+final projection at end of training
+rho 511
+num zeros 0
+Epoch: [49][  26/  26]	Loss 0.001 (0.001)	train_nll   0.30 (  0.32)	train_penalty   0.00 (  0.00)	weight_norm   0.00 (  0.00)	train_acc   0.86 (  0.80)	train_minacc   0.78 (  0.67)	train_majacc   0.87 (  0.83)	train_corr   0.00 (  0.00)	l1 24.9638 (25.0051)	zero_count 0.0000 (0.0000)
+  0%|          | 0/26 [00:00<?, ?it/s]                                        0%|          | 0/26 [00:00<?, ?it/s] 12%|#1        | 3/26 [00:00<00:00, 26.18it/s] 35%|###4      | 9/26 [00:00<00:00, 39.62it/s]                                               35%|###4      | 9/26 [00:00<00:00, 39.62it/s] 62%|######1   | 16/26 [00:00<00:00, 49.58it/s]                                                62%|######1   | 16/26 [00:00<00:00, 49.58it/s] 81%|########  | 21/26 [00:00<00:00, 47.35it/s]100%|##########| 26/26 [00:00<00:00, 42.21it/s]
+Test: [   0/  26]	Loss 0.296 (0.296)	test_acc   0.81 (  0.81)	test_minacc   0.69 (  0.69)	test_majacc   0.83 (  0.83)	Loss_d 0.296 (0.296)	test_acc_d   0.81 (  0.81)	test_minacc_d   0.69 (  0.69)	test_majacc_d   0.83 (  0.83)	test_corr_d   0.71 (  0.71)
+Test: [  10/  26]	Loss 0.292 (0.300)	test_acc   0.84 (  0.83)	test_minacc   0.78 (  0.74)	test_majacc   0.85 (  0.84)	Loss_d 0.292 (0.300)	test_acc_d   0.84 (  0.83)	test_minacc_d   0.78 (  0.74)	test_majacc_d   0.85 (  0.84)	test_corr_d   0.72 (  0.71)
+Test: [  20/  26]	Loss 0.300 (0.299)	test_acc   0.84 (  0.83)	test_minacc   0.75 (  0.72)	test_majacc   0.86 (  0.85)	Loss_d 0.300 (0.299)	test_acc_d   0.84 (  0.83)	test_minacc_d   0.75 (  0.72)	test_majacc_d   0.86 (  0.85)	test_corr_d   0.71 (  0.71)
+Test: [  26/  26]	Loss 0.311 (0.300)	test_acc   0.85 (  0.83)	test_minacc   0.80 (  0.73)	test_majacc   0.86 (  0.85)	Loss_d 0.311 (0.300)	test_acc_d   0.85 (  0.83)	test_minacc_d   0.80 (  0.73)	test_majacc_d   0.86 (  0.85)	test_corr_d   0.69 (  0.71)
+  0%|          | 0/1 [00:00<?, ?it/s]                                       0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00, 67.05it/s]
+Test: [  0/  1]	Loss 2.425 (2.425)	test_acc   0.60 (  0.60)	test_minacc   0.56 (  0.56)	test_majacc   0.89 (  0.89)	Loss_d 2.425 (2.425)	test_acc_d   0.60 (  0.60)	test_minacc_d   0.56 (  0.56)	test_majacc_d   0.89 (  0.89)	test_corr_d   0.35 (  0.35)
+Test: [  1/  1]	Loss 2.425 (2.425)	test_acc   0.60 (  0.60)	test_minacc   0.56 (  0.56)	test_majacc   0.89 (  0.89)	Loss_d 2.425 (2.425)	test_acc_d   0.60 (  0.60)	test_minacc_d   0.56 (  0.56)	test_majacc_d   0.89 (  0.89)	test_corr_d   0.35 (  0.35)
+Overall Timing[ 49/  1]	epoch_time 0.0395 (0.0398)	validation_time 0.0004 (0.0006)	train_time 0.0392 (0.0391)
+record: (train_acc, test_acc) (0.8174000270366669, 0.6680000424385071)
+last accs (train_acc, test_acc) (0.827200021982193, 0.597000002861023)
+done saving aggregate.csv to ./aggregate.csv
+wandb: - 0.090 MB of 0.090 MB uploadedwandb: \ 0.090 MB of 0.090 MB uploadedslurmstepd: error: *** JOB 14084618 ON ccc0284 CANCELLED AT 2024-09-10T21:39:00 ***
