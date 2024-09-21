@@ -9,6 +9,14 @@ import pandas as pd
 from PIL import Image
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset, Subset
+from args import args
+import builtins as __builtin__
+from args import VerboseMode
+
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
 
 
 class SubDataset(object):
@@ -170,18 +178,24 @@ def get_data_loader_cifarminst(
     transform_data_to_standard=1,
     oracle=0,
 ):
-    spdc = CifarMnistSpuriousDataset(
-        train_num=train_num,
-        test_num=test_num,
-        cons_ratios=cons_ratios,
-        train_envs_ratio=train_envs_ratio,
-        label_noise_ratio=label_noise_ratio,
-        augment_data=augment_data,
-        cifar_classes=cifar_classes,
-        color_spurious=color_spurious,
-        transform_data_to_standard=transform_data_to_standard,
-        oracle=oracle,
-    )
+    data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
+    if args.regenerate_data or (not os.path.exists(data_path)):
+        print(data_path + " dataset not found. Creating dataset...")
+        spdc = CifarMnistSpuriousDataset(
+            train_num=train_num,
+            test_num=test_num,
+            cons_ratios=cons_ratios,
+            train_envs_ratio=train_envs_ratio,
+            label_noise_ratio=label_noise_ratio,
+            augment_data=augment_data,
+            cifar_classes=cifar_classes,
+            color_spurious=color_spurious,
+            transform_data_to_standard=transform_data_to_standard,
+            oracle=oracle,
+        )
+        torch.save(spdc, data_path)
+    else:
+        spdc = torch.load(data_path)
     train_dataset, val_dataset, test_dataset = spdc.get_splits(
         splits=["train", "val", "test"]
     )

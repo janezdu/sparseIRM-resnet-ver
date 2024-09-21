@@ -6,6 +6,13 @@ import torch.nn as nn
 
 import utils.conv_type
 import utils.bn_type
+import builtins as __builtin__
+from args import VerboseMode
+
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
 
 
 class Builder(object):

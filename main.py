@@ -46,10 +46,17 @@ import wandb
 
 # from sklearn.linear_model import LogisticRegression
 from utils.irm_utils import eval_acc_class, eval_acc_multi_class
+import builtins as __builtin__
+from args import VerboseMode
+from utils.net_utils import pretty_print
 
+if VerboseMode:
+    wandb.init(project="irm", name=args.runs_name, config=args)
 
-wandb.init(project="irm", name=args.runs_name, config=args)
-
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
 
 def main():
     print(args)
@@ -108,14 +115,19 @@ def main_worker(args):
     ) = (0, 0, 0, 0, 0, 0, 0, 0, 0)
     run_base_dir, ckpt_base_dir, log_base_dir = get_directories(args)
     args.ckpt_base_dir = ckpt_base_dir
-    wandb.tensorboard.patch(root_logdir="runs")
-    writer = SummaryWriter(log_dir=log_base_dir)
-    epoch_time = AverageMeter("epoch_time", ":.4f", write_avg=False)
-    validation_time = AverageMeter("validation_time", ":.4f", write_avg=False)
-    train_time = AverageMeter("train_time", ":.4f", write_avg=False)
-    progress_overall = ProgressMeter(
-        1, [epoch_time, validation_time, train_time], prefix="Overall Timing"
-    )
+    global VerboseMode
+    if VerboseMode:
+        wandb.tensorboard.patch(root_logdir="runs")
+        writer = SummaryWriter(log_dir=log_base_dir)
+        epoch_time = AverageMeter("epoch_time", ":.4f", write_avg=False)
+        validation_time = AverageMeter("validation_time", ":.4f", write_avg=False)
+        train_time = AverageMeter("train_time", ":.4f", write_avg=False)
+        progress_overall = ProgressMeter(
+            1, [epoch_time, validation_time, train_time], prefix="Overall Timing"
+        )
+    else:
+        writer = SummaryWriter(log_dir=log_base_dir)
+
     end_epoch = time.time()
 
     args.start_epoch = args.start_epoch or 0
@@ -149,7 +161,12 @@ def main_worker(args):
     args.steps = 0
     record_test_best = None
 
+    pretty_print("epoch", "train_acc", "test_acc", "time")
+
     for epoch in range(args.start_epoch, args.epochs):
+
+        start_each_epoch = time.time()
+
         if args.iterative:
             if epoch < ts:
                 args.prune_rate = 1
@@ -166,7 +183,8 @@ def main_worker(args):
         # if weight_opt is not None:
         #     print("current weight lr: ", weight_opt.param_groups[0]["lr"])
         # print("current prune rate: ", args.prune_rate)
-        start_train = time.time()
+        if VerboseMode:
+            start_train = time.time()
         train_acc, train_minacc, train_majacc, train_corr = train(
             dp.get_train_loader(),
             model,
@@ -184,12 +202,14 @@ def main_worker(args):
             train_acc, train_minacc, train_majacc, _, train_corr = validate(
                 dp.get_train_loader(), model, criterion, args, writer, epoch
             )
-            train_time.update((time.time() - start_train) / 60)
-            start_validation = time.time()
+            if VerboseMode:
+                train_time.update((time.time() - start_train) / 60)
+                start_validation = time.time()
             test_acc, test_minacc, test_majacc, losses, test_corr = validate(
                 dp.get_test_loader(), model, criterion, args, writer, epoch
             )
-            validation_time.update((time.time() - start_validation) / 60)
+            if VerboseMode:
+                validation_time.update((time.time() - start_validation) / 60)
 
             is_best = (test_acc > best_acc) and (train_acc > 0.6)
             if is_best:
@@ -198,17 +218,21 @@ def main_worker(args):
             if is_best or epoch == args.epochs - 1:
                 if is_best:
                     print(f"==> New best, saving at {ckpt_base_dir / 'model_best.pth'}")
-            epoch_time.update((time.time() - end_epoch) / 60)
-            progress_overall.display(epoch)
-            progress_overall.write_to_tensorboard(
-                writer, prefix="diagnostics", global_step=epoch
-            )
+            if VerboseMode:
+                epoch_time.update((time.time() - end_epoch) / 60)
+                progress_overall.display(epoch)
+                progress_overall.write_to_tensorboard(
+                    writer, prefix="diagnostics", global_step=epoch
+                )
             end_epoch = time.time()
             print("record: (train_acc, test_acc)", record_test_best)
             print("last accs (train_acc, test_acc)", (train_acc, test_acc))
 
             iter += 1
         unfix_model_subnet(model)
+        time_per_epoch = time.time() - start_each_epoch
+        pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.int32(time_per_epoch))
+
         end_train = time.time()
 
     zero_count = (model.module.fc.weight.data == 0).sum()

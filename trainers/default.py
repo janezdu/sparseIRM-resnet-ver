@@ -8,6 +8,13 @@ from torch.utils.tensorboard import SummaryWriter
 # from tensorboardX import SummaryWriter
 import shutil
 import numpy as np
+import builtins as __builtin__
+from args import VerboseMode
+
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
 
 writer = SummaryWriter()
 __all__ = ["train", "validate", "modifier"]
@@ -62,44 +69,55 @@ def calScalingPara(model, args):
 def train(
     train_loader, model, ebd, criterion, optimizer, epoch, args, writer, weight_opt
 ):
-    loss_meter = AverageMeter("Loss", ":.3f")
-    train_nll_meter = AverageMeter("train_nll", ":6.2f")
-    train_penalty_meter = AverageMeter("train_penalty", ":6.2f")
-    weight_norm_meter = AverageMeter("weight_norm", ":6.2f")
-    train_acc_meter = AverageMeter("train_acc", ":6.2f")
-    train_minacc_meter = AverageMeter("train_minacc", ":6.2f")
-    train_majacc_meter = AverageMeter("train_majacc", ":6.2f")
-    train_corr_meter = AverageMeter("train_corr", ":6.2f")
-    v_meter = AverageMeter("v", ":6.4f")
-    max_score_meter = AverageMeter("max_score", ":6.4f")
-    l1_meter = AverageMeter("l1", ":6.4f")
-    zero_count_meter = AverageMeter("zero_count", ":6.4f")
+    if VerboseMode:
+        loss_meter = AverageMeter("Loss", ":.3f")
+        train_nll_meter = AverageMeter("train_nll", ":6.2f")
+        train_penalty_meter = AverageMeter("train_penalty", ":6.2f")
+        weight_norm_meter = AverageMeter("weight_norm", ":6.2f")
+        train_acc_meter = AverageMeter("train_acc", ":6.2f")
+        train_minacc_meter = AverageMeter("train_minacc", ":6.2f")
+        train_majacc_meter = AverageMeter("train_majacc", ":6.2f")
+        train_corr_meter = AverageMeter("train_corr", ":6.2f")
+        v_meter = AverageMeter("v", ":6.4f")
+        max_score_meter = AverageMeter("max_score", ":6.4f")
+        l1_meter = AverageMeter("l1", ":6.4f")
+        zero_count_meter = AverageMeter("zero_count", ":6.4f")
 
-    l = [
-        loss_meter,
-        train_nll_meter,
-        train_penalty_meter,
-        weight_norm_meter,
-        train_acc_meter,
-        train_minacc_meter,
-        train_majacc_meter,
-        train_corr_meter,
-        l1_meter,
-        zero_count_meter,
-    ]
-    progress = ProgressMeter(
-        len(train_loader),
-        l,
-        prefix=f"Epoch: [{epoch}]",
-    )
+        l = [
+            loss_meter,
+            train_nll_meter,
+            train_penalty_meter,
+            weight_norm_meter,
+            train_acc_meter,
+            train_minacc_meter,
+            train_majacc_meter,
+            train_corr_meter,
+            l1_meter,
+            zero_count_meter,
+        ]
+        progress = ProgressMeter(
+            len(train_loader),
+            l,
+            prefix=f"Epoch: [{epoch}]",
+        )
+    else:
+        train_acc_meter = AverageMeter("train_acc", ":6.2f")
+        train_minacc_meter = AverageMeter("train_minacc", ":6.2f")
+        train_majacc_meter = AverageMeter("train_majacc", ":6.2f")
+        train_corr_meter = AverageMeter("train_corr", ":6.2f")
+        v_meter = AverageMeter("v", ":6.4f")
+        max_score_meter = AverageMeter("max_score", ":6.4f")
+
     model.train()
     args.discrete = False
     args.val_loop = False
     args.num_batches = len(train_loader)
 
-    for i, (train_x, train_y, train_g, train_c) in tqdm.tqdm(
-        enumerate(train_loader), ascii=True, total=len(train_loader)
-    ):
+    if VerboseMode:
+        BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
+    else:
+        BatchCollections = enumerate(train_loader)
+    for i, (train_x, train_y, train_g, train_c) in BatchCollections:
         train_x, train_y, train_g, train_c = (
             train_x.cuda(),
             train_y.cuda().float(),
@@ -215,16 +233,23 @@ def train(
                 calculateGrad(model, fn_avg, fn_list, args)
             if args.conv_type == "Reinforce":
                 calculateGrad_pge(model, fn_avg, fn_list, args)
-        loss_meter.update(l, train_x.size(0))
-        train_nll_meter.update(tn, train_x.size(0))
-        train_penalty_meter.update(tp, train_x.size(0))
-        weight_norm_meter.update(wn, train_x.size(0))
-        train_acc_meter.update(t_acc, train_x.size(0))
-        train_minacc_meter.update(t_min_acc, train_x.size(0))
-        train_majacc_meter.update(t_maj_acc, train_x.size(0))
-        train_corr_meter.update(t_corr, train_x.size(0))
-        l1_norm = model.module.fc.weight.norm(p=1)
-        l1_meter.update(l1_norm.item(), train_x.size(0))
+
+        if VerboseMode:
+            loss_meter.update(l, train_x.size(0))
+            train_nll_meter.update(tn, train_x.size(0))
+            train_penalty_meter.update(tp, train_x.size(0))
+            weight_norm_meter.update(wn, train_x.size(0))
+            train_acc_meter.update(t_acc, train_x.size(0))
+            train_minacc_meter.update(t_min_acc, train_x.size(0))
+            train_majacc_meter.update(t_maj_acc, train_x.size(0))
+            train_corr_meter.update(t_corr, train_x.size(0))
+            l1_norm = model.module.fc.weight.norm(p=1)
+            l1_meter.update(l1_norm.item(), train_x.size(0))
+        else:
+            train_acc_meter.update(t_acc, train_x.size(0))
+            train_minacc_meter.update(t_min_acc, train_x.size(0))
+            train_majacc_meter.update(t_maj_acc, train_x.size(0))
+            train_corr_meter.update(t_corr, train_x.size(0))
 
         # torch.nn.utils.clip_grad_norm_(model.parameters(), 3)
 
@@ -264,19 +289,21 @@ def train(
                     if "IMP" in args.conv_type:
                         calScalingPara(model, args)
                         t = len(train_loader) * epoch + i
-                        writer.add_scalar(
-                            f"train/scaling_para", args.scaling_para, global_step=t
-                        )
+                        if VerboseMode:
+                            writer.add_scalar(
+                                f"train/scaling_para", args.scaling_para, global_step=t
+                            )
                         # print("scalingpara at this batch", args.scaling_para)
 
     if args.use_pgd and args.steps > args.pgd_anneal_iters:
         print("final projection at end of training")
         with torch.no_grad():
             proj_sort(model.module, args.z, args.rho_tolerance)
-    zero_count_meter.update((model.module.fc.weight == 0).sum().item(), train_x.size(0))
-    progress.display(len(train_loader))
-    progress.write_to_tensorboard(
-        writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
+    if VerboseMode:
+        zero_count_meter.update((model.module.fc.weight == 0).sum().item(), train_x.size(0))
+        progress.display(len(train_loader))
+        progress.write_to_tensorboard(
+            writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
     )
     return (
         train_acc_meter.avg,
@@ -287,32 +314,40 @@ def train(
 
 
 def validate(val_loader, model, criterion, args, writer, epoch):
-    loss_meter = AverageMeter("Loss", ":.3f")
-    test_acc_meter = AverageMeter("test_acc", ":6.2f")
-    test_minacc_meter = AverageMeter("test_minacc", ":6.2f")
-    test_majacc_meter = AverageMeter("test_majacc", ":6.2f")
+    if VerboseMode:
+        loss_meter = AverageMeter("Loss", ":.3f")
+        test_acc_meter = AverageMeter("test_acc", ":6.2f")
+        test_minacc_meter = AverageMeter("test_minacc", ":6.2f")
+        test_majacc_meter = AverageMeter("test_majacc", ":6.2f")
 
-    loss_meter_d = AverageMeter("Loss_d", ":.3f")
-    test_acc_meter_d = AverageMeter("test_acc_d", ":6.2f")
-    test_minacc_meter_d = AverageMeter("test_minacc_d", ":6.2f")
-    test_majacc_meter_d = AverageMeter("test_majacc_d", ":6.2f")
-    test_corr_meter_d = AverageMeter("test_corr_d", ":6.2f")
+        loss_meter_d = AverageMeter("Loss_d", ":.3f")
+        test_acc_meter_d = AverageMeter("test_acc_d", ":6.2f")
+        test_minacc_meter_d = AverageMeter("test_minacc_d", ":6.2f")
+        test_majacc_meter_d = AverageMeter("test_majacc_d", ":6.2f")
+        test_corr_meter_d = AverageMeter("test_corr_d", ":6.2f")
 
-    progress = ProgressMeter(
-        len(val_loader),
-        [
-            loss_meter,
-            test_acc_meter,
-            test_minacc_meter,
-            test_majacc_meter,
-            loss_meter_d,
-            test_acc_meter_d,
-            test_minacc_meter_d,
-            test_majacc_meter_d,
-            test_corr_meter_d,
-        ],
-        prefix="Test: ",
-    )
+        progress = ProgressMeter(
+            len(val_loader),
+            [
+                loss_meter,
+                test_acc_meter,
+                test_minacc_meter,
+                test_majacc_meter,
+                loss_meter_d,
+                test_acc_meter_d,
+                test_minacc_meter_d,
+                test_majacc_meter_d,
+                test_corr_meter_d,
+            ],
+            prefix="Test: ",
+        )
+    else:
+        loss_meter_d = AverageMeter("Loss_d", ":.3f")
+        test_acc_meter_d = AverageMeter("test_acc_d", ":6.2f")
+        test_minacc_meter_d = AverageMeter("test_minacc_d", ":6.2f")
+        test_majacc_meter_d = AverageMeter("test_majacc_d", ":6.2f")
+        test_corr_meter_d = AverageMeter("test_corr_d", ":6.2f")
+
     args.val_loop = True
     if args.use_running_stats:
         model.eval()
@@ -321,9 +356,11 @@ def validate(val_loader, model, criterion, args, writer, epoch):
     #         if hasattr(m, "scores") and m.prune:
     #             writer.add_histogram(n, m.scores)
     with torch.no_grad():
-        for i, (test_x, test_y, test_g, test_c) in tqdm.tqdm(
-            enumerate(val_loader), ascii=True, total=len(val_loader)
-        ):
+        if VerboseMode:
+            BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
+        else:
+            BatchCollections = enumerate(val_loader)
+        for i, (test_x, test_y, test_g, test_c) in BatchCollections:
             test_x, test_y, test_g, test_c = (
                 test_x.cuda(),
                 test_y.cuda().float(),
@@ -331,16 +368,18 @@ def validate(val_loader, model, criterion, args, writer, epoch):
                 test_c.cuda(),
             )
             test_c_label = (2 * test_y - 1) * test_c - test_y + 1
-            args.discrete = False
-            test_logits = model(test_x)
-            loss = criterion(test_logits, test_y)
-            test_acc, test_minacc, test_majacc = args.eval_fn(
-                test_logits, test_y, test_c
-            )
-            loss_meter.update(loss.item(), test_x.size(0))
-            test_acc_meter.update(test_acc.item(), test_x.size(0))
-            test_minacc_meter.update(test_minacc.item(), test_x.size(0))
-            test_majacc_meter.update(test_majacc.item(), test_x.size(0))
+            if VerboseMode:
+                args.discrete = False
+                test_logits = model(test_x)
+                loss = criterion(test_logits, test_y)
+                test_acc, test_minacc, test_majacc = args.eval_fn(
+                    test_logits, test_y, test_c
+                )
+                loss_meter.update(loss.item(), test_x.size(0))
+                test_acc_meter.update(test_acc.item(), test_x.size(0))
+                test_minacc_meter.update(test_minacc.item(), test_x.size(0))
+                test_majacc_meter.update(test_majacc.item(), test_x.size(0))
+
             args.discrete = True
             test_logits_d = model(test_x)
             loss_d = criterion(test_logits_d, test_y)
@@ -360,15 +399,16 @@ def validate(val_loader, model, criterion, args, writer, epoch):
                     .numpy()
                 )[0, 1]
             )
-            if i % args.print_freq == 0:
+            if VerboseMode and i % args.print_freq == 0:
                 progress.display(i)
-        progress.display(len(val_loader))
-        if writer is not None:
-            progress.write_to_tensorboard(
-                writer,
-                prefix="test" if not args.finetuning else "test_ft",
-                global_step=epoch,
-            )
+        if VerboseMode:
+            progress.display(len(val_loader))
+            if writer is not None:
+                progress.write_to_tensorboard(
+                    writer,
+                    prefix="test" if not args.finetuning else "test_ft",
+                    global_step=epoch,
+                )
     return (
         test_acc_meter_d.avg,
         test_minacc_meter_d.avg,

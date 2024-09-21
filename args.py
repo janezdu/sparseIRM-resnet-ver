@@ -5,7 +5,7 @@ import yaml
 from configs import parser as _parser
 
 args = None
-
+VerboseMode = 0
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="PyTorch ImageNet Training")
@@ -694,7 +694,11 @@ def parse_arguments():
     parser.add_argument("--pgd_skip_steps", type=int, default=50)
     parser.add_argument("--fraction_z", type=float, default=0.95)
     parser.add_argument("--rho_tolerance", type=int, default=0)
+    parser.add_argument("--regenerate_data", type=int, default=0)
+    parser.add_argument("--verbose", type=int, default=1)
+
     args = parser.parse_args()
+    VerboseMode = args.verbose
 
     # Allow for use from notebook without config file
     if len(sys.argv) > 1:
@@ -715,7 +719,8 @@ def get_config(args):
     for v in override_args:
         loaded_yaml[v] = getattr(args, v)
 
-    print(f"=> Reading YAML config from {args.config}")
+    if VerboseMode:
+        print(f"=> Reading YAML config from {args.config}")
     args.__dict__.update(loaded_yaml)
 
 

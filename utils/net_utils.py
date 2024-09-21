@@ -6,6 +6,14 @@ import torch
 import torch.nn as nn
 from args import args as parser_args
 import tqdm
+from args import VerboseMode
+import builtins as __builtin__
+import numpy as np
+
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
 
 def stablize_bn(model, train_loader):
     for i, (train_x, train_y, train_g, train_c) in tqdm.tqdm(
@@ -181,3 +189,14 @@ def constrainScoreByWhole(model, v_meter, max_score_meter):
         if hasattr(m, "scores"):
             if m.prune:
                 m.scores.sub_(v).clamp_(0, 1)
+
+def pretty_print(*values):
+    col_width = 13
+
+    def format_val(v):
+        if not isinstance(v, str):
+            v = np.array2string(v, precision=5, floatmode="fixed")
+        return v.ljust(col_width)
+
+    str_values = [format_val(v) for v in values]
+    __builtin__.print("   ".join(str_values))
