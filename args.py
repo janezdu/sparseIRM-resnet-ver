@@ -696,6 +696,7 @@ def parse_arguments():
     parser.add_argument("--rho_tolerance", type=int, default=0)
     parser.add_argument("--regenerate_data", type=int, default=0)
     parser.add_argument("--verbose", type=int, default=1)
+    parser.add_argument("--train_model", type=str, default="torch_original")
 
     args = parser.parse_args()
     VerboseMode = args.verbose
