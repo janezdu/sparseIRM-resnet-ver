@@ -49,6 +49,8 @@ from utils.irm_utils import eval_acc_class, eval_acc_multi_class
 import builtins as __builtin__
 from args import VerboseMode
 from utils.net_utils import pretty_print
+from torchvision.models import resnet18
+
 
 if VerboseMode:
     wandb.init(project="irm", name=args.runs_name, config=args)
@@ -74,7 +76,11 @@ def main_worker(args):
     args.obtain_prior_prob_with_snip = False
     args.scaling_para = 1
     train, validate, modifier = get_trainer(args)
-    model = get_model(args)
+    if args.train_model == "torch_original":
+        model = resnet18(weights='DEFAULT')
+        model.fc = nn.Linear(model.fc.in_features, 1)  # Modify the final layer
+    else:
+        model = get_model(args)
     model = set_gpu(args, model)
 
     optimizer, weight_opt = get_optimizer(args, model)
