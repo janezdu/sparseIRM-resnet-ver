@@ -8,9 +8,17 @@ from collections import defaultdict, Counter, OrderedDict
 import numpy as np
 import torch
 from torch.utils.data import TensorDataset, DataLoader
+import builtins as __builtin__
+from args import VerboseMode
 
 REPO_DIR = pathlib.Path(__file__).parent.parent.absolute()
 DOWNLOAD_DIR = os.path.join(REPO_DIR, 'datasets')
+
+def print(*args, **kwargs):
+    if VerboseMode:
+        # __builtin__.print('My overridden print() function!')
+        return __builtin__.print(*args, **kwargs)
+
 
 def extract_tensors_from_loader(dl, repeat=1, transform_fn=None):
     X, Y = [], []

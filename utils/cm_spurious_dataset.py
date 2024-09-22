@@ -180,7 +180,7 @@ def get_data_loader_cifarminst(
 ):
     data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
     if args.regenerate_data or (not os.path.exists(data_path)):
-        print(data_path + " dataset not found. Creating dataset...")
+        __builtin__.print(data_path + " dataset not found. Creating dataset...")
         spdc = CifarMnistSpuriousDataset(
             train_num=train_num,
             test_num=test_num,
