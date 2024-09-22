@@ -162,6 +162,7 @@ def main_worker(args):
     record_test_best = None
 
     pretty_print("epoch", "train_acc", "test_acc", "time")
+    start_run = time.time()
 
     for epoch in range(args.start_epoch, args.epochs):
 
@@ -183,8 +184,7 @@ def main_worker(args):
         # if weight_opt is not None:
         #     print("current weight lr: ", weight_opt.param_groups[0]["lr"])
         # print("current prune rate: ", args.prune_rate)
-        if VerboseMode:
-            start_train = time.time()
+        start_train = time.time()
         train_acc, train_minacc, train_majacc, train_corr = train(
             dp.get_train_loader(),
             model,
@@ -238,6 +238,8 @@ def main_worker(args):
     zero_count = (model.module.fc.weight.data == 0).sum()
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
+    time_per_run = time.time() - start_run 
+    pretty_print(np.int32(0), np.float32(0), np.float32(0), np.int32(time_per_run))
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
@@ -245,8 +247,12 @@ def main_worker(args):
     elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
 
+    if VerboseMode:
+        runid = wandb.run.id
+    else:
+        runid = 0
     agg_data = {
-        "runid": wandb.run.id,
+        "runid": runid,
         "date": time.strftime("%Y-%m-%d %H:%M:%S"),
         "model": "resnet18",
         "hidden_dim": args.hidden_dim,
