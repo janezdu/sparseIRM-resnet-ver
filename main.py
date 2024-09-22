@@ -265,7 +265,7 @@ def main_worker(args):
         "algorithm": alg,
         "dataset": args.set,
         "epochs": args.epochs,
-        "time elapsed": end_train - start_train,
+        "time elapsed": time_per_run,
         "record_train_acc": record_test_best[0],
         "record_test_acc": record_test_best[1],
         "last_train_acc": train_acc,
