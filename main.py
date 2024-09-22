@@ -50,6 +50,7 @@ import builtins as __builtin__
 from args import VerboseMode
 from utils.net_utils import pretty_print
 from torchvision.models import resnet18
+from utils.cm_spurious_dataset import CifarMnistSpuriousDataset
 
 
 if VerboseMode:
@@ -84,15 +85,48 @@ def main_worker(args):
     model = set_gpu(args, model)
 
     optimizer, weight_opt = get_optimizer(args, model)
-    # data = get_dataset(args)
-    if args.set == "mnist":
-        dp = CMNIST_LYDP(args)
-    elif args.set == "mnistfull":
-        dp = CMNISTFULL_LYDP(args)
-    elif args.set == "mnistcifar":
-        dp = CIFAR_LYPD(args)
-    elif args.set == "cococolour":
-        dp = COCOcolor_LYPD(args)
+
+    if args.use_dataloader:
+        data = get_dataset(args)
+        if args.set == "mnist":
+            dp = CMNIST_LYDP(args)
+        elif args.set == "mnistfull":
+            dp = CMNISTFULL_LYDP(args)
+        elif args.set == "mnistcifar":
+            dp = CIFAR_LYPD(args)
+        elif args.set == "cococolour":
+            dp = COCOcolor_LYPD(args)
+    else:
+        # load data without dataloader
+        train_num = 10000
+        test_num = 1000  # 1800
+        cons_list = [0.999, 0.7, 0.1]
+        train_envs = len(cons_list) - 1
+        ratio_list = [1.0 / train_envs] * (train_envs)
+
+        data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
+        if args.regenerate_data or (not os.path.exists(data_path)):
+            __builtin__.print(data_path + " dataset not found. Creating dataset...")
+            cifarminist = CifarMnistSpuriousDataset(
+                train_num=train_num,
+                test_num=test_num,
+                cons_ratios=cons_list,
+                train_envs_ratio=ratio_list,
+                label_noise_ratio=0.1,
+                augment_data=True,
+                cifar_classes=(1, 9),
+                color_spurious=False,
+                transform_data_to_standard=0,
+                oracle=0,
+            )
+            torch.save(cifarminist, data_path)
+        else:
+            # print("Loading CifarMNIST dataset...")
+            cifarminist = torch.load(data_path)
+        train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
+            splits=["train", "val", "test"]
+        )
+
     args.arch = "EBD"
     ebd = get_model(args)
     ebd = set_gpu(args, ebd)
@@ -192,7 +226,7 @@ def main_worker(args):
         # print("current prune rate: ", args.prune_rate)
         start_train = time.time()
         train_acc, train_minacc, train_majacc, train_corr = train(
-            dp.get_train_loader(),
+            dp.get_train_loader() if args.use_dataloader else train_dataset,
             model,
             ebd,
             criterion,
@@ -206,13 +240,13 @@ def main_worker(args):
         while iter < 1:
             fix_model_subnet(model)
             train_acc, train_minacc, train_majacc, _, train_corr = validate(
-                dp.get_train_loader(), model, criterion, args, writer, epoch
+                dp.get_train_loader() if args.use_dataloader else train_dataset, model, criterion, args, writer, epoch
             )
             if VerboseMode:
                 train_time.update((time.time() - start_train) / 60)
                 start_validation = time.time()
             test_acc, test_minacc, test_majacc, losses, test_corr = validate(
-                dp.get_test_loader(), model, criterion, args, writer, epoch
+                dp.get_test_loader() if args.use_dataloader else test_dataset, model, criterion, args, writer, epoch
             )
             if VerboseMode:
                 validation_time.update((time.time() - start_validation) / 60)

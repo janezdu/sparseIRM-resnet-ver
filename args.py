@@ -26,7 +26,7 @@ def parse_arguments():
         "--config", help="Config file to use (see configs dir)", default=None
     )
     parser.add_argument(
-        "--log-dir", help="Where to save the runs. If None use ./runs", default=None
+        "--log_dir", help="Where to save the runs. If None use ./runs", default=None
     )
     parser.add_argument(
         "-j",
@@ -44,7 +44,7 @@ def parse_arguments():
         help="number of total epochs to run",
     )
     parser.add_argument(
-        "--start-epoch",
+        "--start_epoch",
         default=None,
         type=int,
         metavar="N",
@@ -52,17 +52,17 @@ def parse_arguments():
     )
     parser.add_argument(
         "-b",
-        "--batch-size",
+        "--batch_size",
         default=256,
         type=int,
         metavar="N",
-        help="mini-batch size (default: 256), this is the total "
+        help="mini_batch size (default: 256), this is the total "
         "batch size of all GPUs on the current node when "
         "using Data Parallel or Distributed Data Parallel",
     )
     parser.add_argument(
         "--lr",
-        "--learning-rate",
+        "--learning_rate",
         default=0.1,
         type=float,
         metavar="LR",
@@ -77,7 +77,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "--wd",
-        "--weight-decay",
+        "--weight_decay",
         default=1e-4,
         type=float,
         metavar="W",
@@ -86,13 +86,13 @@ def parse_arguments():
     )
     parser.add_argument(
         "-p",
-        "--print-freq",
+        "--print_freq",
         default=10,
         type=int,
         metavar="N",
         help="print frequency (default: 10)",
     )
-    parser.add_argument("--num-classes", default=10, type=int)
+    parser.add_argument("--num_classes", default=10, type=int)
     parser.add_argument(
         "--resume",
         default="",
@@ -119,7 +119,7 @@ def parse_arguments():
         dest="pretrained",
         default=None,
         type=str,
-        help="use pre-trained model",
+        help="use pre_trained model",
     )
 
     parser.add_argument(
@@ -157,27 +157,27 @@ def parse_arguments():
 
     # Learning Rate Policy Specific
     parser.add_argument(
-        "--lr-policy", default="constant_lr", help="Policy for the learning rate."
+        "--lr_policy", default="constant_lr", help="Policy for the learning rate."
     )
-    parser.add_argument("--lr-adjust", default=30, type=int, help="Interval to drop lr")
+    parser.add_argument("--lr_adjust", default=30, type=int, help="Interval to drop lr")
     parser.add_argument(
-        "--lr-gamma", default=0.1, type=int, help="Multistep multiplier"
+        "--lr_gamma", default=0.1, type=int, help="Multistep multiplier"
     )
     parser.add_argument(
         "--name", default=None, type=str, help="Experiment name to append to filepath"
     )
     parser.add_argument(
-        "--save-every", default=-1, type=int, help="Save every ___ epochs"
+        "--save_every", default=-1, type=int, help="Save every ___ epochs"
     )
     parser.add_argument(
-        "--prune-rate",
+        "--prune_rate",
         default=0.0,
         help="Amount of pruning to do during sparse training",
         type=float,
     )
 
     parser.add_argument(
-        "--param-prune-rate",
+        "--param_prune_rate",
         default=0.0,
         help="Amount of param pruning to do during sparse training",
         type=float,
@@ -191,10 +191,10 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "--low-data", default=1, help="Amount of data to use", type=float
+        "--low_data", default=1, help="Amount of data to use", type=float
     )
     parser.add_argument(
-        "--width-mult",
+        "--width_mult",
         default=1.0,
         help="How much to vary the width of the network.",
         type=float,
@@ -212,20 +212,20 @@ def parse_arguments():
         help="Whether use threetimes",
     )
     parser.add_argument(
-        "--random-subnet",
+        "--random_subnet",
         action="store_true",
         help="Whether or not to use a random subnet when fine tuning for lottery experiments",
     )
     parser.add_argument(
-        "--one-batch",
+        "--one_batch",
         action="store_true",
         help="One batch train set for debugging purposes (test overfitting)",
     )
     parser.add_argument(
-        "--conv-type", type=str, default=None, help="What kind of sparsity to use"
+        "--conv_type", type=str, default=None, help="What kind of sparsity to use"
     )
     parser.add_argument(
-        "--freeze-weights",
+        "--freeze_weights",
         action="store_true",
         help="Whether or not to train only subnet (this freezes weights)",
     )
@@ -239,21 +239,21 @@ def parse_arguments():
     parser.add_argument(
         "--nonlinearity", default="relu", help="Nonlinearity used by initialization"
     )
-    parser.add_argument("--bn-type", default=None, help="BatchNorm type")
+    parser.add_argument("--bn_type", default=None, help="BatchNorm type")
     parser.add_argument(
         "--init", default="kaiming_normal", help="Weight initialization modifications"
     )
     parser.add_argument(
-        "--no-bn-decay", action="store_true", default=False, help="No batchnorm decay"
+        "--no_bn_decay", action="store_true", default=False, help="No batchnorm decay"
     )
     parser.add_argument(
-        "--scale-fan", action="store_true", default=False, help="scale fan"
+        "--scale_fan", action="store_true", default=False, help="scale fan"
     )
     parser.add_argument(
-        "--first-layer-dense", action="store_true", help="First layer dense or sparse"
+        "--first_layer_dense", action="store_true", help="First layer dense or sparse"
     )
     parser.add_argument(
-        "--last-layer-dense", action="store_true", help="Last layer dense or sparse"
+        "--last_layer_dense", action="store_true", help="Last layer dense or sparse"
     )
     parser.add_argument(
         "--approx", action="store_true", help="Use Approx Discrete Mode"
@@ -284,19 +284,19 @@ def parse_arguments():
         help="individual temperature for different channels",
     )
     parser.add_argument(
-        "--label-smoothing",
+        "--label_smoothing",
         type=float,
         help="Label smoothing to use, default 0.0",
         default=None,
     )
     parser.add_argument(
-        "--first-layer-type", type=str, default=None, help="Conv type of first layer"
+        "--first_layer_type", type=str, default=None, help="Conv type of first layer"
     )
     parser.add_argument(
         "--trainer", type=str, default="default", help="cs, ss, or standard training"
     )
     parser.add_argument(
-        "--score-init-constant",
+        "--score_init_constant",
         type=float,
         default=None,
         help="Sample Baseline Subnet Init",
@@ -366,31 +366,31 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "--PLA-factor",
+        "--PLA_factor",
         type=float,
         default=0.1,
-        help="PLA-factor",
+        help="PLA_factor",
     )
 
     parser.add_argument(
-        "--PLA-patience",
+        "--PLA_patience",
         type=float,
         default=10,
-        help="PLA-patience",
+        help="PLA_patience",
     )
 
     parser.add_argument(
-        "--gradient-loss-para",
+        "--gradient_loss_para",
         type=float,
         default=0,
         help="gradient_loss_para",
     )
 
     parser.add_argument(
-        "--abs-loss-para",
+        "--abs_loss_para",
         type=float,
         default=0,
-        help="abs-loss-para",
+        help="abs_loss_para",
     )
 
     parser.add_argument(
@@ -401,24 +401,24 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "--runs-name",
+        "--runs_name",
         type=str,
         default="name_random",
         help="name",
     )
 
     parser.add_argument(
-        "--resume-compare-loss1",
+        "--resume_compare_loss1",
         type=str,
         default="",
-        help="resume-compare-loss1",
+        help="resume_compare_loss1",
     )
 
     parser.add_argument(
-        "--resume-compare-loss2",
+        "--resume_compare_loss2",
         type=str,
         default="",
-        help="resume-compare-loss2",
+        help="resume_compare_loss2",
     )
 
     parser.add_argument(
@@ -660,7 +660,6 @@ def parse_arguments():
     )
 
     parser.add_argument("--envs_num", type=int, default=2)
-    parser.add_argument("--num_classes", type=int, default=2)
     parser.add_argument("--l2_regularizer_weight", type=float, default=0.001)
     parser.add_argument("--data_num", type=int, default=50000)
     parser.add_argument(
@@ -676,7 +675,6 @@ def parse_arguments():
     parser.add_argument("--fix_subnet", default=False, action="store_true")
     parser.add_argument("--freeze_weight", default=False, action="store_true")
     parser.add_argument("--step", default="ours", type=str)
-    parser.add_argument("--runs_name", type=str)
     parser.add_argument("--prior_sd_coef", type=float, default=0)
     parser.add_argument("--dim_inv", type=int, default=2)
     parser.add_argument("--variance_gamma", type=float, default=1.0)
@@ -696,7 +694,8 @@ def parse_arguments():
     parser.add_argument("--rho_tolerance", type=int, default=0)
     parser.add_argument("--regenerate_data", type=int, default=0)
     parser.add_argument("--verbose", type=int, default=1)
-    parser.add_argument("--train_model", type=str, default="torch_original")
+    parser.add_argument("--train_model", type=str, default="torch_custom")
+    parser.add_argument("--use_dataloader", type=int, default=0)
 
     args = parser.parse_args()
     VerboseMode = args.verbose

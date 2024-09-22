@@ -10,6 +10,7 @@ import shutil
 import numpy as np
 import builtins as __builtin__
 from args import VerboseMode
+import math
 
 def print(*args, **kwargs):
     if VerboseMode:
@@ -66,6 +67,19 @@ def calScalingPara(model, args):
         args.scaling_para = remaining_part / original_part
 
 
+def get_a_batch_data(dataset, batch_offset, batch_size):
+    train_xb = torch.zeros(batch_size, 3, 64 ,32)
+    train_yb = torch.zeros(batch_size, 1)
+    train_gb = torch.zeros(batch_size, 1)
+    train_cb = torch.zeros(batch_size, 1)
+    for i in range(batch_size):
+        (dx, dy, dg, dc) = dataset[batch_offset + i]
+        train_xb[i] = dx
+        train_yb[i][0] = torch.from_numpy(dy)
+        train_gb[i][0] = torch.from_numpy(dg)
+        train_cb[i][0] = torch.from_numpy(dc)
+    return (train_xb, train_yb, train_gb, train_cb)
+
 def train(
     train_loader, model, ebd, criterion, optimizer, epoch, args, writer, weight_opt
 ):
@@ -111,13 +125,29 @@ def train(
     model.train()
     args.discrete = False
     args.val_loop = False
-    args.num_batches = len(train_loader)
+    # args.num_batches = len(train_loader)
 
-    if VerboseMode:
-        BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
-    else:
-        BatchCollections = enumerate(train_loader)
-    for i, (train_x, train_y, train_g, train_c) in BatchCollections:
+    # if VerboseMode:
+    #     BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
+    # else:
+    #     BatchCollections = enumerate(train_loader)
+    # for i, (train_x, train_y, train_g, train_c) in BatchCollections:
+
+    istart = 0
+    totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
+    for i in range(totalBatch):
+        if args.use_dataloader:
+            if VerboseMode:
+                BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
+            else:
+                BatchCollections = enumerate(train_loader)
+            (train_x, train_y, train_g, train_c) = BatchCollections[i]
+        else:
+            batch_size = args.batch_size
+            if i == totalBatch - 1:
+                batch_size = len(train_loader) - i * args.batch_size
+            (train_x, train_y, train_g, train_c) = get_a_batch_data(train_loader, istart, batch_size)
+
         train_x, train_y, train_g, train_c = (
             train_x.cuda(),
             train_y.cuda().float(),
@@ -294,6 +324,7 @@ def train(
                                 f"train/scaling_para", args.scaling_para, global_step=t
                             )
                         # print("scalingpara at this batch", args.scaling_para)
+        istart += args.batch_size
 
     if args.use_pgd and args.steps > args.pgd_anneal_iters:
         print("final projection at end of training")
@@ -356,11 +387,27 @@ def validate(val_loader, model, criterion, args, writer, epoch):
     #         if hasattr(m, "scores") and m.prune:
     #             writer.add_histogram(n, m.scores)
     with torch.no_grad():
-        if VerboseMode:
-            BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
-        else:
-            BatchCollections = enumerate(val_loader)
-        for i, (test_x, test_y, test_g, test_c) in BatchCollections:
+        # if VerboseMode:
+        #     BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
+        # else:
+        #     BatchCollections = enumerate(val_loader)
+        # for i, (test_x, test_y, test_g, test_c) in BatchCollections:
+
+        istart = 0
+        totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
+        for i in range(totalBatch):
+            if args.use_dataloader:
+                if VerboseMode:
+                    BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
+                else:
+                    BatchCollections = enumerate(val_loader)
+                (test_x, test_y, test_g, test_c) = BatchCollections[i]
+            else:
+                batch_size = args.batch_size
+                if i == totalBatch - 1:
+                    batch_size = len(val_loader) - i * args.batch_size
+                (test_x, test_y, test_g, test_c) = get_a_batch_data(val_loader, istart, batch_size)
+
             test_x, test_y, test_g, test_c = (
                 test_x.cuda(),
                 test_y.cuda().float(),
@@ -401,6 +448,8 @@ def validate(val_loader, model, criterion, args, writer, epoch):
             )
             if VerboseMode and i % args.print_freq == 0:
                 progress.display(i)
+            istart += args.batch_size
+            # end of loop
         if VerboseMode:
             progress.display(len(val_loader))
             if writer is not None:
