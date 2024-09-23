@@ -87,7 +87,7 @@ def main_worker(args):
     optimizer, weight_opt = get_optimizer(args, model)
 
     if args.use_dataloader:
-        data = get_dataset(args)
+        # data = get_dataset(args)
         if args.set == "mnist":
             dp = CMNIST_LYDP(args)
         elif args.set == "mnistfull":
