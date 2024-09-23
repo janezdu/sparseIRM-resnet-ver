@@ -123,9 +123,22 @@ def main_worker(args):
         else:
             # print("Loading CifarMNIST dataset...")
             cifarminist = torch.load(data_path)
-        train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
-            splits=["train", "val", "test"]
-        )
+        # train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
+        #     splits=["train", "val", "test"]
+        # )
+        train_x, train_y, train_env, train_sp = cifarminist.return_train_data()
+        test_x, test_y, test_env, test_sp = cifarminist.return_test_data()
+        images = torch.from_numpy(train_x).float().cuda()
+        labels = torch.from_numpy(train_y).float().cuda().reshape(-1, 1)
+        env_ind = torch.from_numpy(train_env).float().cuda().reshape(-1, 1)
+        spurious = torch.from_numpy(train_sp).float().cuda().reshape(-1, 1)
+        train_dataset = (images, labels, env_ind, spurious)
+
+        test_images = torch.from_numpy(test_x).float().cuda()
+        test_labels = torch.from_numpy(test_y).float().cuda().reshape(-1, 1)
+        test_env_ind = torch.from_numpy(test_env).float().cuda().reshape(-1, 1)
+        test_spurious = torch.from_numpy(test_sp).float().cuda().reshape(-1, 1)
+        test_dataset = (test_images, test_labels, test_env_ind, test_spurious)
 
     args.arch = "EBD"
     ebd = get_model(args)

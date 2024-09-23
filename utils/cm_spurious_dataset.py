@@ -164,6 +164,35 @@ class CifarMnistSpuriousDataset(Dataset):
         self.subsets = subsets
         return tuple(subsets)
 
+    def return_data_by_index(self, env_idx):
+        xs = []
+        ys = []
+        gs = []
+        sps = []
+        for idx in range(len(self.y_array)):
+            if self.split_array[idx] in env_idx:
+                x = self.x_array[idx]
+                y = self.y_array[idx]
+                g = self.env_array[idx]
+                sp = self.sp_array[idx]
+                xs.append(x)
+                ys.append(y)
+                gs.append(g)
+                sps.append(sp)
+        # Figure out split and transform accordingly
+        xs = np.stack(xs)
+        ys = np.stack(ys)
+        gs = np.stack(gs)
+        sps = np.stack(sps)
+        gs = gs - np.min(gs)
+        return xs, ys, gs, sps
+
+    def return_train_data(self):
+        return self.return_data_by_index(self.split_dict["train"])
+
+    def return_test_data(self):
+        return self.return_data_by_index(self.split_dict["test"])
+
 
 def get_data_loader_cifarminst(
     batch_size,

@@ -132,6 +132,8 @@ def train(
     # else:
     #     BatchCollections = enumerate(train_loader)
     # for i, (train_x, train_y, train_g, train_c) in BatchCollections:
+    istart = 0
+    totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
 
     if args.use_dataloader:
         if VerboseMode:
@@ -139,24 +141,27 @@ def train(
         else:
             BatchCollections = enumerate(train_loader)
         BatchCollectionsList = list(enumerate(BatchCollections))
+    else:
+        totalBatch = 1
 
-    istart = 0
-    totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
     for i in range(totalBatch):
         if args.use_dataloader:
             (train_x, train_y, train_g, train_c) = BatchCollectionsList[i][1][1]
         else:
-            batch_size = args.batch_size
-            if i == totalBatch - 1:
-                batch_size = len(train_loader) - i * args.batch_size
-            (train_x, train_y, train_g, train_c) = get_a_batch_data(train_loader, istart, batch_size)
+            # batch_size = args.batch_size
+            # if i == totalBatch - 1:
+            #     batch_size = len(train_loader) - i * args.batch_size
+            # (train_x, train_y, train_g, train_c) = get_a_batch_data(train_loader, istart, batch_size)
+            (train_x, train_y, train_g, train_c) = train_loader
 
-        train_x, train_y, train_g, train_c = (
-            train_x.cuda(),
-            train_y.cuda().float(),
-            train_g.cuda(),
-            train_c.cuda(),
-        )
+        if args.use_dataloader:
+            train_x, train_y, train_g, train_c = (
+                train_x.cuda(),
+                train_y.cuda().float(),
+                train_g.cuda(),
+                train_c.cuda(),
+            )
+
         # print(train_x.size(), train_y.size())
         train_c_label = (2 * train_y - 1) * train_c - train_y + 1
 
@@ -395,30 +400,35 @@ def validate(val_loader, model, criterion, args, writer, epoch):
         # else:
         #     BatchCollections = enumerate(val_loader)
         # for i, (test_x, test_y, test_g, test_c) in BatchCollections:
+        istart = 0
+        totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
+
         if args.use_dataloader:
             if VerboseMode:
                 BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
             else:
                 BatchCollections = enumerate(val_loader)
             BatchCollectionsList = list(enumerate(BatchCollections))
+        else:
+            totalBatch = 1
 
-        istart = 0
-        totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
         for i in range(totalBatch):
             if args.use_dataloader:
                 (test_x, test_y, test_g, test_c) = BatchCollectionsList[i][1][1]
             else:
-                batch_size = args.batch_size
-                if i == totalBatch - 1:
-                    batch_size = len(val_loader) - i * args.batch_size
-                (test_x, test_y, test_g, test_c) = get_a_batch_data(val_loader, istart, batch_size)
+                # batch_size = args.batch_size
+                # if i == totalBatch - 1:
+                #     batch_size = len(val_loader) - i * args.batch_size
+                # (test_x, test_y, test_g, test_c) = get_a_batch_data(val_loader, istart, batch_size)
+                (test_x, test_y, test_g, test_c) = val_loader
 
-            test_x, test_y, test_g, test_c = (
-                test_x.cuda(),
-                test_y.cuda().float(),
-                test_g.cuda(),
-                test_c.cuda(),
-            )
+            if args.use_dataloader:
+                test_x, test_y, test_g, test_c = (
+                    test_x.cuda(),
+                    test_y.cuda().float(),
+                    test_g.cuda(),
+                    test_c.cuda(),
+                )
             test_c_label = (2 * test_y - 1) * test_c - test_y + 1
             if VerboseMode:
                 args.discrete = False
