@@ -67,19 +67,6 @@ def calScalingPara(model, args):
         args.scaling_para = remaining_part / original_part
 
 
-def get_a_batch_data(dataset, batch_offset, batch_size):
-    train_xb = torch.zeros(batch_size, 3, 64 ,32)
-    train_yb = torch.zeros(batch_size, 1)
-    train_gb = torch.zeros(batch_size, 1)
-    train_cb = torch.zeros(batch_size, 1)
-    for i in range(batch_size):
-        (dx, dy, dg, dc) = dataset[batch_offset + i]
-        train_xb[i] = dx
-        train_yb[i][0] = torch.from_numpy(dy)
-        train_gb[i][0] = torch.from_numpy(dg)
-        train_cb[i][0] = torch.from_numpy(dc)
-    return (train_xb, train_yb, train_gb, train_cb)
-
 def train(
     train_loader, model, ebd, criterion, optimizer, epoch, args, writer, weight_opt
 ):
@@ -127,32 +114,28 @@ def train(
     args.val_loop = False
     # args.num_batches = len(train_loader)
 
-    # if VerboseMode:
-    #     BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
-    # else:
-    #     BatchCollections = enumerate(train_loader)
-    # for i, (train_x, train_y, train_g, train_c) in BatchCollections:
     istart = 0
-    totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
-
     if args.use_dataloader:
+        totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
         if VerboseMode:
             BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
         else:
             BatchCollections = enumerate(train_loader)
         BatchCollectionsList = list(enumerate(BatchCollections))
     else:
-        totalBatch = 1
+        totalBatch = math.ceil(len(train_loader[0]) * 1.0 / args.batch_size)
 
     for i in range(totalBatch):
         if args.use_dataloader:
             (train_x, train_y, train_g, train_c) = BatchCollectionsList[i][1][1]
         else:
-            # batch_size = args.batch_size
-            # if i == totalBatch - 1:
-            #     batch_size = len(train_loader) - i * args.batch_size
-            # (train_x, train_y, train_g, train_c) = get_a_batch_data(train_loader, istart, batch_size)
-            (train_x, train_y, train_g, train_c) = train_loader
+            batch_size = args.batch_size
+            if i == totalBatch - 1:
+                batch_size = len(train_loader[0]) - i * args.batch_size
+            train_x = train_loader[0][istart : istart + batch_size]
+            train_y = train_loader[1][istart : istart + batch_size]
+            train_g = train_loader[2][istart : istart + batch_size]
+            train_c = train_loader[3][istart : istart + batch_size]
 
         if args.use_dataloader:
             train_x, train_y, train_g, train_c = (
@@ -395,32 +378,28 @@ def validate(val_loader, model, criterion, args, writer, epoch):
     #         if hasattr(m, "scores") and m.prune:
     #             writer.add_histogram(n, m.scores)
     with torch.no_grad():
-        # if VerboseMode:
-        #     BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
-        # else:
-        #     BatchCollections = enumerate(val_loader)
-        # for i, (test_x, test_y, test_g, test_c) in BatchCollections:
         istart = 0
-        totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
-
         if args.use_dataloader:
+            totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
             if VerboseMode:
                 BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
             else:
                 BatchCollections = enumerate(val_loader)
             BatchCollectionsList = list(enumerate(BatchCollections))
         else:
-            totalBatch = 1
+            totalBatch = math.ceil(len(val_loader[0]) * 1.0 / args.batch_size)
 
         for i in range(totalBatch):
             if args.use_dataloader:
                 (test_x, test_y, test_g, test_c) = BatchCollectionsList[i][1][1]
             else:
-                # batch_size = args.batch_size
-                # if i == totalBatch - 1:
-                #     batch_size = len(val_loader) - i * args.batch_size
-                # (test_x, test_y, test_g, test_c) = get_a_batch_data(val_loader, istart, batch_size)
-                (test_x, test_y, test_g, test_c) = val_loader
+                batch_size = args.batch_size
+                if i == totalBatch - 1:
+                    batch_size = len(val_loader[0]) - i * args.batch_size
+                test_x = val_loader[0][istart : istart + batch_size]
+                test_y = val_loader[1][istart : istart + batch_size]
+                test_g = val_loader[2][istart : istart + batch_size]
+                test_c = val_loader[3][istart : istart + batch_size]
 
             if args.use_dataloader:
                 test_x, test_y, test_g, test_c = (

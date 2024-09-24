@@ -284,7 +284,7 @@ def main_worker(args):
             iter += 1
         unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
-        pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.int32(time_per_epoch))
+        pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
 
         end_train = time.time()
 
@@ -292,7 +292,7 @@ def main_worker(args):
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
     time_per_run = time.time() - start_run 
-    pretty_print(np.int32(0), np.float32(0), np.float32(0), np.int32(time_per_run))
+    pretty_print(np.int32(0), np.float32(0), np.float32(0), np.float32(time_per_run))
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
