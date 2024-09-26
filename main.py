@@ -251,10 +251,6 @@ def main_worker(args):
         )
         iter = 0
         while iter < 1:
-            fix_model_subnet(model)
-            train_acc, train_minacc, train_majacc, _, train_corr = validate(
-                dp.get_train_loader() if args.use_dataloader else train_dataset, model, criterion, args, writer, epoch
-            )
             if VerboseMode:
                 train_time.update((time.time() - start_train) / 60)
                 start_validation = time.time()
@@ -282,7 +278,6 @@ def main_worker(args):
             print("last accs (train_acc, test_acc)", (train_acc, test_acc))
 
             iter += 1
-        unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
         pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
 
