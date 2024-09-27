@@ -389,6 +389,26 @@ def get_model(args):
 
 
 def get_optimizer(args, model):
+    
+    if "dense" in args.conv_type.lower():
+        if args.optimizer == "adamw":
+            optimizer = torch.optim.AdamW(
+                filter(lambda p: p.requires_grad, model.parameters()), args.lr
+            )
+        elif args.optimizer == "sgd":
+            optimizer = torch.optim.SGD(
+                filter(lambda p: p.requires_grad, model.parameters()),
+                args.lr,
+                momentum=args.momentum,
+                weight_decay=args.weight_decay,
+            )
+        elif args.optimizer == "adam":
+            optimizer = torch.optim.Adam(
+                filter(lambda p: p.requires_grad, model.parameters()), args.lr
+            )
+        return optimizer, None
+
+    
     for n, v in model.named_parameters():
         if v.requires_grad:
             print("<DEBUG> gradient to", n)
