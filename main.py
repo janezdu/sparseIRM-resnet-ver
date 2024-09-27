@@ -288,7 +288,9 @@ def main_worker(args):
         if args.epochs > 100:
             if epoch % 100 == 0:
                 pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
-
+        else:
+            if epoch % 10 == 0:
+                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
         end_train = time.time()
 
     zero_count = (model.module.fc.weight.data == 0).sum()
