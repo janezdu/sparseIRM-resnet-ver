@@ -207,6 +207,8 @@ def main_worker(args):
 
     # Save the initial state
     flops_reduction_list = []
+    if args.prune_rate > 1:
+        args.prune_rate /= 512 # for counting exact # of pruned params
     pr_target = args.prune_rate
     ts = int(args.ts * args.epochs)
     te = int(args.te * args.epochs)
