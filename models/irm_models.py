@@ -48,6 +48,7 @@ class MLPFull(nn.Module):
           lin1 = builder.linear(3 * 14 * 14, self.flags.hidden_dim)
         lin2 = builder.linear(self.flags.hidden_dim, self.flags.hidden_dim)
         lin3 = builder.linear(self.flags.hidden_dim, self.flags.num_classes)
+        self.fc = lin3
         for lin in [lin1, lin2, lin3]:
           nn.init.xavier_uniform_(lin.weight)
           nn.init.zeros_(lin.bias)
@@ -72,6 +73,7 @@ class MLP(nn.Module):
           lin1 = builder.linear(2 * 14 * 14, self.flags.hidden_dim)
         lin2 = builder.linear(self.flags.hidden_dim, self.flags.hidden_dim)
         lin3 = builder.linear(self.flags.hidden_dim, 1)
+        self.fc = lin3
         for lin in [lin1, lin2, lin3]:
           nn.init.xavier_uniform_(lin.weight)
           nn.init.zeros_(lin.bias)
