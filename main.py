@@ -118,7 +118,7 @@ def main_worker(args):
                 cifar_classes=(1, 9),
                 color_spurious=False,
                 transform_data_to_standard=0,
-                oracle=0,
+                oracle=oracle,
             )
             torch.save(cifarminist, data_path)
         else:
