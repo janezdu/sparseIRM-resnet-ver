@@ -695,7 +695,7 @@ def parse_arguments():
     parser.add_argument("--regenerate_data", type=int, default=0)
     parser.add_argument("--verbose", type=int, default=1)
     parser.add_argument("--train_model", type=str, default="torch_custom")
-    parser.add_argument("--use_dataloader", type=int, default=0)
+    parser.add_argument("--use_dataloader", type=int, default=1)
     parser.add_argument("--oracle", type=int, default=0)
 
     args = parser.parse_args()

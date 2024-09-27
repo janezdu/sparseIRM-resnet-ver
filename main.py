@@ -285,7 +285,9 @@ def main_worker(args):
             iter += 1
         unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
-        pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
+        if args.epochs > 100:
+            if epoch % 100 == 0:
+                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
 
         end_train = time.time()
 
