@@ -56,10 +56,12 @@ from utils.cm_spurious_dataset import CifarMnistSpuriousDataset
 if VerboseMode:
     wandb.init(project="irm", name=args.runs_name, config=args)
 
+
 def print(*args, **kwargs):
     if VerboseMode:
         # __builtin__.print('My overridden print() function!')
         return __builtin__.print(*args, **kwargs)
+
 
 def main():
     print(args)
@@ -78,7 +80,7 @@ def main_worker(args):
     args.scaling_para = 1
     train, validate, modifier = get_trainer(args)
     if args.train_model == "torch_original":
-        model = resnet18(weights='DEFAULT')
+        model = resnet18(weights="DEFAULT")
         model.fc = nn.Linear(model.fc.in_features, 1)  # Modify the final layer
     else:
         model = get_model(args)
@@ -209,7 +211,8 @@ def main_worker(args):
     # Save the initial state
     flops_reduction_list = []
     if args.prune_rate > 1:
-        args.prune_rate /= 512 # for counting exact # of pruned params
+        args.prune_rate = float(1 - args.prune_rate / 512)
+        # for counting exact # of pruned params
     pr_target = args.prune_rate
     ts = int(args.ts * args.epochs)
     te = int(args.te * args.epochs)
@@ -256,13 +259,23 @@ def main_worker(args):
         while iter < 1:
             fix_model_subnet(model)
             train_acc, train_minacc, train_majacc, _, train_corr = validate(
-                dp.get_train_loader() if args.use_dataloader else train_dataset, model, criterion, args, writer, epoch
+                dp.get_train_loader() if args.use_dataloader else train_dataset,
+                model,
+                criterion,
+                args,
+                writer,
+                epoch,
             )
             if VerboseMode:
                 train_time.update((time.time() - start_train) / 60)
                 start_validation = time.time()
             test_acc, test_minacc, test_majacc, losses, test_corr = validate(
-                dp.get_test_loader() if args.use_dataloader else test_dataset, model, criterion, args, writer, epoch
+                dp.get_test_loader() if args.use_dataloader else test_dataset,
+                model,
+                criterion,
+                args,
+                writer,
+                epoch,
             )
             if VerboseMode:
                 validation_time.update((time.time() - start_validation) / 60)
@@ -289,16 +302,26 @@ def main_worker(args):
         time_per_epoch = time.time() - start_each_epoch
         if args.epochs > 100:
             if epoch % 100 == 0:
-                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
+                pretty_print(
+                    np.int32(epoch),
+                    np.float32(train_acc),
+                    np.float32(test_acc),
+                    np.float32(time_per_epoch),
+                )
         else:
             if epoch % 10 == 0:
-                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
+                pretty_print(
+                    np.int32(epoch),
+                    np.float32(train_acc),
+                    np.float32(test_acc),
+                    np.float32(time_per_epoch),
+                )
         end_train = time.time()
 
     zero_count = (model.module.fc.weight.data == 0).sum()
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
-    time_per_run = time.time() - start_run 
+    time_per_run = time.time() - start_run
     pretty_print(np.int32(0), np.float32(0), np.float32(0), np.float32(time_per_run))
 
     alg = "unk"
@@ -309,10 +332,12 @@ def main_worker(args):
             alg = "pgd-ERM" if args.use_pgd else "ERM"
     elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
-        
+
     if args.oracle:
         alg = "oracle"
-        print("Running oracle with {args.conv_type}, {args.penalty_weight}, {args.use_pgd}")
+        print(
+            "Running oracle with {args.conv_type}, {args.penalty_weight}, {args.use_pgd}"
+        )
 
     if VerboseMode:
         runid = wandb.run.id
@@ -393,7 +418,7 @@ def get_model(args):
 
 
 def get_optimizer(args, model):
-    
+
     if "dense" in args.conv_type.lower():
         if args.optimizer == "adamw":
             optimizer = torch.optim.AdamW(
@@ -412,7 +437,6 @@ def get_optimizer(args, model):
             )
         return optimizer, None
 
-    
     for n, v in model.named_parameters():
         if v.requires_grad:
             print("<DEBUG> gradient to", n)
