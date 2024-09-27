@@ -303,6 +303,10 @@ def main_worker(args):
             alg = "pgd-ERM" if args.use_pgd else "ERM"
     elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
+        
+    if args.oracle:
+        alg = "oracle"
+        print("Running oracle with {args.conv_type}, {args.penalty_weight}, {args.use_pgd}")
 
     if VerboseMode:
         runid = wandb.run.id
