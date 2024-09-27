@@ -103,6 +103,7 @@ def main_worker(args):
         cons_list = [0.999, 0.7, 0.1]
         train_envs = len(cons_list) - 1
         ratio_list = [1.0 / train_envs] * (train_envs)
+        oracle = args.oracle
 
         data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
         if args.regenerate_data or (not os.path.exists(data_path)):
@@ -117,7 +118,7 @@ def main_worker(args):
                 cifar_classes=(1, 9),
                 color_spurious=False,
                 transform_data_to_standard=0,
-                oracle=0,
+                oracle=oracle,
             )
             torch.save(cifarminist, data_path)
         else:
@@ -298,7 +299,10 @@ def main_worker(args):
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
-        alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
+        if args.penalty_weight > 0:
+            alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
+        else:
+            alg = "pgd-ERM" if args.use_pgd else "ERM"
     elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
 
