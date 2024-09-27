@@ -103,6 +103,7 @@ def main_worker(args):
         cons_list = [0.999, 0.7, 0.1]
         train_envs = len(cons_list) - 1
         ratio_list = [1.0 / train_envs] * (train_envs)
+        oracle = args.oracle
 
         data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
         if args.regenerate_data or (not os.path.exists(data_path)):
@@ -117,7 +118,7 @@ def main_worker(args):
                 cifar_classes=(1, 9),
                 color_spurious=False,
                 transform_data_to_standard=0,
-                oracle=0,
+                oracle=oracle,
             )
             torch.save(cifarminist, data_path)
         else:
@@ -286,8 +287,12 @@ def main_worker(args):
             iter += 1
         unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
-        pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
-
+        if args.epochs > 100:
+            if epoch % 100 == 0:
+                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
+        else:
+            if epoch % 10 == 0:
+                pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_epoch))
         end_train = time.time()
 
     zero_count = (model.module.fc.weight.data == 0).sum()
@@ -298,9 +303,16 @@ def main_worker(args):
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):
-        alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
+        if args.penalty_weight > 0:
+            alg = "pgd-IRMv1" if args.use_pgd else "IRMv1"
+        else:
+            alg = "pgd-ERM" if args.use_pgd else "ERM"
     elif "prob" in (args.conv_type.lower()):
         alg = "probmask"
+        
+    if args.oracle:
+        alg = "oracle"
+        print("Running oracle with {args.conv_type}, {args.penalty_weight}, {args.use_pgd}")
 
     if VerboseMode:
         runid = wandb.run.id
@@ -381,6 +393,26 @@ def get_model(args):
 
 
 def get_optimizer(args, model):
+    
+    if "dense" in args.conv_type.lower():
+        if args.optimizer == "adamw":
+            optimizer = torch.optim.AdamW(
+                filter(lambda p: p.requires_grad, model.parameters()), args.lr
+            )
+        elif args.optimizer == "sgd":
+            optimizer = torch.optim.SGD(
+                filter(lambda p: p.requires_grad, model.parameters()),
+                args.lr,
+                momentum=args.momentum,
+                weight_decay=args.weight_decay,
+            )
+        elif args.optimizer == "adam":
+            optimizer = torch.optim.Adam(
+                filter(lambda p: p.requires_grad, model.parameters()), args.lr
+            )
+        return optimizer, None
+
+    
     for n, v in model.named_parameters():
         if v.requires_grad:
             print("<DEBUG> gradient to", n)
