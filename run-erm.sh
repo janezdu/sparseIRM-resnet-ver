@@ -1,5 +1,5 @@
 # # dense/irmv1 run
-for rhotval in 60
+for rhotval in 20 40 80 100
 do
 
 #pgd-ERM
