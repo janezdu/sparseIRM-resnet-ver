@@ -100,49 +100,59 @@ def main_worker(args):
             dp = COCOcolor_LYPD(args)
     else:
         # load data without dataloader
-        train_num = 10000
-        test_num = 1000  # 1800
-        cons_list = [0.999, 0.7, 0.1]
-        train_envs = len(cons_list) - 1
-        ratio_list = [1.0 / train_envs] * (train_envs)
-        oracle = args.oracle
+        if args.set == "mnistcifar":
+            train_num = 10000
+            test_num = 1000  # 1800
+            cons_list = [0.999, 0.7, 0.1]
+            train_envs = len(cons_list) - 1
+            ratio_list = [1.0 / train_envs] * (train_envs)
+            oracle = args.oracle
 
-        data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
-        if args.regenerate_data or (not os.path.exists(data_path)):
-            __builtin__.print(data_path + " dataset not found. Creating dataset...")
-            cifarminist = CifarMnistSpuriousDataset(
-                train_num=train_num,
-                test_num=test_num,
-                cons_ratios=cons_list,
-                train_envs_ratio=ratio_list,
-                label_noise_ratio=0.1,
-                augment_data=True,
-                cifar_classes=(1, 9),
-                color_spurious=False,
-                transform_data_to_standard=0,
-                oracle=oracle,
-            )
-            torch.save(cifarminist, data_path)
+            data_path = "./datasets/cifarmnist2_" + str(train_num) + ".pt"
+            if args.regenerate_data or (not os.path.exists(data_path)):
+                __builtin__.print(data_path + " dataset not found. Creating dataset...")
+                cifarminist = CifarMnistSpuriousDataset(
+                    train_num=train_num,
+                    test_num=test_num,
+                    cons_ratios=cons_list,
+                    train_envs_ratio=ratio_list,
+                    label_noise_ratio=0.1,
+                    augment_data=True,
+                    cifar_classes=(1, 9),
+                    color_spurious=False,
+                    transform_data_to_standard=0,
+                    oracle=oracle,
+                )
+                torch.save(cifarminist, data_path)
+            else:
+                # print("Loading CifarMNIST dataset...")
+                cifarminist = torch.load(data_path)
+            # train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
+            #     splits=["train", "val", "test"]
+            # )
+            train_x, train_y, train_env, train_sp = cifarminist.return_train_data()
+            test_x, test_y, test_env, test_sp = cifarminist.return_test_data()
+            images = torch.from_numpy(train_x).float().cuda()
+            labels = torch.from_numpy(train_y).float().cuda().reshape(-1, 1)
+            env_ind = torch.from_numpy(train_env).float().cuda().reshape(-1, 1)
+            spurious = torch.from_numpy(train_sp).float().cuda().reshape(-1, 1)
+            train_dataset = (images, labels, env_ind, spurious)
+
+            test_images = torch.from_numpy(test_x).float().cuda()
+            test_labels = torch.from_numpy(test_y).float().cuda().reshape(-1, 1)
+            test_env_ind = torch.from_numpy(test_env).float().cuda().reshape(-1, 1)
+            test_spurious = torch.from_numpy(test_sp).float().cuda().reshape(-1, 1)
+            test_dataset = (test_images, test_labels, test_env_ind, test_spurious)
+        elif args.set == "mnistfull":
+            dp = CMNISTFULL_LYDP(args)
+
+            train_x, train_y, train_env, train_sp = (dp.train_x, dp.train_y, dp.train_g, dp.train_c)
+            test_x, test_y, test_env, test_sp = (dp.test_x, dp.test_y, dp.test_g, dp.test_c)
+
+            train_dataset = (train_x.cuda(), train_y.cuda().float(), train_env.cuda(), train_sp.cuda())
+            test_dataset = (test_x.cuda(), test_y.cuda().float(), test_env.cuda(), test_sp.cuda())
         else:
-            # print("Loading CifarMNIST dataset...")
-            cifarminist = torch.load(data_path)
-        # train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
-        #     splits=["train", "val", "test"]
-        # )
-        train_x, train_y, train_env, train_sp = cifarminist.return_train_data()
-        test_x, test_y, test_env, test_sp = cifarminist.return_test_data()
-        images = torch.from_numpy(train_x).float().cuda()
-        labels = torch.from_numpy(train_y).float().cuda().reshape(-1, 1)
-        env_ind = torch.from_numpy(train_env).float().cuda().reshape(-1, 1)
-        spurious = torch.from_numpy(train_sp).float().cuda().reshape(-1, 1)
-        train_dataset = (images, labels, env_ind, spurious)
-
-        test_images = torch.from_numpy(test_x).float().cuda()
-        test_labels = torch.from_numpy(test_y).float().cuda().reshape(-1, 1)
-        test_env_ind = torch.from_numpy(test_env).float().cuda().reshape(-1, 1)
-        test_spurious = torch.from_numpy(test_sp).float().cuda().reshape(-1, 1)
-        test_dataset = (test_images, test_labels, test_env_ind, test_spurious)
-
+            assert "not implement"
     args.arch = "EBD"
     ebd = get_model(args)
     ebd = set_gpu(args, ebd)
@@ -301,7 +311,7 @@ def main_worker(args):
         unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
         if args.epochs > 100:
-            if epoch % 100 == 0:
+            if epoch % 10 == 0:
                 pretty_print(
                     np.int32(epoch),
                     np.float32(train_acc),
