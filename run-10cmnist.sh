@@ -1,5 +1,5 @@
 # # dense/irmv1 run
-for rhotval in 190
+for rhotval in 190;
 # for rhotval in 20 40 60 80 100
 # for rhotval in 5 10 15 25 30 35 45 50 55 65 70 75 85 90 95 105 135 155 175 195
 do
