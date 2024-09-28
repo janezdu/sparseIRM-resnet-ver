@@ -56,10 +56,9 @@ def mean_accuracy_multi_class(output, target):
 
 
 def mean_nll_multi_class(logits, y):
-    # nll = nn.CrossEntropyLoss()
-    # return nll(logits, y.view(-1).long())
-    return nn.functional.cross_entropy(logits, y)
-    # return nn.functional.binary_cross_entropy_with_logits(logits, y)
+    nll = nn.CrossEntropyLoss()
+    return nll(logits, y.view(-1).long())
+    # return nn.functional.cross_entropy(logits, y)
 
 
 def merge_env(original_env, merged_num):

@@ -207,7 +207,7 @@
                 "--batch_size",
                 "390",
                 "--arch",
-                "MLP",
+                "MLPFull",
                 "--set",
                 "mnistfull",
                 "--iterative",
