@@ -356,7 +356,7 @@ def main_worker(args):
     agg_data = {
         "runid": runid,
         "date": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "model": "resnet18",
+        "model": args.arch,
         "hidden_dim": args.hidden_dim,
         "algorithm": alg,
         "dataset": args.set,

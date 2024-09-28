@@ -1,4 +1,4 @@
-for rhotval in 25
+for rhotval in 25;
 #pgd-ERM
 for i in $(seq 1 10);
 do
