@@ -697,6 +697,7 @@ def parse_arguments():
     parser.add_argument("--train_model", type=str, default="torch_custom")
     parser.add_argument("--use_dataloader", type=int, default=1)
     parser.add_argument("--oracle", type=int, default=0)
+    parser.add_argument("--run_batch_notes", type=str, default="running batch notes")
 
     args = parser.parse_args()
     VerboseMode = args.verbose

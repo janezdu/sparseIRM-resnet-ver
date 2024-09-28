@@ -311,7 +311,7 @@ def main_worker(args):
         unfix_model_subnet(model)
         time_per_epoch = time.time() - start_each_epoch
         if args.epochs > 100:
-            if epoch % 10 == 0:
+            if epoch % 100 == 0:
                 pretty_print(
                     np.int32(epoch),
                     np.float32(train_acc),
@@ -381,6 +381,7 @@ def main_worker(args):
         "fraction z": args.fraction_z if args.use_pgd else None,
         "pgd skip": args.pgd_skip_steps if args.use_pgd else None,
         "rho tolerance": args.rho_tolerance if args.use_pgd else None,
+        "run notes": args.run_batch_notes
     }
 
     save_aggregate_data("aggregate.csv", agg_data, verbose=True)
