@@ -221,7 +221,7 @@ def train(
             )
             # print("penalty weights", penalty_weight)
 
-            if args.use_pgd and args.set == "mnistcifar":
+            if args.use_pgd:
                 args.l2_regularizer_weight = 0.0
 
             loss = (
