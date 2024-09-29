@@ -151,8 +151,16 @@ def main_worker(args):
 
             train_dataset = (train_x.cuda(), train_y.cuda().float(), train_env.cuda(), train_sp.cuda())
             test_dataset = (test_x.cuda(), test_y.cuda().float(), test_env.cuda(), test_sp.cuda())
+        elif args.set == "mnist":
+            dp = CMNIST_LYDP(args)
+
+            train_x, train_y, train_env, train_sp = (dp.train_x, dp.train_y, dp.train_g, dp.train_c)
+            test_x, test_y, test_env, test_sp = (dp.test_x, dp.test_y, dp.test_g, dp.test_c)
+
+            train_dataset = (train_x.cuda(), train_y.cuda().float(), train_env.cuda(), train_sp.cuda())
+            test_dataset = (test_x.cuda(), test_y.cuda().float(), test_env.cuda(), test_sp.cuda())
         else:
-            assert "not implement"
+            assert False, "Not implemented"
     args.arch = "EBD"
     ebd = get_model(args)
     ebd = set_gpu(args, ebd)
@@ -334,7 +342,7 @@ def main_worker(args):
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
     time_per_run = time.time() - start_run
-    pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_run))
+    pretty_print(np.int32(0), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_run))
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):

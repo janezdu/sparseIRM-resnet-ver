@@ -70,7 +70,7 @@ class MLP(nn.Module):
         if self.flags.grayscale_model:
           lin1 = builder.linear(14 * 14, self.flags.hidden_dim)
         else:
-          lin1 = builder.linear(3 * 14 * 14, self.flags.hidden_dim)
+          lin1 = builder.linear(2 * 14 * 14, self.flags.hidden_dim)
         lin2 = builder.linear(self.flags.hidden_dim, self.flags.hidden_dim)
         lin3 = builder.linear(self.flags.hidden_dim, 1)
         self.fc = lin3
@@ -81,9 +81,9 @@ class MLP(nn.Module):
 
     def forward(self, input):
         if self.flags.grayscale_model:
-          out = input.view(input.shape[0], 3, 14 * 14).sum(dim=1)
+          out = input.view(input.shape[0], 2, 14 * 14).sum(dim=1)
         else:
-          out = input.view(input.shape[0], 3 * 14 * 14)
+          out = input.view(input.shape[0], 2 * 14 * 14)
         out = self._main(out)
         return out
 
