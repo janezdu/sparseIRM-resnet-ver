@@ -232,10 +232,9 @@ def main_worker(args):
 
     pretty_print("epoch", "train_acc", "test_acc", "time")
     start_run = time.time()
+    start_each_epoch = time.time()
 
-    for epoch in range(args.start_epoch, args.epochs):
-
-        start_each_epoch = time.time()
+    for epoch in range(args.start_epoch + 1, args.epochs + 1):
 
         if args.iterative:
             if epoch < ts:
@@ -309,9 +308,10 @@ def main_worker(args):
 
             iter += 1
         unfix_model_subnet(model)
-        time_per_epoch = time.time() - start_each_epoch
         if args.epochs > 100:
             if epoch % 100 == 0:
+                time_per_epoch = time.time() - start_each_epoch
+                start_each_epoch = time.time()
                 pretty_print(
                     np.int32(epoch),
                     np.float32(train_acc),
@@ -320,6 +320,8 @@ def main_worker(args):
                 )
         else:
             if epoch % 10 == 0:
+                time_per_epoch = time.time() - start_each_epoch
+                start_each_epoch = time.time()
                 pretty_print(
                     np.int32(epoch),
                     np.float32(train_acc),
@@ -332,7 +334,7 @@ def main_worker(args):
     dim_v = len(model.module.fc.weight.data.view(-1))
     final_l1_norm = model.module.fc.weight.data.norm(p=1)
     time_per_run = time.time() - start_run
-    pretty_print(np.int32(0), np.float32(0), np.float32(0), np.float32(time_per_run))
+    pretty_print(np.int32(epoch), np.float32(train_acc), np.float32(test_acc), np.float32(time_per_run))
 
     alg = "unk"
     if "dense" in (args.conv_type.lower()):

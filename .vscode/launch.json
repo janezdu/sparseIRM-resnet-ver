@@ -312,7 +312,7 @@
                 "--num_classes",
                 "10",
                 "--pgd_anneal_iters",
-                "1200",
+                "800",
                 "--bn_type",
                 "LearnedBatchNorm",
                 "--pgd_skip_steps",
