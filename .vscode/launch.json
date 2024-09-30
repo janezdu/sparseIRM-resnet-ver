@@ -203,7 +203,7 @@
                 "--score_init_constant",
                 "1",
                 "--batch_size",
-                "390",
+                "50000",
                 "--arch",
                 "MLPFull",
                 "--set",
