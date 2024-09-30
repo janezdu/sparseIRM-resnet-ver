@@ -316,7 +316,7 @@ def main_worker(args):
 
             iter += 1
         unfix_model_subnet(model)
-        if args.epochs > 100:
+        if args.epochs > 200:
             if epoch % 100 == 0:
                 time_per_epoch = time.time() - start_each_epoch
                 start_each_epoch = time.time()
