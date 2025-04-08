@@ -6,7 +6,7 @@
 #SBATCH --partition=gpuA100x4
 #SBATCH --account=bejr-delta-gpu    # <- match to a "Project" returned by the "accounts" command
 #SBATCH --job-name=mncifar
-#SBATCH --time=00:15:00
+#SBATCH --time=04:15:00
 #SBATCH --gpus-per-node=1
 #SBATCH --gpus-per-task=1
 #SBATCH --gpu-bind=none    # <- or closest
