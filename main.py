@@ -129,7 +129,7 @@ def main_worker(args):
                 torch.save(cifarminist, data_path)
             else:
                 # print("Loading CifarMNIST dataset...")
-                cifarminist = torch.load(data_path)
+                cifarminist = torch.load(data_path, weights_only=False)
             # train_dataset, val_dataset, test_dataset = cifarminist.get_splits(
             #     splits=["train", "val", "test"]
             # )
