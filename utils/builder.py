@@ -23,6 +23,7 @@ class Builder(object):
 
     def conv_custom(self, in_planes, out_planes, kernel_size, stride, padding=1, first_layer=False, bias=False, dilation=1):
         conv_layer = self.first_layer if first_layer else self.conv_layer
+        print("first layer is {}".format(self.first_layer))
         if first_layer:
             print(f"==> Building first layer with {str(self.first_layer)}")
         conv = conv_layer(
