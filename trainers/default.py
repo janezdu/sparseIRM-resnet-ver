@@ -12,10 +12,12 @@ import builtins as __builtin__
 from args import VerboseMode
 import math
 
+
 def print(*args, **kwargs):
     if VerboseMode:
         # __builtin__.print('My overridden print() function!')
         return __builtin__.print(*args, **kwargs)
+
 
 writer = SummaryWriter()
 __all__ = ["train", "validate", "modifier"]
@@ -118,7 +120,9 @@ def train(
     if args.use_dataloader:
         totalBatch = math.ceil(len(train_loader) * 1.0 / args.batch_size)
         if VerboseMode:
-            BatchCollections = tqdm.tqdm(enumerate(train_loader), ascii=True, total=len(train_loader))
+            BatchCollections = tqdm.tqdm(
+                enumerate(train_loader), ascii=True, total=len(train_loader)
+            )
         else:
             BatchCollections = enumerate(train_loader)
         BatchCollectionsList = list(enumerate(BatchCollections))
@@ -300,6 +304,7 @@ def train(
             if args.steps % args.pgd_skip_steps == 0:
                 with torch.no_grad():
                     proj_sort(model.module, args.z, args.rho_tolerance)
+                    # proj_iht_basic(model.module, args.rho_tolerance)
             # proj(model.module, args.z)
 
         args.steps += 1
@@ -321,12 +326,17 @@ def train(
         print("final projection at end of training")
         with torch.no_grad():
             proj_sort(model.module, args.z, args.rho_tolerance)
+            # proj_iht_basic(model.module, args.rho_tolerance)
     if VerboseMode:
-        zero_count_meter.update((model.module.fc.weight == 0).sum().item(), train_x.size(0))
+        zero_count_meter.update(
+            (model.module.fc.weight == 0).sum().item(), train_x.size(0)
+        )
         progress.display(len(train_loader))
         progress.write_to_tensorboard(
-            writer, prefix="train" if not args.finetuning else "train_ft", global_step=epoch
-    )
+            writer,
+            prefix="train" if not args.finetuning else "train_ft",
+            global_step=epoch,
+        )
     return (
         train_acc_meter.avg,
         train_minacc_meter.avg,
@@ -382,7 +392,9 @@ def validate(val_loader, model, criterion, args, writer, epoch):
         if args.use_dataloader:
             totalBatch = math.ceil(len(val_loader) * 1.0 / args.batch_size)
             if VerboseMode:
-                BatchCollections = tqdm.tqdm(enumerate(val_loader), ascii=True, total=len(val_loader))
+                BatchCollections = tqdm.tqdm(
+                    enumerate(val_loader), ascii=True, total=len(val_loader)
+                )
             else:
                 BatchCollections = enumerate(val_loader)
             BatchCollectionsList = list(enumerate(BatchCollections))
@@ -465,6 +477,19 @@ def modifier(args, epoch, model):
     return
 
 
+def proj_iht_basic(model, rho_tolerance):
+    v = model.fc.weight.data.flatten()
+    dim_v = v.shape[0]
+
+    signs = torch.sign(v)
+    mu, p = torch.sort(v.abs(), descending=True)
+
+    trimmed = torch.zeros_like(mu)
+    trimmed[: dim_v - rho_tolerance] = mu[: dim_v - rho_tolerance]
+
+    model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
+
+
 def proj_up(model, z):
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
@@ -492,6 +517,7 @@ def proj_up(model, z):
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
     print("num zeros", (model.fc.weight == 0).sum().item())
 
+
 def proj_sort(model, z, rho_tolerance):
     v = model.fc.weight.data.flatten()
     dim_v = v.shape[0]
@@ -513,7 +539,7 @@ def proj_sort(model, z, rho_tolerance):
     if rho > dim_v - rho_tolerance:
         rho = dim_v - rho_tolerance
         # theta = mu[rho] # subtract mu rho from everything
-        theta = torch.zeros_like(mu) 
+        theta = torch.zeros_like(mu)
         theta[rho:] = mu[rho]
         # should just kill the last "rho tolerance" weights, keeping all before
         print("artificially killing some weights, smallest is ", mu[rho])
@@ -531,6 +557,7 @@ def proj_sort(model, z, rho_tolerance):
     model.fc.weight.data = (trimmed[p] * signs).reshape(model.fc.weight.shape)
     print("num zeros", (model.fc.weight == 0).sum().item())
 
+
 # def proj_sort(model, z, rho_tolerance):
 #     v = model.fc.weight.data.flatten()
 #     dim_v = v.shape[0]
@@ -547,7 +574,7 @@ def proj_sort(model, z, rho_tolerance):
 
 #     rho = dim_v - rho_tolerance
 #     # theta = mu[rho] # subtract mu rho from everything
-#     theta = torch.zeros_like(mu) 
+#     theta = torch.zeros_like(mu)
 #     theta[rho:] = mu[rho]
 
 #     trimmed = (mu - theta).clamp(min=0)
