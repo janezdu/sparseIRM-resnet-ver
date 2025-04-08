@@ -10,5 +10,9 @@
 #SBATCH --output=out/%x-%j.out
 
 echo 'hello'
+
+source .venv/bin/activate
+which python
+
 chmod +x mnistcifar-irmv1iht.sh
 ./mnistcifar-irmv1iht.sh
