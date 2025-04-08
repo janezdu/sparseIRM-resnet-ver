@@ -301,7 +301,7 @@ def main_worker(args):
                 validation_time.update((time.time() - start_validation) / 60)
 
             is_best = (test_acc > best_acc) and (train_acc > 0.6)
-            if is_best:
+            if is_best or record_test_best == None:
                 best_acc = test_acc
                 record_test_best = (train_acc, test_acc)
             if is_best or epoch == args.epochs - 1:
