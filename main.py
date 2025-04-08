@@ -88,6 +88,9 @@ def main_worker(args):
 
     optimizer, weight_opt = get_optimizer(args, model)
 
+    if torch.cuda.device_count() > 1:
+        print("Using", torch.cuda.device_count(), "GPUs!")
+
     if args.use_dataloader:
         # data = get_dataset(args)
         if args.set == "mnist":
