@@ -1,0 +1,509 @@
+hello
+/projects/bejr/janezdu/sparseIRM-resnet-ver/.venv/bin/python
+54
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+58
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
+59
+Traceback (most recent call last):
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 664, in <module>
+    main()
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 71, in main
+    main_worker(args)
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 86, in main_worker
+    model = get_model(args)
+            ^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/main.py", line 439, in get_model
+    model = models.__dict__[args.arch]()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 177, in ResNet18
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/models/resnet.py", line 108, in __init__
+    self.conv1 = builder.conv7x7(3, 64, stride=2, first_layer=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 110, in conv7x7
+    c = self.conv(7, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/bejr/janezdu/sparseIRM-resnet-ver/utils/builder.py", line 82, in conv
+    conv = conv_layer(
+           ^^^^^^^^^^^
+TypeError: Linear.__init__() got an unexpected keyword argument 'kernel_size'
